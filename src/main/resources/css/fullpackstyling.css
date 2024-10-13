@@ -1,0 +1,158 @@
+
+#toSignUpButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color:  #ffffff; /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #ffffff; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#toSignUpButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+}
+#signInButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(107, 41, 151); /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #6b2997; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#signInButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-border-color: rgb(178, 81, 184);
+    -fx-effect: dropshadow(gaussian, rgb(178, 81, 184), 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(178, 81, 184, 0.82); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: rgb(178, 81, 184); /* Màu chữ khi hover */
+}
+#toSignInButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color:  #ffffff; /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #ffffff; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#toSignInButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+}
+#signUpButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-border-color: rgb(107, 41, 151); /* Màu viền */
+    -fx-border-width: 3px; /* Độ dày viền */
+    -fx-text-fill: #6b2997; /* Màu chữ */
+    -fx-background-radius: 50px; /* Bo góc button */
+    -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
+}
+
+#signUpButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-border-color: rgb(178, 81, 184);
+    -fx-effect: dropshadow(gaussian, rgb(178, 81, 184), 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(178, 81, 184, 0.82); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: rgb(178, 81, 184); /* Màu chữ khi hover */
+}
+
+
+@font-face {
+    -fx-font-family: 'Poppins-ExtraBold';
+    src: url('css/Font/Poppins-ExtraBold.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Black';
+    src: url('css/Font/Poppins-Black.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-BlackItalic';
+    src: url('css/Font/Poppins-BlackItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Bold';
+    src: url('css/Font/Poppins-Bold.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-BoldItalic';
+    src: url('css/Font/Poppins-BoldItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-ExtraBoldItalic';
+    src: url('css/Font/Poppins-ExtraBoldItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Light';
+    src: url('css/Font/Poppins-Light.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Italic';
+    src: url('css/Font/Poppins-Italic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-LightItalic';
+    src: url('css/Font/Poppins-LightItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Medium';
+    src: url('css/Font/Poppins-Medium.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-MediumItalic';
+    src: url('css/Font/Poppins-MediumItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Regular';
+    src: url('css/Font/Poppins-Regular.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-SemiBold';
+    src: url('css/Font/Poppins-SemiBold.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-Thin';
+    src: url('css/Font/Poppins-Thin.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-SemiBoldItalic';
+    src: url('css/Font/Poppins-SemiBoldItalic.ttf');
+}
+
+@font-face {
+    -fx-font-family: 'Poppins-ThinItalic';
+    src: url('css/Font/Poppins-ThinItalic.ttf');
+}
+
+.button {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-font-size: 24px;
+}
+
+
+
+
+
