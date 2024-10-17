@@ -20,7 +20,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/LoginView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/MainView.fxml"));
             LoginViewController controller = loader.getController();
             loader.setController(controller);
             Parent root = loader.load();
@@ -28,6 +28,8 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("LibraHub");
             primaryStage.setResizable(false);
+
+
             primaryStage.show();
         } catch (IOException e) {
             System.out.println(e.getMessage());

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" style="-fx-background-color: edd6f8;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="imageView">
+         <left>
+            <AnchorPane prefHeight="700.0" prefWidth="250.0" style="-fx-background-color: #edd6f8;" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane layoutX="20.0" layoutY="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="230.0" style="-fx-background-radius: 30 0 0 30; -fx-background-color: #ffffff;" />
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <VBox prefHeight="700.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="100.0" prefWidth="850.0" style="-fx-background-color: edd6f8;">
+                     <children>
+                        <AnchorPane layoutY="20.0" prefHeight="80.0" prefWidth="830.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0 30 0 0;">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="35.0" layoutX="50.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: edd6f8; -fx-arc-height: 30; -fx-arc-width: 30; -fx-stroke: null;" width="500.0" />
+                              <Button fx:id="categories" layoutX="50.0" layoutY="15.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="137.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 10; -fx-font-weight: bold; -fx-background-color: transparent; -fx-border-color: transparent black transparent transparent;" text="Categories">
+                                 <font>
+                                    <Font name="Arial Narrow" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="850.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="830.0" style="-fx-background-color: #ffffff;" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="400.0" prefWidth="850.0">
+                     <children>
+                        <AnchorPane prefHeight="380.0" prefWidth="830.0" style="-fx-background-radius: 0 0 30 0; -fx-background-color: #ffffff;" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
