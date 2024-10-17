@@ -152,6 +152,9 @@
     -fx-font-size: 24px;
 }
 
+.label {
+    -fx-font-family: "Poppins-ExtraBold";
+}
 
 
 
