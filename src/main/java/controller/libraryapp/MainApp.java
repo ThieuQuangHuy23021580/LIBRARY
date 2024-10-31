@@ -20,7 +20,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NewMainView.fxml"));
             LoginViewController controller = loader.getController();
             loader.setController(controller);
             Parent root = loader.load();
