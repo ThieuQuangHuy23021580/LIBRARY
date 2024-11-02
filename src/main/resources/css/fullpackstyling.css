@@ -228,6 +228,22 @@
     -fx-text-fill: #ffffff; /* Thay đổi màu văn bản khi hover */
 }
 
-/*#librahub {*/
-/*    -fx-effect: reflection;*/
-/*}*/
+#homeButton_active:hover {
+    -fx-background-color: FFFDFD59;
+}
+
+#homeButton_inactive:hover {
+    -fx-background-color: FFFDFD59;
+}
+
+#categoriesButton_active:hover {
+    -fx-background-color: FFFDFD59;
+}
+
+#categoriesButton_inactive:hover {
+    -fx-background-color: FFFDFD59;
+}
+
+#searchButton:hover {
+    -fx-background-color: FFFDFD59;
+}
