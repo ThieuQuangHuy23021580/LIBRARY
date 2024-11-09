@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="750.0" prefWidth="1200.0">
+         <children>
+            <AnchorPane prefHeight="60.0" prefWidth="1200.0">
+               <children>
+                  <Label fx:id="librahub" layoutX="71.0" layoutY="7.0" prefHeight="38.0" prefWidth="129.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 25; -fx-font-weight: bold;" text="LIBRAHUB" textFill="#e50914">
+                     <effect>
+                        <Reflection fraction="0.86" topOffset="-10.0" topOpacity="0.61" />
+                     </effect>
+                  </Label>
+                  <Button fx:id="homeButton_active" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" opacity="0.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent;" text="Home" textFill="#bcb5b5" />
+                  <Button fx:id="homeButton_inactive" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-BoldItalic&quot;; -fx-font-size: 22; -fx-font-weight: bold; -fx-background-color: transparent;" text="Home" textFill="#e50914">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="categoriesButton_inactive" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent;" text="Categories" textFill="#e50914" />
+                  <Button fx:id="categoriesButton_active" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent;" text="Categories" textFill="#bcb5b5" />
+                  <TextField fx:id="searchTextField" layoutX="563.0" layoutY="10.0" prefHeight="45.0" prefWidth="315.0" promptText="  Searching for . . " style="-fx-border-color: white; -fx-border-width: 1; -fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: &quot;Poppins-BoldItalic&quot;;" />
+                  <ImageView disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="888.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../PICTURES/search.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="searchButton" layoutX="877.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" style="-fx-font-size: 18; -fx-border-width: 1; -fx-background-color: transparent;" />
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="980.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../PICTURES/userAvartar.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="1035.0" layoutY="21.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 16;" text="User Name" textFill="WHITE" />
+                  <ImageView disable="true" fitHeight="20.0" fitWidth="20.0" layoutX="1135.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../PICTURES/arrow_white.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="userButton" layoutX="1130.0" layoutY="18.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 12; -fx-background-color: transparent;" />
+               </children>
+            </AnchorPane>
+            <ScrollPane prefHeight="690.0" prefWidth="1200.0">
+               <content>
+                  <FlowPane prefHeight="690.0" prefWidth="1200.0">
+                     <children>
+                        <AnchorPane fx:id="home_anchorpane" prefHeight="650.0" prefWidth="1200.0">
+                           <children>
+                              <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../PICTURES/post_bg.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="gradient_left_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
+                              <Rectangle fx:id="gradient_right_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" layoutX="600.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
+                              <Rectangle fx:id="gradient_up_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
+                              <Rectangle fx:id="gradient_down_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
+                              <Button fx:id="the_most_popular_books" layoutX="330.0" layoutY="319.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 45; -fx-font-weight: bold; -fx-background-color: transparent;" text="The most popular books!" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow spread="0.5" />
+                                 </effect>
+                              </Button>
+                              <Label fx:id="discover" layoutX="480.0" layoutY="248.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 65; -fx-font-weight: bold;" text="Discover" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow spread="0.5" />
+                                 </effect>
+                              </Label>
+                              <AnchorPane layoutX="390.0" prefHeight="464.0" prefWidth="193.0">
+                                 <children>
+                                    <MenuButton fx:id="categoriesButton" layoutX="19.0" layoutY="43.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent; -fx-text-fill: white;" text="Categorise" textFill="WHITE">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                                      </items>
+                                    </MenuButton>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </FlowPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</StackPane>
