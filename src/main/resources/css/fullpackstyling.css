@@ -228,22 +228,75 @@
     -fx-text-fill: #ffffff; /* Thay đổi màu văn bản khi hover */
 }
 
+#homeButton_active {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: #7c7a7a;
+
+}
+
 #homeButton_active:hover {
-    -fx-background-color: FFFDFD59;
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
 }
 
+#homeButton_inactive {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(229, 9, 20, 0.65);
+}
 #homeButton_inactive:hover {
-    -fx-background-color: FFFDFD59;
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian, #e50914, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.37); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #e50914; /* Màu chữ khi hover */
 }
 
+#categoriesButton_active {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: #7c7a7a;
+}
 #categoriesButton_active:hover {
-    -fx-background-color: FFFDFD59;
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
 }
 
+#categoriesButton_inactive {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(229, 9, 20, 0.65);
+}
 #categoriesButton_inactive:hover {
-    -fx-background-color: FFFDFD59;
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
 }
 
-#searchButton:hover {
-    -fx-background-color: FFFDFD59;
+#searchButton {
+    -fx-border-color: #fdfdfd;
 }
+#searchButton:hover {
+    -fx-border-color: #E50914FF ;
+}
+
+#categoriesButton {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-background-color: transparent;
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+    -fx-mark-color:  #ffffff;
+
+}
+
+#categoriesButton:hover {
+    -fx-font-family: "Poppins-ExtraBold";
+    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    /*-fx-background-color: rgba(255, 253, 253, 0.35); !* Màu nền nhẹ khi hover *!*/
+    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+}
+
