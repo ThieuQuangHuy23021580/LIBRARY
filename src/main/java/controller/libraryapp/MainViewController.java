@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -13,9 +14,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainViewController {
+
+    @FXML
+    private FlowPane recommendFlowPane;
 
     @FXML
     private AnchorPane bookPane;
@@ -71,11 +76,29 @@ public class MainViewController {
     @FXML
     private Label userName;
 
-
     @FXML
-    void initialize() throws IOException {
-        StackPane bookObject = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("controller/fxml_designs/BookObject.fxml")));
-        bookPane.getChildren().add(bookObject);
+    public void initialize(){
+    showBook();
     }
+    // Tạo đối tượng là sách.
+    void showBook(){
+        try {
+            ArrayList<StackPane> bookObjects = new ArrayList<>();
+            for(int i=0; i < 5 ; i++){
+                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
+                StackPane bookObject = loader.load();
+                bookObjects.add(bookObject);
+            }
+            for (StackPane bookObject : bookObjects) {
+                recommendFlowPane.getChildren().add(bookObject);
+            }
+
+        }
+        catch (IOException e){
+            System.out.println("Book Object: " + e.getMessage());
+        }
+    }
+
+
 
 }
