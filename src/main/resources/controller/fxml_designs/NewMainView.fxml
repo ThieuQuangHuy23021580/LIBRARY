@@ -28,37 +28,44 @@
                         <Reflection fraction="0.86" topOffset="-10.0" topOpacity="0.61" />
                      </effect>
                   </Label>
-                  <Button fx:id="homeButton_active" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" opacity="0.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent;" text="Home" textFill="#bcb5b5" />
-                  <Button fx:id="homeButton_inactive" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-BoldItalic&quot;; -fx-font-size: 22; -fx-font-weight: bold; -fx-background-color: transparent;" text="Home" textFill="#e50914">
+                  <Button fx:id="homeButton_active" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Home" textFill="#bcb5b5" />
+                  <Button fx:id="homeButton_inactive" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-BoldItalic&quot;; -fx-font-size: 20; -fx-font-weight: bold; -fx-background-color: transparent;" text="Home" textFill="#e50914">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
-                  <Button fx:id="categoriesButton_inactive" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent;" text="Categories" textFill="#e50914" />
-                  <Button fx:id="categoriesButton_active" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent;" text="Categories" textFill="#bcb5b5" />
-                  <TextField fx:id="searchTextField" layoutX="563.0" layoutY="10.0" prefHeight="45.0" prefWidth="315.0" promptText="  Searching for . . " style="-fx-border-color: white; -fx-border-width: 1; -fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: &quot;Poppins-BoldItalic&quot;;" />
-                  <ImageView disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="888.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                  <Button fx:id="categoriesButton_inactive" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Categories" textFill="#e50914" />
+                  <Button fx:id="categoriesButton_active" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Categories" textFill="#bcb5b5" />
+                  <TextField fx:id="searchTextField" layoutX="563.0" layoutY="12.0" prefHeight="40.0" prefWidth="315.0" promptText="  Searching for . . " style="-fx-border-color: white; -fx-border-width: 1; -fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: &quot;Poppins-BoldItalic&quot;;" />
+                  <ImageView disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="888.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../PICTURES/search.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="searchButton" layoutX="877.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="50.0" style="-fx-font-size: 18; -fx-border-width: 1; -fx-background-color: transparent;" />
-                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="980.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <Button fx:id="searchButton" layoutX="877.0" layoutY="12.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="50.0" style="-fx-font-size: 18; -fx-border-width: 1; -fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../PICTURES/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="980.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../PICTURES/userAvartar.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="1035.0" layoutY="21.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 16;" text="User Name" textFill="WHITE" />
-                  <ImageView disable="true" fitHeight="20.0" fitWidth="20.0" layoutX="1135.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../PICTURES/arrow_white.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="userButton" layoutX="1130.0" layoutY="18.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-font-size: 12; -fx-background-color: transparent;" />
+                  <Label fx:id="userName" layoutX="1035.0" layoutY="21.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="User Name" textFill="WHITE" />
+                  <MenuButton fx:id="userMenuButton" layoutX="1028.0" layoutY="16.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent;">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Your Information" />
+                      <MenuItem mnemonicParsing="false" text="My Library" />
+                    </items>
+                  </MenuButton>
                </children>
             </AnchorPane>
             <ScrollPane prefHeight="690.0" prefWidth="1200.0">
                <content>
-                  <FlowPane prefHeight="690.0" prefWidth="1200.0">
+                  <FlowPane fx:id="flowHome" prefHeight="690.0" prefWidth="1200.0">
                      <children>
                         <AnchorPane fx:id="home_anchorpane" prefHeight="650.0" prefWidth="1200.0">
                            <children>
@@ -81,18 +88,9 @@
                                     <DropShadow spread="0.5" />
                                  </effect>
                               </Label>
-                              <AnchorPane layoutX="390.0" prefHeight="464.0" prefWidth="193.0">
-                                 <children>
-                                    <MenuButton fx:id="categoriesButton" layoutX="19.0" layoutY="43.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 22; -fx-background-color: transparent; -fx-text-fill: white;" text="Categorise" textFill="WHITE">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                      </items>
-                                    </MenuButton>
-                                 </children>
-                              </AnchorPane>
                            </children>
                         </AnchorPane>
+                        <AnchorPane fx:id="bookPane" prefHeight="1000.0" prefWidth="1200.0" />
                      </children>
                   </FlowPane>
                </content>

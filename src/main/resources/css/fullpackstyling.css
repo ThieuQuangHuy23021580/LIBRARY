@@ -280,23 +280,25 @@
 
 #searchButton {
     -fx-border-color: #fdfdfd;
+
 }
 #searchButton:hover {
     -fx-border-color: #E50914FF ;
+
 }
 
-#categoriesButton {
-    -fx-font-family: "Poppins-ExtraBold";
+#categoriesMenuButton {
+    /*-fx-font-family: "Poppins-ExtraBold";*/
     -fx-background-color: transparent;
-    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+    /*-fx-text-fill-fill: #f6f0f6 !important;*/
     -fx-mark-color:  #ffffff;
 
 }
 
-#categoriesButton:hover {
-    -fx-font-family: "Poppins-ExtraBold";
-    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
-    /*-fx-background-color: rgba(255, 253, 253, 0.35); !* Màu nền nhẹ khi hover *!*/
-    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+#searchTextField {
+    -fx-text-fill: white;
+}
+#userMenuButton {
+    -fx-mark-color: #7C7A7AFF;
 }
 
