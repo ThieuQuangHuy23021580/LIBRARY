@@ -84,7 +84,7 @@ public class MainViewController {
     void showBook(){
         try {
             ArrayList<StackPane> bookObjects = new ArrayList<>();
-            for(int i=0; i < 5 ; i++){
+            for(int i=0; i < 15 ; i++){
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
                 StackPane bookObject = loader.load();
                 bookObjects.add(bookObject);
