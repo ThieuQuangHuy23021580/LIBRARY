@@ -12,6 +12,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
@@ -101,5 +103,79 @@
             </ScrollPane>
          </children>
       </VBox>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane layoutX="200.0" layoutY="120.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: transparent;">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" width="800.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="500.0" layoutX="350.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" style="-fx-arc-height: 10; -fx-arc-width: 10; -fx-fill: transparent;" width="450.0" />
+                  <HBox prefHeight="500.0" prefWidth="800.0">
+                     <children>
+                        <AnchorPane prefHeight="500.0" prefWidth="350.0">
+                           <children>
+                              <ImageView fitHeight="500.0" fitWidth="350.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../PICTURES/fim_poster_1.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="500.0" prefWidth="450.0">
+                           <children>
+                              <VBox layoutX="25.0" prefHeight="375.0" prefWidth="400.0">
+                                 <children>
+                                    <Region prefHeight="19.0" prefWidth="420.0" />
+                                    <Label alignment="TOP_LEFT" graphicTextGap="2.0" prefHeight="92.0" prefWidth="400.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Book Name " textFill="WHITE" wrapText="true" />
+                                    <Label prefWidth="400.0" style="-fx-font-size: 18; -fx-font-style: italic;" text="Author : Author Name" textFill="WHITE" />
+                                    <Label style="-fx-font-size: 18; -fx-font-style: italic;" text="Publish : Publish date" textFill="WHITE" />
+                                    <Label style="-fx-font-size: 18; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="WHITE" />
+                                    <Label style="-fx-font-size: 18; -fx-font-style: italic;" text="Description : " textFill="WHITE" />
+                                    <AnchorPane prefHeight="145.0" prefWidth="420.0">
+                                       <children>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="145.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+                                          <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="5.0" prefHeight="135.0" prefWidth="375.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." wrapText="true" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                              <TextField layoutX="145.0" layoutY="390.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: white; -fx-font-size: 18;" />
+                              <Label layoutX="25.0" layoutY="390.0" style="-fx-font-size: 18; -fx-font-style: italic;" text="Quantity : " textFill="WHITE" />
+                              <Button layoutX="111.0" layoutY="390.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914FF; -fx-border-color: white;" text="-" textFill="WHITE" />
+                              <Button layoutX="345.0" layoutY="390.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914FF; -fx-border-color: white;" text="+" textFill="WHITE" />
+                              <Button layoutX="345.0" layoutY="440.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" style="-fx-font-size: 15; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 10;">
+                                 <graphic>
+                                    <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../PICTURES/borrowBookButton.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="260.0" layoutY="440.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" style="-fx-font-size: 15; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 10;">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../PICTURES/ConfigBookButton.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="175.0" layoutY="440.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="43.0" style="-fx-font-size: 15; -fx-background-color: transparent; -fx-border-color: white; -fx-border-radius: 10;">
+                                 <graphic>
+                                    <ImageView fitHeight="43.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../PICTURES/deleteBookButton.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </StackPane>
