@@ -109,8 +109,8 @@
          <children>
             <AnchorPane layoutX="200.0" layoutY="120.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: transparent;">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" opacity="0.6" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="500.0" layoutX="350.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" style="-fx-arc-height: 10; -fx-arc-width: 10; -fx-fill: transparent;" width="450.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" width="800.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="500.0" layoutX="350.0" opacity="0.8" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" style="-fx-arc-height: 10; -fx-arc-width: 10; -fx-fill: transparent;" width="450.0" />
                   <HBox prefHeight="500.0" prefWidth="800.0">
                      <children>
                         <AnchorPane prefHeight="500.0" prefWidth="350.0">
@@ -127,7 +127,7 @@
                               <VBox layoutX="35.0" prefHeight="375.0" prefWidth="390.0">
                                  <children>
                                     <Region prefHeight="19.0" prefWidth="420.0" />
-                                    <Label alignment="TOP_LEFT" graphicTextGap="2.0" prefHeight="92.0" prefWidth="390.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic;" text="INCEPTION: The DarkNight" textFill="WHITE" wrapText="true">
+                                    <Label fx:id="tiltleBook" alignment="TOP_LEFT" graphicTextGap="2.0" prefHeight="92.0" prefWidth="390.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-font-style: italic;" text="INCEPTION: The DarkNight" textFill="WHITE" wrapText="true">
                                        <effect>
                                           <DropShadow height="60.05" radius="14.5125" width="0.0">
                                              <input>
@@ -140,19 +140,19 @@
                                     <AnchorPane prefWidth="380.0">
                                        <children>
                                           <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#adabab" />
-                                          <TextField fx:id="authorConfigTextField" disable="true" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." visible="false" />
+                                          <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefWidth="380.0">
                                        <children>
                                           <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#adabab" />
-                                          <TextField fx:id="publishConfigTextField" disable="true" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." visible="false" />
+                                          <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." />
                                        </children>
                                     </AnchorPane>
                                     <AnchorPane prefWidth="380.0">
                                        <children>
                                           <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#adabab" />
-                                          <TextField fx:id="quantityConfigTextField" disable="true" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." visible="false" />
+                                          <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." />
                                        </children>
                                     </AnchorPane>
                                     <Label style="-fx-font-size: 16; -fx-font-style: italic;" text="Description : " textFill="#adabab" />
@@ -165,7 +165,7 @@
                                           <AnchorPane layoutX="10.0" layoutY="5.0">
                                              <children>
                                                 <Label alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#adabab" wrapText="true" />
-                                                <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" disable="true" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." visible="false" />
+                                                <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." />
                                              </children>
                                           </AnchorPane>
                                        </children>
@@ -183,7 +183,7 @@
                               <Button disable="true" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" visible="false" />
                               <Button layoutX="320.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE" />
                               <Button layoutX="190.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE" />
-                              <Button fx:id="configAuthor" disable="true" layoutY="111.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                              <Button fx:id="configAuthor" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -192,7 +192,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="configAuthor1" disable="true" layoutY="135.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                              <Button fx:id="configAuthor1" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -201,7 +201,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="configAuthor11" disable="true" layoutY="160.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                              <Button fx:id="configAuthor11" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -210,7 +210,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="configAuthor111" disable="true" layoutY="185.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                              <Button fx:id="configAuthor111" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                  <graphic>
                                     <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
