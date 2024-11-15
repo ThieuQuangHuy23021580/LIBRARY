@@ -24,11 +24,19 @@
                     <children>
                         <AnchorPane prefHeight="500.0" prefWidth="350.0">
                             <children>
-                                <ImageView fitHeight="500.0" fitWidth="350.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../../PICTURES/fim_poster_1.jpg" />
-                                    </image>
-                                </ImageView>
+                                <AnchorPane prefHeight="500.0" prefWidth="350.0">
+                                    <children>
+                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="500.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="350.0" />
+                                        <ImageView fitHeight="470.0" fitWidth="320.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true">
+                                            <image>
+                                                <Image url="@../../PICTURES/fim_poster_1.jpg" />
+                                            </image>
+                                            <effect>
+                                                <DropShadow />
+                                            </effect>
+                                        </ImageView>
+                                    </children>
+                                </AnchorPane>
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="500.0" prefWidth="450.0">
@@ -46,105 +54,105 @@
                                                         <Color red="1.0" green="1.0" blue="1.0" />
                                                     </color></DropShadow>
                                             </effect></Label>
-                              <AnchorPane prefWidth="380.0">
-                                 <children>
-                                              <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#adabab" />
-                                    <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefWidth="380.0">
-                                 <children>
-                                              <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#adabab" />
-                                    <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefWidth="380.0">
-                                 <children>
-                                              <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#adabab" />
-                                    <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." />
-                                 </children>
-                              </AnchorPane>
+                                        <AnchorPane prefWidth="380.0">
+                                            <children>
+                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#adabab" />
+                                                <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." />
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane prefWidth="380.0">
+                                            <children>
+                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#adabab" />
+                                                <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." />
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane prefWidth="380.0">
+                                            <children>
+                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#adabab" />
+                                                <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." />
+                                            </children>
+                                        </AnchorPane>
                                         <Label style="-fx-font-size: 16; -fx-font-style: italic;" text="Description : " textFill="#adabab" />
                                         <AnchorPane prefHeight="145.0" prefWidth="420.0">
                                             <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffffe6" height="145.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="380.0">
-                                       <effect>
-                                          <DropShadow />
-                                       </effect></Rectangle>
-                                    <AnchorPane layoutX="10.0" layoutY="5.0">
-                                       <children>
-                                                      <Label alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#adabab" wrapText="true" />
-                                          <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." />
-                                       </children>
-                                    </AnchorPane>
+                                                    <effect>
+                                                        <DropShadow />
+                                                    </effect></Rectangle>
+                                                <AnchorPane layoutX="10.0" layoutY="5.0">
+                                                    <children>
+                                                        <Label alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#adabab" wrapText="true" />
+                                                        <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." />
+                                                    </children>
+                                                </AnchorPane>
                                             </children>
                                         </AnchorPane>
                                     </children>
                                 </VBox>
                                 <TextField layoutX="145.0" layoutY="375.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: transparent; -fx-font-size: 15; -fx-border-color: white;">
-                           <effect>
-                              <DropShadow />
-                           </effect></TextField>
+                                    <effect>
+                                        <DropShadow />
+                                    </effect></TextField>
                                 <Label layoutX="35.0" layoutY="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity : " textFill="#adabab" />
                                 <Button layoutX="111.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="-" textFill="WHITE" />
                                 <Button layoutX="345.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="+" textFill="WHITE" />
                                 <Button disable="true" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Config" textFill="WHITE" visible="false" />
                                 <Button disable="true" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" visible="false" />
                                 <Button layoutX="320.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE" />
-                        <Button layoutX="190.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE" />
-                        <Button fx:id="configAuthor" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../PICTURES/configButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="configAuthor1" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../PICTURES/configButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="configAuthor11" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../PICTURES/configButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="configAuthor111" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
-                           <graphic>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../PICTURES/configButton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
+                                <Button layoutX="190.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE" />
+                                <Button fx:id="configAuthor" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../PICTURES/configButton.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="configAuthor1" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../PICTURES/configButton.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="configAuthor11" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../PICTURES/configButton.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="configAuthor111" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                    <graphic>
+                                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../PICTURES/configButton.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
                             </children>
                         </AnchorPane>
                     </children>
                 </HBox>
             </children>
-         <effect>
-            <DropShadow height="30.0" radius="14.5" spread="0.05" width="30.0" />
-         </effect>
+            <effect>
+                <DropShadow height="30.0" radius="14.5" spread="0.05" width="30.0" />
+            </effect>
         </AnchorPane>
-      <Button layoutX="935.0" layoutY="63.0" mnemonicParsing="false" opacity="0.8" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 10;">
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../PICTURES/x.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+        <Button layoutX="935.0" layoutY="63.0" mnemonicParsing="false" opacity="0.8" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 10;">
+            <graphic>
+                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../PICTURES/x.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
     </children>
 </AnchorPane>
