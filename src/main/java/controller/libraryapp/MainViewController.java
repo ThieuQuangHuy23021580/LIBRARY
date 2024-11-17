@@ -3,15 +3,18 @@ package controller.libraryapp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,6 +82,8 @@ public class MainViewController {
     @FXML
     public void initialize(){
     showBook();
+    userName.setCursor(Cursor.HAND);
+    userMenuButton.setCursor(Cursor.HAND);
     }
     // Tạo đối tượng là sách.
     void showBook(){
@@ -99,6 +104,37 @@ public class MainViewController {
         }
     }
 
+    public void logOut(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/LoginView.fxml")));
+        Parent root = loader.load();
+        Stage stage = (Stage) userMenuButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void setUserName(String name) {
+        userName.setText(name);
+    }
+
+   public void userInfo() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/userProfile.fxml")));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("yourInfo");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+
+    public void searchBook() throws IOException {
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("yourInfo");
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
 
 
 }
