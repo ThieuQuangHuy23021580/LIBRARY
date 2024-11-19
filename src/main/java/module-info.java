@@ -17,4 +17,6 @@ module controller.libraryapp {
 
     opens controller.fxml_designs to javafx.fxml;
     exports controller.libraryapp;
+    exports Model;
+    opens Model to javafx.fxml;
 }

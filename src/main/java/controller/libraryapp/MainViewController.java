@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import Model.Account;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainViewController {
+    private Account account;
 
     @FXML
     private FlowPane recommendFlowPane;
@@ -80,16 +82,21 @@ public class MainViewController {
     private Label userName;
 
     @FXML
-    public void initialize(){
-    showBook();
-    userName.setCursor(Cursor.HAND);
-    userMenuButton.setCursor(Cursor.HAND);
+    public void initialize() {
+        showBook();
+        userName.setCursor(Cursor.HAND);
+        userMenuButton.setCursor(Cursor.HAND);
     }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     // Tạo đối tượng là sách.
-    void showBook(){
+    void showBook() {
         try {
             ArrayList<StackPane> bookObjects = new ArrayList<>();
-            for(int i=0; i < 15 ; i++){
+            for (int i = 0; i < 15; i++) {
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
                 StackPane bookObject = loader.load();
                 bookObjects.add(bookObject);
@@ -98,13 +105,12 @@ public class MainViewController {
                 recommendFlowPane.getChildren().add(bookObject);
             }
 
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Book Object: " + e.getMessage());
         }
     }
 
-    public void logOut(ActionEvent event) throws IOException {
+    public void logOut() throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/LoginView.fxml")));
         Parent root = loader.load();
         Stage stage = (Stage) userMenuButton.getScene().getWindow();
@@ -116,7 +122,7 @@ public class MainViewController {
         userName.setText(name);
     }
 
-   public void userInfo() throws IOException {
+    public void userInfo() throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/userProfile.fxml")));
         Parent root = loader.load();
         Stage stage = new Stage();
@@ -124,6 +130,8 @@ public class MainViewController {
         stage.setScene(new Scene(root));
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+        UserController controller = loader.getController();
+
     }
 
     public void searchBook() throws IOException {

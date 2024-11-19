@@ -1,6 +1,8 @@
 package controller.libraryapp;
 
 
+import Model.Account;
+import Model.User;
 import javafx.animation.TranslateTransition;
 
 import javafx.event.ActionEvent;
@@ -73,6 +75,8 @@ public class LoginViewController {
     @FXML
     private TextField showPassword;
 
+    Account account;
+
     Rectangle clip;
 
 
@@ -93,6 +97,10 @@ public class LoginViewController {
 
     @FXML
     void signUpButtonPressed(ActionEvent event) throws SQLException {
+        if(emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()|| ConfirmPasswordField.getText().isEmpty()) {
+            showAlert("Please fill all", "no");
+            return;
+        }
         DatabaseConnect db = new DatabaseConnect();
         Connection conn = null;
         PreparedStatement st = null;
@@ -106,6 +114,7 @@ public class LoginViewController {
                 st.executeUpdate();
                 toSignInButtonPressed(event);
             }
+            else showAlert("Password mismatch", "no");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -116,11 +125,15 @@ public class LoginViewController {
 
     @FXML
     void signInButtonPressed(ActionEvent event) throws IOException, SQLException {
+        if(emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            showAlert("Please fill all"," noo");
+            return;
+        }
         if (checkAccount()) {
             showAlert("ok", "login successfully");
             loginViewToMenu(event);
         }
-
+        else showAlert("not correct","noo");
     }
 
     public void loginViewToMenu(ActionEvent event) throws IOException, SQLException {
@@ -146,14 +159,13 @@ public class LoginViewController {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-
         try {
             conn = db.getConnection();
 
             String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, emailAddressField.getText());
+            account.setEmail(setString(1, emailAddressField.getText()));
             pstmt.setString(2, passwordField.getText());
             rs = pstmt.executeQuery();
 
@@ -183,7 +195,7 @@ public class LoginViewController {
      * @param actionEvent sự kiện nhấn nút Sign Up.
      */
     public void toSignUpButtonPressed(ActionEvent actionEvent) {
-
+        show.setVisible(false);
         //Dịch chuyển khung hình hiên thị background trái sang phải.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);
         moveClip.setToY(-800);
@@ -237,6 +249,7 @@ public class LoginViewController {
     public void toSignInButtonPressed(ActionEvent actionEvent) {
         emailAddressField.setText(null);
         passwordField.setText(null);
+        show.setVisible(true);
         //Dịch chuyển khung hình hiên thị background phải sang trái.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);
         moveClip.setToY(0);
