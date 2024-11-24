@@ -7,10 +7,10 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.UserController">
    <children>
-      <TableView layoutX="169.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableView" layoutX="169.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="name" />
-          <TableColumn prefWidth="75.0" text="address" />
+          <TableColumn fx:id="userNameColumn" prefWidth="75.0" text="name" />
+          <TableColumn fx:id="ageColumn" prefWidth="75.0" text="address" />
         </columns>
       </TableView>
       <Button layoutX="430.0" layoutY="220.0" mnemonicParsing="false" text="add" />

@@ -75,7 +75,9 @@ public class LoginViewController {
     @FXML
     private TextField showPassword;
 
-    Account account;
+    Account account = new Account();
+    DatabaseConnect db = new DatabaseConnect();
+    Connection conn = null;
 
     Rectangle clip;
 
@@ -97,44 +99,104 @@ public class LoginViewController {
 
     @FXML
     void signUpButtonPressed(ActionEvent event) throws SQLException {
-        if(emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()|| ConfirmPasswordField.getText().isEmpty()) {
+        if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty() || ConfirmPasswordField.getText().isEmpty()) {
             showAlert("Please fill all", "no");
             return;
         }
-        DatabaseConnect db = new DatabaseConnect();
-        Connection conn = null;
         PreparedStatement st = null;
+        ResultSet key = null;
+
         try {
             conn = db.getConnection();
             if (passwordField.getText().equals(ConfirmPasswordField.getText())) {
-                String sql = "INSERT INTO user(email,password) VALUES(?,?)";
+                String sql1 = "INSERT INTO userInfo(userName, age) VALUES (?, ?)";
+                st = conn.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+                st.setString(1, "Update");
+                st.setInt(2, 0);
+                st.executeUpdate();
+
+                key = st.getGeneratedKeys();
+                int userId = 0;
+                if (key.next()) {
+                    userId = key.getInt(1);
+                }
+
+                st.close();
+                if (key != null) key.close();
+
+                String sql = "INSERT INTO user(email, password, userId) VALUES (?, ?, ?)";
                 st = conn.prepareStatement(sql);
                 st.setString(1, emailAddressField.getText());
                 st.setString(2, passwordField.getText());
+                st.setInt(3, userId);
                 st.executeUpdate();
+
+                st.close();
+
+                // Điều hướng tới màn hình đăng nhập
                 toSignInButtonPressed(event);
+            } else {
+                showAlert("Password mismatch", "no");
             }
-            else showAlert("Password mismatch", "no");
         } catch (SQLException e) {
             e.printStackTrace();
+            showAlert("Database Error: " + e.getMessage(), "error");
         } finally {
-            if (st != null) st.close();
-            if (conn != null) conn.close();
+            // Đảm bảo tài nguyên được đóng
+            try {
+                if (key != null) key.close();
+                if (st != null) st.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     @FXML
     void signInButtonPressed(ActionEvent event) throws IOException, SQLException {
-        if(emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            showAlert("Please fill all"," noo");
+        if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            showAlert("Please fill all fields", "Error");
             return;
         }
-        if (checkAccount()) {
-            showAlert("ok", "login successfully");
-            loginViewToMenu(event);
+
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = db.getConnection();
+
+            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, emailAddressField.getText());
+            pstmt.setString(2, passwordField.getText());
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int userId = rs.getInt("userId");
+
+                String userInfoSql = "SELECT * FROM userInfo WHERE userId = ?";
+                pstmt.close();
+                pstmt = conn.prepareStatement(userInfoSql);
+                pstmt.setInt(1, userId);
+                ResultSet userInfo = pstmt.executeQuery();
+                loginViewToMenu(event);
+                if (userInfo.next()) {
+                    User user = new User(userInfo.getString("userName"),userInfo.getInt("age"));
+                    account.setUser(user);
+                }
+                userInfo.close();
+            } else {
+                showAlert("Invalid email or password", "Error");
+            }
+
+        } finally {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+            if (conn != null) conn.close();
         }
-        else showAlert("not correct","noo");
     }
+
 
     public void loginViewToMenu(ActionEvent event) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NewMainView.fxml"));
@@ -142,6 +204,7 @@ public class LoginViewController {
 
         MainViewController controller = loader.getController();
         controller.setUserName(emailAddressField.getText());
+        controller.setAccount(account);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -152,29 +215,6 @@ public class LoginViewController {
         alert.setContentText(content);
         alert.setTitle(title);
         alert.showAndWait();
-    }
-
-    private boolean checkAccount() throws SQLException {
-        DatabaseConnect db = new DatabaseConnect();
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            conn = db.getConnection();
-
-            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-            pstmt = conn.prepareStatement(sql);
-
-            account.setEmail(setString(1, emailAddressField.getText()));
-            pstmt.setString(2, passwordField.getText());
-            rs = pstmt.executeQuery();
-
-            return rs.next();
-        } finally {
-            if (rs != null) rs.close();
-            if (pstmt != null) pstmt.close();
-            if (conn != null) conn.close();
-        }
     }
 
     public void showCharacter() {

@@ -5,12 +5,6 @@ public class Account {
     private String password;
     private User user;
 
-    public Account(String email, String password, User user) {
-        this.email = email;
-        this.password = password;
-        this.user = user;
-    }
-
     public String getEmail() {
         return email;
     }

@@ -131,7 +131,7 @@ public class MainViewController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
         UserController controller = loader.getController();
-
+        controller.setAccount(account);
     }
 
     public void searchBook() throws IOException {
