@@ -1,28 +1,28 @@
 package controller.libraryapp;
 
-import Model.Account;
+import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Book;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainViewController {
-    private Account account;
 
     @FXML
     private FlowPane recommendFlowPane;
@@ -81,22 +81,16 @@ public class MainViewController {
     @FXML
     private Label userName;
 
+
     @FXML
-    public void initialize() {
-        showBook();
-        userName.setCursor(Cursor.HAND);
-        userMenuButton.setCursor(Cursor.HAND);
+    public void initialize(){
+    showBook();
     }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     // Tạo đối tượng là sách.
-    void showBook() {
+    void showBook(){
         try {
             ArrayList<StackPane> bookObjects = new ArrayList<>();
-            for (int i = 0; i < 15; i++) {
+            for(int i=0; i < 15 ; i++){
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
                 StackPane bookObject = loader.load();
                 bookObjects.add(bookObject);
@@ -105,44 +99,35 @@ public class MainViewController {
                 recommendFlowPane.getChildren().add(bookObject);
             }
 
-        } catch (IOException e) {
+        }
+        catch (IOException e){
             System.out.println("Book Object: " + e.getMessage());
         }
     }
+    @FXML
+    private void handleSearchButtonClick() {
+        String query = searchTextField.getText();
 
-    public void logOut() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/LoginView.fxml")));
-        Parent root = loader.load();
-        Stage stage = (Stage) userMenuButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        // Fetch book data from Google Books API
+        Book book = GoogleBooksAPI.searchBook(query);
+
+        if (book != null) {
+            // Assume a default quantity for now, or set from UI if needed
+            int defaultQuantity = 10;  // You can adjust this based on your requirement
+            book.setQuantity(defaultQuantity);
+
+            // Insert the book into the database
+            DatabaseUtil.insertBook(book);
+            System.out.println("Book added to the database with quantity: " + defaultQuantity);
+        } else {
+            System.out.println("No book found for the query: " + query);
+        }
     }
-
-    public void setUserName(String name) {
-        userName.setText(name);
-    }
-
-    public void userInfo() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/userProfile.fxml")));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("yourInfo");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-        UserController controller = loader.getController();
-        controller.setAccount(account);
-    }
-
-    public void searchBook() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
-        Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("yourInfo");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
-    }
-
-
 }
+
+
+
+
+
+
+

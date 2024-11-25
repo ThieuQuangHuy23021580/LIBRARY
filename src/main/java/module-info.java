@@ -11,12 +11,11 @@ module controller.libraryapp {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires com.google.gson;
     requires java.sql;
 
     opens controller.libraryapp to javafx.fxml;
 
     opens controller.fxml_designs to javafx.fxml;
     exports controller.libraryapp;
-    exports Model;
-    opens Model to javafx.fxml;
 }
