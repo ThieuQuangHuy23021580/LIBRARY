@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="bookObjectInfo" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="adminBookObjectInfo" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.AdminBookObjectInfoController">
     <children>
         <AnchorPane layoutX="200.0" layoutY="120.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: transparent;">
             <children>
@@ -89,18 +89,18 @@
                                         </AnchorPane>
                                     </children>
                                 </VBox>
-                                <TextField layoutX="145.0" layoutY="375.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: transparent; -fx-font-size: 15; -fx-border-color: white;">
+                                <TextField disable="true" layoutX="145.0" layoutY="375.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: transparent; -fx-font-size: 15; -fx-border-color: white;" visible="false">
                                     <effect>
                                         <DropShadow />
                                     </effect></TextField>
-                                <Label layoutX="35.0" layoutY="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity : " textFill="#adabab" />
-                                <Button fx:id="minusQuantityButton" layoutX="111.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="-" textFill="WHITE" />
-                                <Button fx:id="plusQuantityButton" layoutX="345.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="+" textFill="WHITE" />
-                                <Button fx:id="configButton" disable="true" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#configButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Config" textFill="WHITE" visible="false" />
-                                <Button fx:id="deleteButton" disable="true" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" visible="false" />
-                                <Button fx:id="borrowButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#borrowButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE" />
-                                <Button fx:id="returnButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#returnButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE" />
-                                <Button fx:id="authorConfigButton" disable="true" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Label disable="true" layoutX="35.0" layoutY="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity : " textFill="#adabab" visible="false" />
+                                <Button fx:id="minusQuantityButton" disable="true" layoutX="111.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="-" textFill="WHITE" visible="false" />
+                                <Button fx:id="plusQuantityButton" disable="true" layoutX="345.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="+" textFill="WHITE" visible="false" />
+                                <Button fx:id="configButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#configButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Config" textFill="WHITE" />
+                                <Button fx:id="deleteButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" />
+                                <Button fx:id="borrowButton" disable="true" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#borrowButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE" visible="false" />
+                                <Button fx:id="returnButton" disable="true" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#returnButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE" visible="false" />
+                                <Button fx:id="authorConfigButton" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -109,7 +109,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="publishConfigButton" disable="true" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Button fx:id="publishConfigButton" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -118,7 +118,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="quantityConfigButton" disable="true" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Button fx:id="quantityConfigButton" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -127,7 +127,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="descriptionConfigButton" disable="true" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Button fx:id="descriptionConfigButton" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -155,4 +155,6 @@
             </graphic>
         </Button>
     </children>
+
+
 </AnchorPane>
