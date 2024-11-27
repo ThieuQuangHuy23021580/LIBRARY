@@ -89,13 +89,13 @@
                                         </AnchorPane>
                                     </children>
                                 </VBox>
-                                <TextField disable="true" layoutX="145.0" layoutY="375.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: transparent; -fx-font-size: 15; -fx-border-color: white;" visible="false">
+                                <TextField layoutX="145.0" layoutY="375.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: transparent; -fx-font-size: 15; -fx-border-color: white;">
                                     <effect>
                                         <DropShadow />
                                     </effect></TextField>
-                                <Label disable="true" layoutX="35.0" layoutY="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity : " textFill="#adabab" visible="false" />
-                                <Button fx:id="minusQuantityButton" disable="true" layoutX="111.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="-" textFill="WHITE" visible="false" />
-                                <Button fx:id="plusQuantityButton" disable="true" layoutX="345.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="+" textFill="WHITE" visible="false" />
+                                <Label layoutX="35.0" layoutY="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity : " textFill="#adabab" />
+                                <Button fx:id="minusQuantityButton" layoutX="111.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="-" textFill="WHITE" />
+                                <Button fx:id="plusQuantityButton" layoutX="345.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="+" textFill="WHITE" />
                                 <Button fx:id="configButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#configButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Config" textFill="WHITE" />
                                 <Button fx:id="deleteButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" />
                                 <Button fx:id="borrowButton" disable="true" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#borrowButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE" visible="false" />
@@ -136,6 +136,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
+                        <Button fx:id="addBookButton" layoutX="70.0" layoutY="435.0" mnemonicParsing="false" onAction="#addBookButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Add" textFill="WHITE" />
                             </children>
                         </AnchorPane>
                     </children>
