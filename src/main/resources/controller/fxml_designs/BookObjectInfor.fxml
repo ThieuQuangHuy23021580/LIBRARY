@@ -57,19 +57,19 @@
                                         <AnchorPane prefWidth="380.0">
                                             <children>
                                                 <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#adabab" />
-                                                <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." visible="false" />
+                                                <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
                                                 <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#adabab" />
-                                                <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." visible="false" />
+                                                <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
                                                 <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#adabab" />
-                                                <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." visible="false" />
+                                                <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." />
                                             </children>
                                         </AnchorPane>
                                         <Label style="-fx-font-size: 16; -fx-font-style: italic;" text="Description : " textFill="#adabab" />
@@ -82,7 +82,7 @@
                                                 <AnchorPane layoutX="10.0" layoutY="5.0">
                                                     <children>
                                                         <Label alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#adabab" wrapText="true" />
-                                                        <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." visible="false" />
+                                                        <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." />
                                                     </children>
                                                 </AnchorPane>
                                             </children>
@@ -100,7 +100,7 @@
                                 <Button fx:id="deleteButton" disable="true" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" visible="false" />
                                 <Button fx:id="borrowButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#borrowButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE" />
                                 <Button fx:id="returnButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#returnButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE" />
-                                <Button fx:id="authorConfigButton" disable="true" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Button fx:id="authorConfigButton" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -109,7 +109,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="publishConfigButton" disable="true" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Button fx:id="publishConfigButton" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -118,7 +118,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="quantityConfigButton" disable="true" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Button fx:id="quantityConfigButton" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -127,7 +127,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="descriptionConfigButton" disable="true" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
+                                <Button fx:id="descriptionConfigButton" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>

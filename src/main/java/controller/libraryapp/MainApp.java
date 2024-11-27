@@ -1,6 +1,7 @@
 package controller.libraryapp;
 
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,12 +19,11 @@ public class MainApp extends Application {
     public void addFXML() {
 //        fxmlLoaders.add("");
     }
-
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/LoginView.fxml"));
-            LoginViewController controller = loader.getController();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NewMainView.fxml"));
+            MainViewController controller = loader.getController();
             loader.setController(controller);
 
 
@@ -31,8 +31,8 @@ public class MainApp extends Application {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("LibraHub");
-//            primaryStage.setResizable(true);
-//
+            primaryStage.setResizable(false);
+
 
             primaryStage.show();
         } catch (IOException e) {
