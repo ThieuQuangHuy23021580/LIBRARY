@@ -1,40 +1,17 @@
 package controller.libraryapp;
 
-
+import Util.SwitchScene;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainApp extends Application {
-
-    public static ArrayList<String> fxmlLoaders = new ArrayList<>();
-    private Stage primaryStage;
-
-    public void addFXML() {
-//        fxmlLoaders.add("");
-    }
 
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/LoginView.fxml"));
-            LoginViewController controller = loader.getController();
-            loader.setController(controller);
-
-
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("LibraHub");
-//            primaryStage.setResizable(true);
-//
-
-            primaryStage.show();
+            SwitchScene.setPrimaryStage(primaryStage);
+            SwitchScene.showLoginView();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

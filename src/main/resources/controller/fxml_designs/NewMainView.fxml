@@ -41,7 +41,7 @@
                         <Image url="@../../PICTURES/search.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="searchButton" layoutX="877.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchBook" prefHeight="41.0" prefWidth="50.0" style="-fx-font-size: 18; -fx-border-width: 1; -fx-background-color: transparent;">
+                  <Button fx:id="searchButton" layoutX="877.0" layoutY="12.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="50.0" style="-fx-font-size: 18; -fx-border-width: 1; -fx-background-color: transparent;">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>

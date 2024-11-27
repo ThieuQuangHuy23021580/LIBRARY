@@ -1,22 +1,17 @@
 package controller.libraryapp;
 
 
-import Model.Account;
-import Model.User;
+import Util.SwitchScene;
+import Util.UserDAO;
+import model.User;
 import javafx.animation.TranslateTransition;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -75,9 +70,6 @@ public class LoginViewController {
     @FXML
     private TextField showPassword;
 
-    Account account = new Account();
-    DatabaseConnect db = new DatabaseConnect();
-    Connection conn = null;
 
     Rectangle clip;
 
@@ -96,118 +88,35 @@ public class LoginViewController {
         bg.setClip(clip);
 
     }
-
     @FXML
     void signUpButtonPressed(ActionEvent event) throws SQLException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty() || ConfirmPasswordField.getText().isEmpty()) {
             showAlert("Please fill all", "no");
             return;
         }
-        PreparedStatement st = null;
-        ResultSet key = null;
-
-        try {
-            conn = db.getConnection();
-            if (passwordField.getText().equals(ConfirmPasswordField.getText())) {
-                String sql1 = "INSERT INTO userInfo(userName, age) VALUES (?, ?)";
-                st = conn.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
-                st.setString(1, "Update");
-                st.setInt(2, 0);
-                st.executeUpdate();
-
-                key = st.getGeneratedKeys();
-                int userId = 0;
-                if (key.next()) {
-                    userId = key.getInt(1);
-                }
-
-                st.close();
-                if (key != null) key.close();
-
-                String sql = "INSERT INTO user(email, password, userId) VALUES (?, ?, ?)";
-                st = conn.prepareStatement(sql);
-                st.setString(1, emailAddressField.getText());
-                st.setString(2, passwordField.getText());
-                st.setInt(3, userId);
-                st.executeUpdate();
-
-                st.close();
-
-                // Điều hướng tới màn hình đăng nhập
-                toSignInButtonPressed(event);
-            } else {
-                showAlert("Password mismatch", "no");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert("Database Error: " + e.getMessage(), "error");
-        } finally {
-            // Đảm bảo tài nguyên được đóng
-            try {
-                if (key != null) key.close();
-                if (st != null) st.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        if(passwordField.getText().equals(ConfirmPasswordField.getText())) {
+            UserDAO.handleRegister(emailAddressField.getText(), passwordField.getText());
+            toSignInButtonPressed(event);
         }
-
     }
 
     @FXML
-    void signInButtonPressed(ActionEvent event) throws IOException, SQLException {
+    void signInButtonPressed() throws IOException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()) {
             showAlert("Please fill all fields", "Error");
             return;
         }
-
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
         try {
-            conn = db.getConnection();
-
-            String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, emailAddressField.getText());
-            pstmt.setString(2, passwordField.getText());
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                int userId = rs.getInt("userId");
-
-                String userInfoSql = "SELECT * FROM userInfo WHERE userId = ?";
-                pstmt.close();
-                pstmt = conn.prepareStatement(userInfoSql);
-                pstmt.setInt(1, userId);
-                ResultSet userInfo = pstmt.executeQuery();
-                loginViewToMenu(event);
-                if (userInfo.next()) {
-                    User user = new User(userInfo.getString("userName"),userInfo.getInt("age"));
-                    account.setUser(user);
-                }
-                userInfo.close();
+            User user = UserDAO.authenticator(emailAddressField.getText(), passwordField.getText());
+            if (user == null) {
+                showAlert("Username or password is incorrect", "Error");
             } else {
-                showAlert("Invalid email or password", "Error");
+                showAlert("Login successfully","Correct");
+                SwitchScene.showMainView(user);
             }
-
-        } finally {
-            if (rs != null) rs.close();
-            if (pstmt != null) pstmt.close();
-            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    }
-
-
-    public void loginViewToMenu(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NewMainView.fxml"));
-        Parent root = loader.load();
-
-        MainViewController controller = loader.getController();
-        controller.setUserName(emailAddressField.getText());
-        controller.setAccount(account);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
     }
 
     public void showAlert(String content, String title) {
