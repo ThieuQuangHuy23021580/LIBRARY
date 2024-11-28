@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -21,7 +29,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
+<StackPane fx:id="mainStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1200.0">
          <children>
@@ -45,7 +53,7 @@
                         <Image url="@../../PICTURES/search.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="searchButton" layoutX="877.0" layoutY="12.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="50.0" style="-fx-font-size: 18; -fx-border-width: 1; -fx-background-color: transparent;">
+                  <Button fx:id="searchButton" layoutX="877.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleSearchButtonAction" prefHeight="41.0" prefWidth="50.0" style="-fx-font-size: 18; -fx-border-width: 1; -fx-background-color: transparent;">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -61,8 +69,9 @@
                   <Label fx:id="userName" layoutX="1035.0" layoutY="21.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="User Name" textFill="WHITE" />
                   <MenuButton fx:id="userMenuButton" layoutX="1028.0" layoutY="16.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent;">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Your Information" />
+                      <MenuItem mnemonicParsing="false" text="My Information" />
                       <MenuItem mnemonicParsing="false" text="My Library" />
+                        <MenuItem mnemonicParsing="false" text="Add New Book" />
                     </items>
                   </MenuButton>
                </children>
@@ -71,6 +80,29 @@
                <content>
                   <FlowPane fx:id="flowHome" prefHeight="690.0" prefWidth="1200.0">
                      <children>
+                        <AnchorPane fx:id="homeAnchorPane" prefHeight="650.0" prefWidth="1200.0">
+                           <children>
+                              <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../PICTURES/post_bg.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="gradient_left_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
+                              <Rectangle fx:id="gradient_right_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" layoutX="600.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
+                              <Rectangle fx:id="gradient_up_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
+                              <Rectangle fx:id="gradient_down_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
+                              <Button fx:id="the_most_popular_books" layoutX="330.0" layoutY="319.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 45; -fx-font-weight: bold; -fx-background-color: transparent;" text="The most popular books!" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow spread="0.5" />
+                                 </effect>
+                              </Button>
+                              <Label fx:id="discover" layoutX="480.0" layoutY="248.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 65; -fx-font-weight: bold;" text="Discover" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow spread="0.5" />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </AnchorPane>
                         <AnchorPane fx:id="categoriesAnchorPane" prefHeight="695.0" prefWidth="1200.0">
                            <children>
                               <ImageView fitHeight="695.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
@@ -100,7 +132,7 @@
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../PICTURES/Isolated_white_book_cover.png" />
+                                          <Image url="@../../PICTURES/comic_book.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -109,7 +141,7 @@
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../PICTURES/Isolated_white_book_cover.png" />
+                                          <Image url="@../../PICTURES/economic_book.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -118,7 +150,7 @@
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../PICTURES/Isolated_white_book_cover.png" />
+                                          <Image url="@../../PICTURES/health_and_fitness_book.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -127,7 +159,7 @@
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../PICTURES/Isolated_white_book_cover.png" />
+                                          <Image url="@../../PICTURES/other_book.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -138,7 +170,7 @@
                                     <Image url="@../../PICTURES/scroll_down.png" />
                                  </image>
                               </ImageView>
-                              <AnchorPane layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0">
+                              <AnchorPane fx:id="fictionCateList" layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0" visible="false">
                                  <children>
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000008f" height="250.0" stroke="#faf761" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40; -fx-stroke-width: 5;" width="1000.0">
                                        <effect>
@@ -192,29 +224,303 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="homeAnchorPane" prefHeight="650.0" prefWidth="1200.0">
-                           <children>
-                              <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../PICTURES/post_bg.png" />
-                                 </image>
-                              </ImageView>
-                              <Rectangle fx:id="gradient_left_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
-                              <Rectangle fx:id="gradient_right_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" layoutX="600.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
-                              <Rectangle fx:id="gradient_up_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
-                              <Rectangle fx:id="gradient_down_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
-                              <Button fx:id="the_most_popular_books" layoutX="330.0" layoutY="319.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 45; -fx-font-weight: bold; -fx-background-color: transparent;" text="The most popular books!" textFill="WHITE">
-                                 <effect>
-                                    <DropShadow spread="0.5" />
-                                 </effect>
-                              </Button>
-                              <Label fx:id="discover" layoutX="480.0" layoutY="248.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 65; -fx-font-weight: bold;" text="Discover" textFill="WHITE">
-                                 <effect>
-                                    <DropShadow spread="0.5" />
-                                 </effect>
-                              </Label>
+                              <AnchorPane fx:id="educationCateList" layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0" visible="false">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000008f" height="250.0" stroke="#faf761" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40; -fx-stroke-width: 5;" width="1000.0">
+                                       <effect>
+                                          <Glow level="1.0" />
+                                       </effect>
+                                    </Rectangle>
+                                    <Label layoutX="406.0" layoutY="20.0" style="-fx-font-size: 40; -fx-text-fill: #faf761; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="EDUCATION" textFill="#faf761">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="80.0" style="-fx-font-size: 23; -fx-font-weight: BOLD; -fx-font-family: Poppin; -fx-text-fill: white;" text="- Textbooks (Sách giáo khoa)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="115.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Test Preparation (Ôn thi)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="150.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Reference (Tham khảo)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="185.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Language Learning (Học ngôn ngữ)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="comicCateList" layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0" visible="false">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000008f" height="250.0" stroke="#faf761" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40; -fx-stroke-width: 5;" width="1000.0">
+                                       <effect>
+                                          <Glow level="1.0" />
+                                       </effect>
+                                    </Rectangle>
+                                    <Label layoutX="270.0" layoutY="20.0" style="-fx-font-size: 40; -fx-text-fill: #faf761; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="Comics &amp; Graphic Novels" textFill="#faf761">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="80.0" style="-fx-font-size: 23; -fx-font-weight: BOLD; -fx-font-family: Poppin; -fx-text-fill: white;" text="- Manga (Manga Nhật Bản)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="115.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Superheroes (Siêu anh hùng)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="150.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Picture Books (Sách tranh)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="185.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Slice of Life (Đời thường)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="businessAndEconomicCateList" layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0" visible="false">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000008f" height="250.0" stroke="#faf761" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40; -fx-stroke-width: 5;" width="1000.0">
+                                       <effect>
+                                          <Glow level="1.0" />
+                                       </effect>
+                                    </Rectangle>
+                                    <Label layoutX="290.0" layoutY="20.0" style="-fx-font-size: 40; -fx-text-fill: #faf761; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="Business &amp; Economics" textFill="#faf761">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="80.0" style="-fx-font-size: 23; -fx-font-weight: BOLD; -fx-font-family: Poppin; -fx-text-fill: white;" text="- Management (Quản lý)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="115.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Entrepreneurship (Khởi nghiệp)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="150.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Investing (Đầu tư)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="185.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Economics &amp; Finance (Kinh tế học và tài chính)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="healthAndFitnessCateList" layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0" visible="false">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000008f" height="250.0" stroke="#faf761" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40; -fx-stroke-width: 5;" width="1000.0">
+                                       <effect>
+                                          <Glow level="1.0" />
+                                       </effect>
+                                    </Rectangle>
+                                    <Label layoutX="335.0" layoutY="20.0" style="-fx-font-size: 40; -fx-text-fill: #faf761; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="Health &amp; Fitness" textFill="#faf761">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="80.0" style="-fx-font-size: 23; -fx-font-weight: BOLD; -fx-font-family: Poppin; -fx-text-fill: white;" text="- Nutrition (Dinh dưỡng)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="115.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Mental Health (Sức khỏe tinh thần)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="150.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Exercise (Tập luyện thể dục)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="185.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Sports &amp; Outdoor (Thể thao và hoạt động ngoài trời)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="otherCateList" layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0" visible="false">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000008f" height="250.0" stroke="#faf761" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40; -fx-stroke-width: 5;" width="1000.0">
+                                       <effect>
+                                          <Glow level="1.0" />
+                                       </effect>
+                                    </Rectangle>
+                                    <Label layoutX="335.0" layoutY="20.0" style="-fx-font-size: 40; -fx-text-fill: #faf761; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="Other Categories" textFill="#faf761">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="80.0" style="-fx-font-size: 23; -fx-font-weight: BOLD; -fx-font-family: Poppin; -fx-text-fill: white;" text="- Technology &amp; Computing (Công nghệ và máy tính)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="115.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Religious &amp; Spirituality (Tôn giáo và tâm linh)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="150.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- Arts &amp; Hobbies (Nghệ thuật và sở thích)" textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="170.0" layoutY="185.0" style="-fx-font-size: 23; -fx-text-fill: white; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="- And more . . ." textFill="WHITE">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="discoverCatetegories" layoutX="95.0" layoutY="35.0" prefHeight="250.0" prefWidth="1000.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000008f" height="250.0" stroke="#faf761" strokeType="INSIDE" style="-fx-arc-height: 40; -fx-arc-width: 40; -fx-stroke-width: 5;" width="1000.0">
+                                       <effect>
+                                          <Glow level="1.0" />
+                                       </effect>
+                                    </Rectangle>
+                                    <Label layoutX="400.0" layoutY="70.0" style="-fx-font-size: 40; -fx-text-fill: #faf761; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="DISCOVERY" textFill="#faf761">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                    <Label layoutX="270.0" layoutY="120.0" style="-fx-font-size: 40; -fx-text-fill: #faf761; -fx-font-weight: BOLD; -fx-font-family: Poppin;" text="Please choose one below!" textFill="#faf761">
+                                       <effect>
+                                          <Glow level="1.0">
+                                             <input>
+                                                <DropShadow spread="0.15" />
+                                             </input>
+                                          </Glow>
+                                       </effect>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="recommendAnchorPane" prefHeight="300.0" prefWidth="1200.0">
@@ -253,7 +559,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="500.0" prefWidth="450.0">
+                        <AnchorPane opacity="0.8" prefHeight="500.0" prefWidth="450.0">
                            <children>
                               <VBox layoutX="35.0" prefHeight="375.0" prefWidth="390.0">
                                  <children>
@@ -265,7 +571,7 @@
                                                 <Glow />
                                              </input>
                                              <color>
-                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                                <Color blue="1.0" green="1.0" red="1.0" />
                                              </color></DropShadow>
                                        </effect></Label>
                                     <AnchorPane prefWidth="380.0">

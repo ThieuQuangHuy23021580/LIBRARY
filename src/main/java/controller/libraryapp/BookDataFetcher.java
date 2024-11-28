@@ -7,6 +7,8 @@ import model.Book;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,92 +20,135 @@ public class BookDataFetcher {
     // Method to fetch books from Google Books API by category
     public static List<Book> fetchBooksFromGoogleByCategory(String category, int numberOfBooks) throws Exception {
         List<Book> books = new ArrayList<>();
-        int startIndex = 0;
+        int startIndex =0;
 
         while (books.size() < numberOfBooks) {
-            String urlString = String.format(GOOGLE_BOOKS_API_URL, category, startIndex) + API_KEY;
+            // Encode the category to handle spaces and special characters
+            String encodedCategory = URLEncoder.encode(category, StandardCharsets.UTF_8);
+            String urlString = String.format(GOOGLE_BOOKS_API_URL, encodedCategory, startIndex) + API_KEY;
+
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
-            // Read the response from the API
             try (InputStreamReader reader = new InputStreamReader(connection.getInputStream())) {
                 Gson gson = new Gson();
                 JsonObject response = gson.fromJson(reader, JsonObject.class);
 
-                // Check if the response contains the "items" field
+                // Check total number of items available in the category
+                int totalItems = response.has("totalItems") ? response.get("totalItems").getAsInt() : 0;
+
                 if (response.has("items")) {
                     JsonArray items = response.getAsJsonArray("items");
 
-                    // Loop through each book in the response and map it to Book object
                     for (int i = 0; i < items.size(); i++) {
                         JsonObject item = items.get(i).getAsJsonObject();
                         JsonObject volumeInfo = item.getAsJsonObject("volumeInfo");
 
+                        // Extract book information as before
                         String title = volumeInfo.get("title").getAsString();
                         String author = volumeInfo.has("authors") ? volumeInfo.getAsJsonArray("authors").get(0).getAsString() : "Unknown Author";
                         String publisher = volumeInfo.has("publisher") ? volumeInfo.get("publisher").getAsString() : "Unknown Publisher";
                         String description = volumeInfo.has("description") ? volumeInfo.get("description").getAsString() : "No description available";
                         String imageUrl = volumeInfo.has("imageLinks") ? volumeInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : "No image";
-                        int quantity = 10; // Default quantity
+                        int quantity = 10;
 
-                        // Extract category (subject) information from the API response
-                        String bookCategory = category;  // Set the category based on the API query
+                        String bookCategory = "Other";
                         if (volumeInfo.has("categories")) {
                             JsonArray categories = volumeInfo.getAsJsonArray("categories");
-                            if (categories != null && categories.size() > 0) {
-                                bookCategory = categories.get(0).getAsString(); // Use the first category
+                            for (int j = 0; j < categories.size(); j++) {
+                                String currentCategory = categories.get(j).getAsString();
+                                if (currentCategory.contains(category)) {
+                                    bookCategory = currentCategory;
+                                    break;
+                                }
+                            }
+                        }
+
+                        String isbn = "Unknown ISBN";
+                        if (volumeInfo.has("industryIdentifiers")) {
+                            JsonArray industryIdentifiers = volumeInfo.getAsJsonArray("industryIdentifiers");
+                            for (int k = 0; k < industryIdentifiers.size(); k++) {
+                                JsonObject identifier = industryIdentifiers.get(k).getAsJsonObject();
+                                if (identifier.get("type").getAsString().equals("ISBN_13")) {
+                                    isbn = identifier.get("identifier").getAsString();
+                                    break;
+                                }
                             }
                         }
 
                         // Create a Book object and add it to the list
-                        Book book = new Book(title, author, publisher, description, imageUrl, quantity, bookCategory);
+                        Book book = new Book(title, author, publisher, description, imageUrl, quantity, bookCategory, isbn);
                         books.add(book);
 
-                        if (books.size() >= numberOfBooks) {
+                        // If the number of fetched books reaches the requested amount, break the loop
+                        if (books.size() >= numberOfBooks || books.size() >= totalItems) {
                             break;
                         }
                     }
 
-                    // Increase the startIndex for the next batch of books
-                    startIndex += 40;  // maxResults is 40 per page, you can adjust this as per your need
+                    startIndex += 40;  // Move to the next page of results
+
+                    // If we have fetched all available books, stop the loop
+                    if (books.size() >= totalItems) {
+                        break;
+                    }
                 } else {
                     System.out.println("No 'items' field found in API response.");
-                    break;  // Exit the loop if no items were found
+                    break;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Error fetching data from Google Books API.");
-                break;  // Exit the loop if an error occurs
+                break;
             }
         }
 
         return books;
     }
 
+
     // Method to add books to the database from different categories
     public static void addBooksToDatabaseByCategory() {
         String[] categories = {
-                "fiction",               // Fiction
-                "education",             // Education
-                "comics+graphic+novels", // Comics & Graphic Novels
-                "business+economics",    // Business & Economics
-                "health+fitness",        // Health & Fitness
-                "others"                 // Others
+                "Fiction",               // Fiction
+                "Education",// Education
+                "Comics & Graphic Novels",// Comics & Graphic Novels
+                "Business & Economics",
+                "Health & Fitness",   // Business & Economics
+                "Others"                 // Others
         };
+
+        int targetCount = 100; // Target number of books per category
 
         for (String category : categories) {
             try {
-                // Fetch books from Google Books API by category
-                List<Book> books = fetchBooksFromGoogleByCategory(category, 100); // Fetch 100 books per category
-                for (Book book : books) {
-                    // Insert each book into the database
-                    DatabaseUtil.insertBook(book);
+                // Check the current number of books in the database for this category
+                int currentCount = DatabaseUtil.getBookCountByCategory(category);
+
+                // Calculate how many more books are needed
+                if (currentCount < targetCount) {
+                    int booksToFetch = targetCount - currentCount;
+
+                    System.out.println("Category: " + category + " | Current: " + currentCount
+                            + " | Fetching: " + booksToFetch + " more books.");
+
+                    // Fetch only the required number of books
+                    List<Book> books = fetchBooksFromGoogleByCategory(category, booksToFetch);
+
+                    // Insert fetched books into the database
+                    for (Book book : books) {
+                        DatabaseUtil.insertBook(book);
+                    }
+
+                    System.out.println("Category: " + category + " now has " + targetCount + " books.");
+                } else {
+                    System.out.println("Category: " + category + " already has " + currentCount + " books.");
                 }
-                System.out.println("Books for category " + category + " successfully added to the database.");
+
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("Error occurred while fetching or adding books for category " + category);
+                System.out.println("Error occurred while processing category: " + category);
             }
         }
     }
