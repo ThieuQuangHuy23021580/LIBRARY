@@ -72,6 +72,29 @@
                <content>
                   <FlowPane fx:id="flowHome" prefHeight="690.0" prefWidth="1200.0">
                      <children>
+                        <AnchorPane fx:id="homeAnchorPane" prefHeight="650.0" prefWidth="1200.0">
+                           <children>
+                              <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../PICTURES/post_bg.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="gradient_left_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
+                              <Rectangle fx:id="gradient_right_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" layoutX="600.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
+                              <Rectangle fx:id="gradient_up_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
+                              <Rectangle fx:id="gradient_down_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
+                              <Button fx:id="the_most_popular_books" layoutX="330.0" layoutY="319.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 45; -fx-font-weight: bold; -fx-background-color: transparent;" text="The most popular books!" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow spread="0.5" />
+                                 </effect>
+                              </Button>
+                              <Label fx:id="discover" layoutX="480.0" layoutY="248.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 65; -fx-font-weight: bold;" text="Discover" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow spread="0.5" />
+                                 </effect>
+                              </Label>
+                           </children>
+                        </AnchorPane>
                         <AnchorPane fx:id="categoriesAnchorPane" prefHeight="695.0" prefWidth="1200.0">
                            <children>
                               <ImageView fitHeight="695.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
@@ -490,29 +513,6 @@
                                     </Label>
                                  </children>
                               </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="homeAnchorPane" prefHeight="650.0" prefWidth="1200.0">
-                           <children>
-                              <ImageView fitHeight="650.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../PICTURES/post_bg.png" />
-                                 </image>
-                              </ImageView>
-                              <Rectangle fx:id="gradient_left_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
-                              <Rectangle fx:id="gradient_right_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="650.0" layoutX="600.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="600.0" />
-                              <Rectangle fx:id="gradient_up_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
-                              <Rectangle fx:id="gradient_down_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="325.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: transparent;" width="1200.0" />
-                              <Button fx:id="the_most_popular_books" layoutX="330.0" layoutY="319.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 45; -fx-font-weight: bold; -fx-background-color: transparent;" text="The most popular books!" textFill="WHITE">
-                                 <effect>
-                                    <DropShadow spread="0.5" />
-                                 </effect>
-                              </Button>
-                              <Label fx:id="discover" layoutX="480.0" layoutY="248.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-size: 65; -fx-font-weight: bold;" text="Discover" textFill="WHITE">
-                                 <effect>
-                                    <DropShadow spread="0.5" />
-                                 </effect>
-                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane fx:id="recommendAnchorPane" prefHeight="300.0" prefWidth="1200.0">

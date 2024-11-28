@@ -10,6 +10,7 @@ public class AdminBookObjectInfoController {
     }
 
     public void borrowButtonPress(ActionEvent actionEvent) {
+
     }
 
     public void returnButtonPress(ActionEvent actionEvent) {

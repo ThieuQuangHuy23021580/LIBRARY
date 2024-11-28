@@ -374,3 +374,20 @@
     -fx-border-color: red;
     -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
 }
+
+.menu-item {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
+.menu-item:hover {
+    -fx-border-color: red;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+    -fx-background-color: #830a0a;
+}
+
+#moreInfoButton:hover{
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
