@@ -3,6 +3,7 @@ package controller.libraryapp;
 
 import Util.SwitchScene;
 import Util.UserDAO;
+import javafx.scene.Cursor;
 import model.User;
 import javafx.animation.TranslateTransition;
 
@@ -86,44 +87,45 @@ public class LoginViewController {
         clip = new Rectangle(bg.getFitWidth(), 400);
         clip.setY(800);
         bg.setClip(clip);
-
+        signInButton.setCursor(Cursor.HAND);
+        signUpButton.setCursor(Cursor.HAND);
+        showPassword.setCursor(Cursor.HAND);
     }
+
     @FXML
     void signUpButtonPressed(ActionEvent event) throws SQLException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty() || ConfirmPasswordField.getText().isEmpty()) {
-            showAlert("Please fill all", "no");
+            UserDAO.showAlert("Please fill all", "no");
             return;
         }
-        if(passwordField.getText().equals(ConfirmPasswordField.getText())) {
-            UserDAO.handleRegister(emailAddressField.getText(), passwordField.getText());
-            toSignInButtonPressed(event);
+        if (!checkStrongPassword(passwordField.getText())) {
+            UserDAO.showAlert("Password must contain one digit, one special character, one uppercase and one lowercase letter", "no");
+            return;
+        }
+        if (passwordField.getText().equals(ConfirmPasswordField.getText())) {
+            if (UserDAO.handleRegister(emailAddressField.getText(), passwordField.getText())) {
+                toSignInButtonPressed(event);
+            }
         }
     }
 
     @FXML
     void signInButtonPressed() throws IOException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            showAlert("Please fill all fields", "Error");
+            UserDAO.showAlert("Please fill all fields", "Error");
             return;
         }
         try {
             User user = UserDAO.authenticator(emailAddressField.getText(), passwordField.getText());
             if (user == null) {
-                showAlert("Username or password is incorrect", "Error");
+                UserDAO.showAlert("Username or password is incorrect", "Error");
             } else {
-                showAlert("Login successfully","Correct");
+                UserDAO.showAlert("Login successfully", "Correct");
                 SwitchScene.showMainView(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public void showAlert(String content, String title) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(content);
-        alert.setTitle(title);
-        alert.showAndWait();
     }
 
     public void showCharacter() {
@@ -136,6 +138,30 @@ public class LoginViewController {
             passwordField.setText(showPassword.getText());
             showPassword.setVisible(false);
         }
+    }
+
+    public boolean checkStrongPassword(String password) {
+        String spCharacter = "!@#$%^&*()_+-={}[]|:;\"'<>,.?/";
+        boolean haveUpperCase = false;
+        boolean haveLowerCase = false;
+        boolean haveSpecial = false;
+        boolean haveDigit = false;
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (Character.isUpperCase(c)) {
+                haveUpperCase = true;
+            }
+            if (Character.isLowerCase(c)) {
+                haveLowerCase = true;
+            }
+            if (Character.isDigit(c)) {
+                haveDigit = true;
+            }
+            if (spCharacter.indexOf(c) != -1) {
+                haveSpecial = true;
+            }
+        }
+        return haveDigit && haveUpperCase && haveLowerCase && haveSpecial;
     }
 
     /**

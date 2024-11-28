@@ -4,6 +4,7 @@ import Util.SwitchScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -23,6 +24,9 @@ public class MainViewController {
 
     @FXML
     private AnchorPane bookPane;
+
+    @FXML
+    private AnchorPane viewPane;
 
     @FXML
     private Button categoriesButton_active;
@@ -71,15 +75,30 @@ public class MainViewController {
 
     @FXML
     private MenuButton userMenuButton;
-
+    @FXML
+    private MenuItem listLoanButton;
+    @FXML
+    private MenuItem manageUserButton;
     @FXML
     private Label userName;
+    @FXML
+    private StackPane parent;
 
     private User user;
 
     public void setUser(User user) {
         this.user = user;
+        if(user.getRole().equals(User.MANAGER)) {
+           listLoanButton.setVisible(false);
+           manageUserButton.setVisible(true);
+        }
+        userName.setText(user.getUserName());
     }
+
+    public void setView(Parent root) {
+        parent.getChildren().add(root);
+    }
+
 
     @FXML
     public void initialize() {

@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import model.User;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class SwitchScene {
 
@@ -41,15 +40,19 @@ public class SwitchScene {
     }
 
     public static void showUserDashboard(User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SwitchScene.class.getResource("/controller/fxml_designs/userProfile.fxml")));
-        Parent root = loader.load();
-        UserController controller = loader.getController();
-        controller.setUser(user);
-        Stage stage = new Stage();
-        stage.setTitle("yourInfo");
-        stage.setScene(new Scene(root));
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.show();
+        FXMLLoader loader = new FXMLLoader(SwitchScene.class.getResource("/controller/fxml_designs/userProfile.fxml"));
+        Parent userProfileRoot = loader.load();
 
+        UserController userController = loader.getController();
+        userController.setUser(user);
+
+        FXMLLoader mainLoader = new FXMLLoader(SwitchScene.class.getResource("/controller/fxml_designs/NewMainView.fxml"));
+        Parent mainRoot = mainLoader.load();
+        MainViewController mainController = mainLoader.getController();
+        mainController.setView(userProfileRoot);
+        primaryStage.setScene(new Scene(mainRoot));
+        primaryStage.show();
     }
+
+
 }

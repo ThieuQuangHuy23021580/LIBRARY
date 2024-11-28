@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
+<StackPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1200.0">
          <children>
@@ -58,7 +58,8 @@
                   <MenuButton fx:id="userMenuButton" layoutX="1028.0" layoutY="16.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent;">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#userInfo" text="Your Information" />
-                      <MenuItem mnemonicParsing="false" text="My Library" />
+                      <MenuItem fx:id="listLoanButton" mnemonicParsing="false" text="My Library" />
+                        <MenuItem fx:id="manageUserButton" mnemonicParsing="false" onAction="#userInfo" text="ManageUser" />
                         <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" text="Logout" />
                     </items>
                   </MenuButton>
