@@ -280,23 +280,114 @@
 
 #searchButton {
     -fx-border-color: #fdfdfd;
+
 }
 #searchButton:hover {
     -fx-border-color: #E50914FF ;
+
 }
 
-#categoriesButton {
-    -fx-font-family: "Poppins-ExtraBold";
+#categoriesMenuButton {
+    /*-fx-font-family: "Poppins-ExtraBold";*/
     -fx-background-color: transparent;
-    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+    /*-fx-text-fill-fill: #f6f0f6 !important;*/
     -fx-mark-color:  #ffffff;
 
 }
 
-#categoriesButton:hover {
-    -fx-font-family: "Poppins-ExtraBold";
-    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
-    /*-fx-background-color: rgba(255, 253, 253, 0.35); !* Màu nền nhẹ khi hover *!*/
-    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+#searchTextField {
+    -fx-text-fill: white;
+}
+#userMenuButton {
+    -fx-mark-color: #7C7A7AFF;
 }
 
+#educationButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+
+#educationButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#fictionButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#fictionButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#comicButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#comicButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#businessAndEconomicButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#businessAndEconomicButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#healthAndFitnessButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#healthAndFitnessButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#otherCategoriesButton{
+    -fx-effect: null;
+    -fx-transition: all 0.2s ease-in-out; /* Hiệu ứng chuyển mượt */
+}
+#otherCategoriesButton:hover {
+    -fx-scale-x: 1.3; /* Dãn theo chiều ngang */
+    -fx-scale-y: 1.3; /* Dãn theo chiều dọc */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 0, 0.8), 15, 0.5, 0, 0);
+}
+#changeInfoButton:hover {
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
+}
+#updateInfoButton:hover {
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
+}
+#cancelInfoButton:hover {
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #ff0000, 10, 0, 0, 0);
+}
+
+#seeUserPasswordButton:hover{
+    -fx-border-color: red;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+
+.menu-item {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
+.menu-item:hover {
+    -fx-border-color: red;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+    -fx-background-color: #830a0a;
+}
+
+#moreInfoButton:hover{
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
