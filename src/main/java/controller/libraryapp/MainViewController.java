@@ -20,6 +20,7 @@ import model.Book;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainViewController {
@@ -225,22 +226,37 @@ public class MainViewController {
             System.out.println("Book Object: " + e.getMessage());
         }
     }
+
     @FXML
-    private void handleSearchButtonClick() {
-        String query = searchTextField.getText();
+    private StackPane mainStackPane; // Reference to the main StackPane in your FXML
 
-        // Fetch book data from Google Books API
-        Book book = GoogleBooksAPI.searchBook(query);
-        if (book != null) {
-            // Assume a default quantity for now, or set from UI if needed
-            int defaultQuantity = 10;  // You can adjust this based on your requirement
-            book.setQuantity(defaultQuantity);
+    @FXML
+    private void handleSearchButtonAction() {
+        String title = searchTextField.getText().trim();
+        recommendFlowPane.getChildren().clear();
 
-            // Insert the book into the database
-            DatabaseUtil.insertBook(book);
-            System.out.println("Book added to the database with quantity: " + defaultQuantity);
+        // Fetch books by title
+        List<Book> books = DatabaseUtil.getBooksByTitle(title);
+
+        if (books == null || books.isEmpty()) {
+            System.out.println("No books found with title: " + title);
         } else {
-            System.out.println("No book found for the query: " + query);
+            try {
+                for (Book book : books) {
+                    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
+                    StackPane bookObject = loader.load();
+
+                    // Pass book details to the controller
+                    BookObjectController controller = loader.getController();
+                    controller.setMainStackPane(mainStackPane);
+                    controller.setBookDetails(book);
+
+                    recommendFlowPane.getChildren().add(bookObject);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("Error loading book objects for search results.");
+            }
         }
     }
 

@@ -14,10 +14,10 @@ public class GoogleBooksAPI {
 
     private static final String API_KEY = "AIzaSyCfOWbVT84KCF8MS0AL7gwN4S8XNvSFy1k";  // Replace with your actual Google API key
 
-    // Method to search for a book by its query
-    public static Book searchBook(String query) {
+    // Method to search for a book by its query (or ISBN)
+    public static Book searchBookByISBN(String isbn) {
         try {
-            String urlString = "https://www.googleapis.com/books/v1/volumes?q=" + query + "&key=" + API_KEY;
+            String urlString = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + API_KEY;
             URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -44,6 +44,7 @@ public class GoogleBooksAPI {
                 String publisher = bookInfo.has("publisher") ? bookInfo.get("publisher").getAsString() : "No publisher";
                 String description = bookInfo.has("description") ? bookInfo.get("description").getAsString() : "No description";
                 String imageUrl = bookInfo.has("imageLinks") ? bookInfo.getAsJsonObject("imageLinks").get("thumbnail").getAsString() : "No image";
+                String isbnCode = getISBNFromVolumeInfo(bookInfo); // Fetch ISBN
 
                 // Default quantity
                 int quantity = 10;
@@ -57,12 +58,28 @@ public class GoogleBooksAPI {
                     }
                 }
 
-                // Return the Book object including the category
-                return new Book(title, author, publisher, description, imageUrl, quantity, category);
+                // Return the Book object including the ISBN
+                return new Book(title, author, publisher, description, imageUrl, quantity, category, isbnCode);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    // Method to extract ISBN from volumeInfo (if available)
+    private static String getISBNFromVolumeInfo(JsonObject volumeInfo) {
+        if (volumeInfo.has("industryIdentifiers")) {
+            JsonArray identifiers = volumeInfo.getAsJsonArray("industryIdentifiers");
+            for (int i = 0; i < identifiers.size(); i++) {
+                JsonObject identifier = identifiers.get(i).getAsJsonObject();
+                if (identifier.get("type").getAsString().equals("ISBN_13")) {
+                    return identifier.get("identifier").getAsString(); // Return ISBN-13
+                } else if (identifier.get("type").getAsString().equals("ISBN_10")) {
+                    return identifier.get("identifier").getAsString(); // Return ISBN-10
+                }
+            }
+        }
+        return "No ISBN"; // Return if no ISBN found
     }
 }
