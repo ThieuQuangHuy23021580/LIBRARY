@@ -1,8 +1,11 @@
 package controller.libraryapp;
 
+import com.google.gson.JsonObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -12,6 +15,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+import model.Book;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +24,8 @@ import java.util.Objects;
 
 public class MainViewController {
 
+    @FXML
+    private FlowPane recommendFlowPane;
     @FXML
     private TextField authorConfigTextField;
 
@@ -33,6 +40,9 @@ public class MainViewController {
 
     @FXML
     private AnchorPane categoriesAnchorPane;
+
+    @FXML
+    private AnchorPane bookPane;
 
     @FXML
     private Button categoriesButton_active;
@@ -110,7 +120,7 @@ public class MainViewController {
     private Button homeButton_inactive;
 
     @FXML
-    private Label librahub;
+    private AnchorPane home_anchorpane;
 
     @FXML
     private AnchorPane otherCateList;
@@ -126,9 +136,6 @@ public class MainViewController {
 
     @FXML
     private AnchorPane recommendAnchorPane;
-
-    @FXML
-    private FlowPane recommendFlowPane;
 
     @FXML
     private Button searchButton;
@@ -147,6 +154,7 @@ public class MainViewController {
 
     @FXML
     private Label userName;
+
 
     @FXML
     public void initialize(){
@@ -217,7 +225,24 @@ public class MainViewController {
             System.out.println("Book Object: " + e.getMessage());
         }
     }
+    @FXML
+    private void handleSearchButtonClick() {
+        String query = searchTextField.getText();
 
+        // Fetch book data from Google Books API
+        Book book = GoogleBooksAPI.searchBook(query);
+        if (book != null) {
+            // Assume a default quantity for now, or set from UI if needed
+            int defaultQuantity = 10;  // You can adjust this based on your requirement
+            book.setQuantity(defaultQuantity);
+
+            // Insert the book into the database
+            DatabaseUtil.insertBook(book);
+            System.out.println("Book added to the database with quantity: " + defaultQuantity);
+        } else {
+            System.out.println("No book found for the query: " + query);
+        }
+    }
 
     public void configButtonPress(ActionEvent actionEvent) {
     }
@@ -231,3 +256,10 @@ public class MainViewController {
     public void returnButtonPress(ActionEvent actionEvent) {
     }
 }
+
+
+
+
+
+
+
