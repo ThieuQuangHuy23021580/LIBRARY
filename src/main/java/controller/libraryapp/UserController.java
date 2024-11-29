@@ -2,30 +2,17 @@ package controller.libraryapp;
 
 import Util.SwitchScene;
 import Util.UserDAO;
-import javafx.scene.Cursor;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class UserController {
 
     @FXML
-    private TextField userIdTextField;
-    @FXML
     private TextField userNameTextField;
-    @FXML
-    private TextField userEmailTextField;
     @FXML
     private TextField userPhoneTextField;
     @FXML
@@ -36,22 +23,22 @@ public class UserController {
     private Button changeInfoButton;
     @FXML
     private Button cancelInfoButton;
+    @FXML
+    private Label userName;
+    @FXML
+    private Label userPhone;
+    @FXML
+    private Label userPassword;
+    @FXML
+    private Label userEmail;
+    @FXML
+    private Label userId;
 
     private User user;
 
     public void initialize() {
         updateInfoButton.setVisible(false);
         cancelInfoButton.setVisible(false);
-
-        updateInfoButton.setCursor(Cursor.HAND);
-        cancelInfoButton.setCursor(Cursor.HAND);
-        changeInfoButton.setCursor(Cursor.HAND);
-
-        userIdTextField.setEditable(false);
-        userNameTextField.setEditable(false);
-        userEmailTextField.setEditable(false);
-        userPhoneTextField.setEditable(false);
-        userPasswordTextField.setEditable(false);
     }
     public void setUser(User user) {
         this.user = user;
@@ -59,20 +46,24 @@ public class UserController {
     }
 
     public void showUserInfo() {
-        userIdTextField.setText(String.valueOf(user.getId()));
-        userNameTextField.setText(user.getUserName());
-        userEmailTextField.setText(user.getEmail());
-        userPhoneTextField.setText(user.getPhone());
-        userPasswordTextField.setText(user.getPassword());
+       userPasswordTextField.setVisible(false);
+       userNameTextField.setVisible(false);
+       userPhoneTextField.setVisible(false);
+       userId.setText(String.valueOf(user.getId()));
+       userName.setText(user.getUserName());
+       userPhone.setText(user.getPhone());
+       userPassword.setText(user.getPassword());
+       userEmail.setText(user.getEmail());
     }
 
     public void changeInfo() {
         changeInfoButton.setVisible(false);
         updateInfoButton.setVisible(true);
         cancelInfoButton.setVisible(true);
-        userNameTextField.setEditable(true);
-        userPhoneTextField.setEditable(true);
-        userPasswordTextField.setEditable(true);
+
+        userPasswordTextField.setVisible(true);
+        userNameTextField.setVisible(true);
+        userPhoneTextField.setVisible(true);
     }
 
     public void updateInfo() throws SQLException {
@@ -80,6 +71,11 @@ public class UserController {
         user.setPassword(userPasswordTextField.getText());
         user.setPhone(userPhoneTextField.getText());
         UserDAO.handleUpdateInfo(user);
+
+        userName.setText(user.getUserName());
+        userPhone.setText(user.getPhone());
+        userPassword.setText(user.getPassword());
+
         cancelUpdate();
     }
     public void cancelUpdate() {

@@ -3,7 +3,6 @@ package controller.libraryapp;
 import Util.SwitchScene;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -103,8 +102,6 @@ public class MainViewController {
     @FXML
     public void initialize() {
         showBook();
-        userName.setCursor(Cursor.HAND);
-        userMenuButton.setCursor(Cursor.HAND);
     }
 
     // Tạo đối tượng là sách.
