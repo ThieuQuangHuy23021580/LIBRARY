@@ -169,7 +169,7 @@ public class MainViewController {
     }
 
     public void setView(Parent root) {
-        parent.getChildren().add(root);
+        mainStackPane.getChildren().add(root);
     }
 
 
