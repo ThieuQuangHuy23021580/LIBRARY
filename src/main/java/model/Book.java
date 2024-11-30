@@ -11,9 +11,10 @@ public class Book {
     private String category;
     private String isbn;
 
-    public Book(int id,String title, String author, String publisher, String description, String imageUrl, int quantity, String category, String isbn) {
-        this.id = id;
+    public Book(String title, String author, String publisher, String description, String imageUrl, int quantity, String category, String isbn) {
         this.publisher = publisher;
+        this.title = title;
+        this.author = author;
         this.description = description;
         this.imageUrl = imageUrl;
         this.quantity = quantity;

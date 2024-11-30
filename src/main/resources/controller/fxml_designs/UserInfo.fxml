@@ -92,11 +92,10 @@
       <Label fx:id="UserPassword" layoutX="625.0" layoutY="445.0" prefHeight="30.0" prefWidth="367.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="*********" textFill="#f39d9d" />
       <Button fx:id="updateInfoButton" layoutX="880.0" layoutY="495.0" mnemonicParsing="false" style="-fx-font-size: 25; -fx-background-color: #E509144F; -fx-font-weight: bold;" text="Update" textFill="WHITE" />
       <Button fx:id="cancelInfoButton" layoutX="718.0" layoutY="495.0" mnemonicParsing="false" style="-fx-font-size: 25; -fx-background-color: #E509144F; -fx-font-weight: bold;" text="Cancel" textFill="WHITE" />
-      <TextField fx:id="userIdTextField" layoutX="557.0" layoutY="153.0" prefHeight="43.0" prefWidth="439.0" style="-fx-font-size: 20;" />
-      <TextField fx:id="userNameTextField" layoutX="635.0" layoutY="224.0" prefHeight="43.0" prefWidth="362.0" style="-fx-font-size: 20;" />
-      <TextField fx:id="userEmailTextField" layoutX="580.0" layoutY="293.0" prefHeight="43.0" prefWidth="418.0" style="-fx-font-size: 20;" />
-      <TextField fx:id="userPhoneTextField" layoutX="591.0" layoutY="364.0" prefHeight="43.0" prefWidth="405.0" style="-fx-font-size: 20;" />
-      <TextField fx:id="userPasswordTextField" layoutX="624.0" layoutY="433.0" prefHeight="43.0" prefWidth="373.0" style="-fx-font-size: 20;" />
+      <TextField fx:id="userNameTextField" layoutX="635.0" layoutY="224.0" prefHeight="43.0" prefWidth="362.0" style="-fx-font-size: 20;" visible="false" />
+      <TextField fx:id="userEmailTextField" layoutX="580.0" layoutY="293.0" prefHeight="43.0" prefWidth="418.0" style="-fx-font-size: 20;" visible="false" />
+      <TextField fx:id="userPhoneTextField" layoutX="591.0" layoutY="364.0" prefHeight="43.0" prefWidth="405.0" style="-fx-font-size: 20;" visible="false" />
+      <TextField fx:id="userPasswordTextField" layoutX="624.0" layoutY="433.0" prefHeight="43.0" prefWidth="373.0" style="-fx-font-size: 20;" visible="false" />
       <Button fx:id="seeUserPasswordButton" layoutX="1000.0" layoutY="430.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-font: 5; -fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">

@@ -11,8 +11,9 @@ module controller.libraryapp {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
-    requires java.sql;
     requires org.mariadb.jdbc;
+    requires com.google.gson;
+    requires java.sql;
 
     opens controller.libraryapp to javafx.fxml;
 

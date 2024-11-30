@@ -1,9 +1,14 @@
 package controller.libraryapp;
 
 
+import Util.DatabaseConnect;
 import Util.SwitchScene;
 import Util.UserDAO;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import model.User;
 import javafx.animation.TranslateTransition;
 
