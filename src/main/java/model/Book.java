@@ -1,6 +1,7 @@
 package model;
 
 public class Book {
+    private int id;
     private String title;
     private String author;
     private String publisher;
@@ -11,9 +12,9 @@ public class Book {
     private String isbn;
 
     public Book(String title, String author, String publisher, String description, String imageUrl, int quantity, String category, String isbn) {
+        this.publisher = publisher;
         this.title = title;
         this.author = author;
-        this.publisher = publisher;
         this.description = description;
         this.imageUrl = imageUrl;
         this.quantity = quantity;
@@ -21,6 +22,9 @@ public class Book {
         this.isbn = isbn;
     }
 
+    public int getId() {
+        return id;
+    }
     // Getters and Setters
     public String getTitle() { return title; }
     public String getAuthor() { return author; }

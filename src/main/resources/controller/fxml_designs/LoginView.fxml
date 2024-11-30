@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.LoginViewController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.LoginViewController">
    <children>
       <AnchorPane prefHeight="800.0" prefWidth="1200.0">
          <children>
@@ -40,7 +41,7 @@
                         <Font name="Webdings" size="24.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="emailAddressField" layoutX="255.0" layoutY="310.0" onAction="#EnterEmailAddress" prefHeight="70.0" prefWidth="330.0" promptText="Enter your email address " style="-fx-background-color: transparent; -fx-font-family: 'Poppins-ExtraBold'; -fx-border-color: #6B2997FF; -fx-font-size: 20;">
+                  <TextField fx:id="emailAddressField" layoutX="255.0" layoutY="310.0" prefHeight="70.0" prefWidth="330.0" promptText="Enter your email address " style="-fx-background-color: transparent; -fx-font-family: 'Poppins-ExtraBold'; -fx-border-color: #6B2997FF; -fx-font-size: 20;">
                      <font>
                         <Font name="Times New Roman" size="16.0" />
                      </font>
@@ -88,6 +89,16 @@
                         <Image url="@../../PICTURES/locked-padlock.png" />
                      </image>
                   </ImageView>
+                  <CheckBox fx:id="show" layoutX="586.0" layoutY="494.0" mnemonicParsing="false" onAction="#showCharacter" prefHeight="60.0" prefWidth="172.0" text="showCharacter">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </CheckBox>
+                  <TextField fx:id="showPassword" layoutX="255.0" layoutY="435.0" prefHeight="70.0" prefWidth="330.0" style="-fx-background-color: transparent; -fx-font-family: 'Poppins-ExtraBold'; -fx-border-color: #6B2997FF; -fx-font-size: 20;">
+                     <font>
+                        <Font name="Times New Roman" size="16.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="layer1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1199.0" prefWidth="407.0">

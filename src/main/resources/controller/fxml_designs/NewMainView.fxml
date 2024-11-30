@@ -69,9 +69,10 @@
                   <Label fx:id="userName" layoutX="1035.0" layoutY="21.0" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 15;" text="User Name" textFill="WHITE" />
                   <MenuButton fx:id="userMenuButton" layoutX="1028.0" layoutY="16.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent;">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="My Information" />
-                      <MenuItem mnemonicParsing="false" text="My Library" />
-                        <MenuItem mnemonicParsing="false" text="Add New Book" />
+                      <MenuItem mnemonicParsing="false" onAction="#userInfo" text="Your Information" />
+                      <MenuItem fx:id="listLoanButton" mnemonicParsing="false" text="My Library" />
+                        <MenuItem fx:id="manageUserButton" mnemonicParsing="false" onAction="#userInfo" text="ManageUser" />
+                        <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" text="Logout" />
                     </items>
                   </MenuButton>
                </children>

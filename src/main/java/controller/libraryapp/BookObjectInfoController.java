@@ -1,4 +1,5 @@
 package controller.libraryapp;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,4 +69,15 @@ public class BookObjectInfoController {
         ((StackPane) bookObjectInfo.getParent()).getChildren().remove(bookObjectInfo);
     }
 
+    public void configButtonPress(ActionEvent actionEvent) {
+    }
+
+    public void deleteButtonPress(ActionEvent actionEvent) {
+    }
+
+    public void borrowButtonPress(ActionEvent actionEvent) {
+    }
+
+    public void returnButtonPress(ActionEvent actionEvent) {
+    }
 }

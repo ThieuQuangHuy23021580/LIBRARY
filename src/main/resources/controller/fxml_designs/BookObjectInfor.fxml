@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -21,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="bookObjectInfo" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.BookObjectInfoController">
+<AnchorPane fx:id="bookObjectInfo" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.BookObjectInfoController">
     <children>
         <AnchorPane layoutX="200.0" layoutY="120.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: transparent;">
             <children>
@@ -46,7 +40,7 @@
                                 </AnchorPane>
                             </children>
                         </AnchorPane>
-                        <AnchorPane opacity="0.8" prefHeight="500.0" prefWidth="450.0">
+                        <AnchorPane prefHeight="500.0" prefWidth="450.0">
                             <children>
                                 <VBox layoutX="35.0" prefHeight="375.0" prefWidth="390.0">
                                     <children>
@@ -58,28 +52,28 @@
                                                         <Glow />
                                                     </input>
                                                     <color>
-                                                        <Color blue="1.0" green="1.0" red="1.0" />
+                                                        <Color red="1.0" green="1.0" blue="1.0" />
                                                     </color></DropShadow>
                                             </effect></Label>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#adabab" />
+                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#d2d2d2" />
                                                 <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." visible="false" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#adabab" />
+                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#d2d2d2" />
                                                 <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." visible="false" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#adabab" />
+                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#d2d2d2" />
                                                 <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." visible="false" />
                                             </children>
                                         </AnchorPane>
-                                        <Label style="-fx-font-size: 16; -fx-font-style: italic;" text="Description : " textFill="#adabab" />
+                                        <Label style="-fx-font-size: 16; -fx-font-style: italic;" text="Description : " textFill="#d2d2d2" />
                                         <AnchorPane prefHeight="145.0" prefWidth="420.0">
                                             <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffffe6" height="145.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="380.0">
@@ -88,7 +82,7 @@
                                                     </effect></Rectangle>
                                                 <AnchorPane layoutX="10.0" layoutY="5.0">
                                                     <children>
-                                                        <Label alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#adabab" wrapText="true" />
+                                                        <Label alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#373737" wrapText="true" />
                                                         <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." visible="false" />
                                                     </children>
                                                 </AnchorPane>
@@ -105,8 +99,14 @@
                                 <Button fx:id="plusQuantityButton" layoutX="345.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="+" textFill="WHITE" />
                                 <Button fx:id="configButton" disable="true" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#configButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Config" textFill="WHITE" visible="false" />
                                 <Button fx:id="deleteButton" disable="true" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" visible="false" />
-                                <Button fx:id="borrowButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#borrowButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE" />
-                                <Button fx:id="returnButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#returnButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE" />
+                                <Button fx:id="borrowButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#borrowButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Borrow" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                                <Button fx:id="returnButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#returnButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Return" textFill="WHITE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                                 <Button fx:id="authorConfigButton" disable="true" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">

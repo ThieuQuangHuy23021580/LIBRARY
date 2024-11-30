@@ -1,22 +1,18 @@
 package controller.libraryapp;
 
-import com.google.gson.JsonObject;
+import Util.SwitchScene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import model.Book;
+import model.User;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +40,9 @@ public class MainViewController {
 
     @FXML
     private AnchorPane bookPane;
+
+    @FXML
+    private AnchorPane viewPane;
 
     @FXML
     private Button categoriesButton_active;
@@ -148,13 +147,30 @@ public class MainViewController {
     private Button the_most_popular_books;
 
     @FXML
-    private Label tiltleBook;
-
-    @FXML
     private MenuButton userMenuButton;
-
+    @FXML
+    private MenuItem listLoanButton;
+    @FXML
+    private MenuItem manageUserButton;
     @FXML
     private Label userName;
+    @FXML
+    private StackPane parent;
+
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+        if(user.getRole().equals(User.MANAGER)) {
+           listLoanButton.setVisible(false);
+           manageUserButton.setVisible(true);
+        }
+        userName.setText(user.getUserName());
+    }
+
+    public void setView(Parent root) {
+        mainStackPane.getChildren().add(root);
+    }
 
 
     @FXML
@@ -209,10 +225,10 @@ public class MainViewController {
     }
 
     // Tạo đối tượng là sách.
-    void showBook(){
+    void showBook() {
         try {
             ArrayList<StackPane> bookObjects = new ArrayList<>();
-            for(int i=0; i < 15 ; i++){
+            for (int i = 0; i < 15; i++) {
                 FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
                 StackPane bookObject = loader.load();
                 bookObjects.add(bookObject);
@@ -221,8 +237,7 @@ public class MainViewController {
                 recommendFlowPane.getChildren().add(bookObject);
             }
 
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Book Object: " + e.getMessage());
         }
     }
@@ -265,17 +280,16 @@ public class MainViewController {
 
     public void deleteButtonPress(ActionEvent actionEvent) {
     }
-
     public void borrowButtonPress(ActionEvent actionEvent) {
     }
 
     public void returnButtonPress(ActionEvent actionEvent) {
     }
+    public void logOut() throws IOException {
+        SwitchScene.showLoginView();
+    }
+
+    public void userInfo() throws IOException {
+        SwitchScene.showUserDashboard(user);
+    }
 }
-
-
-
-
-
-
-
