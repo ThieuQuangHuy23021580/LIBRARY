@@ -76,11 +76,6 @@ public class LoginViewController {
     private ImageView bg;
     @FXML
     private TextField showPassword;
-
-    Account account = new Account();
-    DatabaseConnect db = new DatabaseConnect();
-    Connection conn = null;
-
     Rectangle clip;
 
 
@@ -143,8 +138,6 @@ public class LoginViewController {
         Parent root = loader.load();
 
         MainViewController controller = loader.getController();
-        controller.setUserName(emailAddressField.getText());
-        controller.setAccount(account);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MainViewController {
-    private Account account;
 
     @FXML
     private FlowPane recommendFlowPane;
