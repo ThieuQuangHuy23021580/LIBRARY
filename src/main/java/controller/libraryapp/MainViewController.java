@@ -264,7 +264,9 @@ public class MainViewController {
                     // Pass book details to the controller
                     BookObjectController controller = loader.getController();
                     controller.setMainStackPane(mainStackPane);
-                    controller.setBookDetails(book);
+
+                    controller.setBookDetails(book,user);
+
 
                     recommendFlowPane.getChildren().add(bookObject);
                 }

@@ -20,13 +20,13 @@ public class BookObjectInfoController {
     @FXML
     private Label titleBook;
     @FXML
-    private TextField authorConfigTextField;
+    private Label authorConfigTextField;
     @FXML
-    private TextField publishConfigTextField;
+    private Label publishConfigTextField;
     @FXML
-    private TextField quantityConfigTextField;
+    private Label quantityConfigTextField;
     @FXML
-    private TextField descriptionConfigTextField;
+    private Label descriptionConfigTextField;
     @FXML
     private ImageView bookImage;
 // TextField for book quantity in stock

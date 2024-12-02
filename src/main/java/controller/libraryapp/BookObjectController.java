@@ -9,8 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import model.Book;
+import model.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class BookObjectController {
     @FXML
@@ -32,9 +34,7 @@ public class BookObjectController {
         this.mainStackPane = stackPane;
     }
 
-
-    // Method to set the details for a book
-    public void setBookDetails(Book book) {
+    public void setBookDetails(Book book, User user) {
         bookName.setText(book.getTitle());
         author.setText(book.getAuthor());
 
@@ -47,17 +47,36 @@ public class BookObjectController {
         }
 
         // Add event handler for "More Info" button if needed
-        moreInfobutton.setOnAction(event -> displayBookInfo(book));
+        moreInfobutton.setOnAction(event -> displayBookInfo(book, user));
     }
 
-    private void displayBookInfo(Book book) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/BookObjectInfor.fxml"));
-            AnchorPane bookInfoPane = loader.load();
+    private void displayBookInfo(Book book, User user) {
+        String fxmlPath = user.getRole().equals("Manager")
+                ? "/controller/fxml_designs/AdminBookObjectInfo.fxml"
+                : "/controller/fxml_designs/BookObjectInfor.fxml";
+        DatabaseUtil databaseUtil = new DatabaseUtil();
 
-            // Get the controller of the detailed view
-            BookObjectInfoController infoController = loader.getController();
-            infoController.displayBookDetails(book);
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            if (user.getRole().equals("Manager")) {
+                loader.setControllerFactory(param -> {
+            try {
+                    return new AdminBookObjectInfoController(book, book.getIsbn(), databaseUtil.getConnection());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            });
+            }
+
+            AnchorPane bookInfoPane = loader.load();
+            if (user.getRole().equals("Manager")) {
+                AdminBookObjectInfoController adminController = loader.getController();
+                adminController.displayBookDetails(book);
+            } else {
+                BookObjectInfoController infoController = loader.getController();
+                infoController.displayBookDetails(book);
+            }
 
             // Add the detailed view to the main StackPane
             mainStackPane.getChildren().add(bookInfoPane);
@@ -65,10 +84,12 @@ public class BookObjectController {
             // Configure the close button to remove the detailed view
             Button closeButton = (Button) bookInfoPane.lookup("#closeButton");
             closeButton.setOnAction(e -> mainStackPane.getChildren().remove(bookInfoPane));
-
         } catch (IOException e) {
-            System.err.println("Error loading the detailed book info view: " + e.getMessage());
+            System.err.println("Error loading detailed book info view: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
+
 }
+
