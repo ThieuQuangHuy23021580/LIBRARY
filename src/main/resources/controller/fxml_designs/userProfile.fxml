@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="690.0" prefWidth="1200.0" style="-fx-background-color: black;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.UserController">
+<AnchorPane prefHeight="690.0" prefWidth="1200.0" style="-fx-background-color: black;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.UserController">
     <children>
         <ImageView fitHeight="690.0" fitWidth="1200.0" pickOnBounds="true">
             <image>
@@ -95,7 +95,7 @@
         <TextField fx:id="userNameTextField" layoutX="635.0" layoutY="224.0" prefHeight="43.0" prefWidth="362.0" style="-fx-font-size: 20;" />
         <TextField fx:id="userPhoneTextField" layoutX="591.0" layoutY="364.0" prefHeight="43.0" prefWidth="405.0" style="-fx-font-size: 20;" />
         <TextField fx:id="userPasswordTextField" layoutX="624.0" layoutY="433.0" prefHeight="43.0" prefWidth="373.0" style="-fx-font-size: 20;" />
-        <Button fx:id="seeUserPasswordButton" layoutX="1000.0" layoutY="430.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-font: 5; -fx-background-color: transparent;">
+        <Button fx:id="seeUserPasswordButton" layoutX="1000.0" layoutY="430.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
             <graphic>
                 <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                     <image>
