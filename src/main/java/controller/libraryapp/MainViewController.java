@@ -1,6 +1,9 @@
 package controller.libraryapp;
 
-import Util.SwitchScene;
+import Util.BookDAO;
+import Util.SceneManager;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +18,7 @@ import model.User;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -161,11 +165,16 @@ public class MainViewController {
 
     public void setUser(User user) {
         this.user = user;
-        if(user.getRole().equals(User.MANAGER)) {
-           listLoanButton.setVisible(false);
-           manageUserButton.setVisible(true);
+        if (user.getRole().equals(User.MANAGER)) {
+            listLoanButton.setVisible(false);
+            manageUserButton.setVisible(true);
+        } else {
+            listLoanButton.setVisible(true);
+            manageUserButton.setVisible(false);
         }
         userName.setText(user.getUserName());
+
+        showBook();
     }
 
     public void setView(Parent root) {
@@ -174,23 +183,22 @@ public class MainViewController {
 
 
     @FXML
-    public void initialize(){
-    showBook();
-    fictionButton.setOnMouseEntered(event-> getFictionCateList());
-    fictionButton.setOnMouseExited(event-> getDiscoveryCategories());
-    educationButton.setOnMouseEntered(event-> getEducationCateList());
-    educationButton.setOnMouseExited(event-> getDiscoveryCategories());
-    comicButton.setOnMouseEntered(event-> getComicCateList());
-    comicButton.setOnMouseExited(event-> getDiscoveryCategories());
-    healthAndFitnessButton.setOnMouseEntered(event-> getHealthAndFitnessCateList());
-    healthAndFitnessButton.setOnMouseExited(event-> getDiscoveryCategories());
-    businessAndEconomicButton.setOnMouseEntered(event-> getBusinessAndEconomicCateList());
-    businessAndEconomicButton.setOnMouseExited(event-> getDiscoveryCategories());
-    otherCategoriesButton.setOnMouseEntered(event-> getOtherCateList());
-    otherCategoriesButton.setOnMouseExited(event-> getDiscoveryCategories());
+    public void initialize() {
+        fictionButton.setOnMouseEntered(event -> getFictionCateList());
+        fictionButton.setOnMouseExited(event -> getDiscoveryCategories());
+        educationButton.setOnMouseEntered(event -> getEducationCateList());
+        educationButton.setOnMouseExited(event -> getDiscoveryCategories());
+        comicButton.setOnMouseEntered(event -> getComicCateList());
+        comicButton.setOnMouseExited(event -> getDiscoveryCategories());
+        healthAndFitnessButton.setOnMouseEntered(event -> getHealthAndFitnessCateList());
+        healthAndFitnessButton.setOnMouseExited(event -> getDiscoveryCategories());
+        businessAndEconomicButton.setOnMouseEntered(event -> getBusinessAndEconomicCateList());
+        businessAndEconomicButton.setOnMouseExited(event -> getDiscoveryCategories());
+        otherCategoriesButton.setOnMouseEntered(event -> getOtherCateList());
+        otherCategoriesButton.setOnMouseExited(event -> getDiscoveryCategories());
     }
 
-    void getDiscoveryCategories(){
+    void getDiscoveryCategories() {
         discoverCatetegories.setVisible(true);
         fictionCateList.setVisible(false);
         educationCateList.setVisible(false);
@@ -199,97 +207,118 @@ public class MainViewController {
         healthAndFitnessCateList.setVisible(false);
         businessAndEconomicCateList.setVisible(false);
     }
-    void getFictionCateList(){
+
+    void getFictionCateList() {
         fictionCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getEducationCateList(){
+
+    void getEducationCateList() {
         educationCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getComicCateList(){
+
+    void getComicCateList() {
         comicCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getHealthAndFitnessCateList(){
+
+    void getHealthAndFitnessCateList() {
         healthAndFitnessCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getBusinessAndEconomicCateList(){
+
+    void getBusinessAndEconomicCateList() {
         businessAndEconomicCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getOtherCateList(){
+
+    void getOtherCateList() {
         otherCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
 
-    // Tạo đối tượng là sách.
-    void showBook() {
-        try {
-            ArrayList<StackPane> bookObjects = new ArrayList<>();
-            for (int i = 0; i < 15; i++) {
-                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
-                StackPane bookObject = loader.load();
-                bookObjects.add(bookObject);
-            }
-            for (StackPane bookObject : bookObjects) {
-                recommendFlowPane.getChildren().add(bookObject);
-            }
-
-        } catch (IOException e) {
-            System.out.println("Book Object: " + e.getMessage());
+    public void setListBook(List<Book> books) throws IOException {
+        for (Book book : books) {
+            StackPane bookObject = (StackPane) SceneManager.loadBookObject(book, user, mainStackPane);
+            recommendFlowPane.getChildren().add(bookObject);
         }
     }
+
+    void showBook() {
+            new Thread(() -> {
+                try {
+                    List<Book> books = BookDAO.getRandomBook();
+                    // Gọi phương thức UI trong luồng chính để cập nhật giao diện
+                    Platform.runLater(() -> {
+                        try {
+                            setListBook(books);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+
 
     @FXML
     private StackPane mainStackPane; // Reference to the main StackPane in your FXML
 
     @FXML
-    private void handleSearchButtonAction() {
+    private void handleSearchButtonAction() throws IOException {
         String title = searchTextField.getText().trim();
         recommendFlowPane.getChildren().clear();
 
-        // Fetch books by title
-        List<Book> books = DatabaseUtil.getBooksByTitle(title);
+        Task<List<Book>> searchTask = new Task<>() {
+            @Override
+            protected List<Book> call() throws Exception {
+                return BookDAO.getBooksByTitle(title); // Gọi cơ sở dữ liệu
+            }
+        };
 
-        if (books == null || books.isEmpty()) {
-            System.out.println("No books found with title: " + title);
-        } else {
+        searchTask.setOnSucceeded(event -> {
             try {
-                for (Book book : books) {
-                    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
-                    StackPane bookObject = loader.load();
-
-                    // Pass book details to the controller
-                    BookObjectController controller = loader.getController();
-                    controller.setMainStackPane(mainStackPane);
-                    controller.setBookDetails(book);
-
-                    recommendFlowPane.getChildren().add(bookObject);
-                }
+                setListBook(searchTask.getValue());
             } catch (IOException e) {
                 e.printStackTrace();
-                System.err.println("Error loading book objects for search results.");
             }
-        }
+        });
+
+        searchTask.setOnFailed(event -> {
+            System.err.println("Search failed: " + searchTask.getException());
+        });
+
+        new Thread(searchTask).start(); // Chạy trên luồng nền
     }
+
 
     public void configButtonPress(ActionEvent actionEvent) {
     }
 
     public void deleteButtonPress(ActionEvent actionEvent) {
     }
-    public void borrowButtonPress(ActionEvent actionEvent) {
+
+
+    public void showListLoan() {
+        SceneManager.showUserLoan(user);
+
     }
 
-    public void returnButtonPress(ActionEvent actionEvent) {
-    }
     public void logOut() throws IOException {
-        SwitchScene.showLoginView();
+        SceneManager.showLoginView();
     }
+
 
     public void userInfo() throws IOException {
-        SwitchScene.showUserDashboard(user);
+        SceneManager.showUserDashboard(user);
     }
+
+    public void cleanUp()
+    {
+        recommendFlowPane.getChildren().clear(); // Dọn sạch danh sách sách cũ
+    }
+
 }

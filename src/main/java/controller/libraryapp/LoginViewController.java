@@ -1,14 +1,9 @@
 package controller.libraryapp;
 
 
-import Util.DatabaseConnect;
-import Util.SwitchScene;
+import Util.SceneManager;
 import Util.UserDAO;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import model.User;
 import javafx.animation.TranslateTransition;
 
@@ -18,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -125,30 +119,13 @@ public class LoginViewController {
                 UserDAO.showAlert("Username or password is incorrect", "Error");
             } else {
                 UserDAO.showAlert("Login successfully", "Correct");
-                SwitchScene.showMainView(user);
+                SceneManager.showMainView(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
-    public void loginViewToMenu(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NewMainView.fxml"));
-        Parent root = loader.load();
-
-        MainViewController controller = loader.getController();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    public void showAlert(String content, String title) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(content);
-        alert.setTitle(title);
-        alert.showAndWait();
-    }
 
     public void showCharacter() {
         if (show.isSelected()) {

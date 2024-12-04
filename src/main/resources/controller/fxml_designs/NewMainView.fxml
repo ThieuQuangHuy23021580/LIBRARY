@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -29,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="mainStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
+<StackPane fx:id="mainStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1200.0">
          <children>
@@ -70,10 +63,13 @@
                   <MenuButton fx:id="userMenuButton" layoutX="1028.0" layoutY="16.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent;">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#userInfo" text="Your Information" />
-                      <MenuItem fx:id="listLoanButton" mnemonicParsing="false" text="My Library" />
+                      <MenuItem fx:id="listLoanButton" mnemonicParsing="false" onAction="#showListLoan" text="My Library" />
                         <MenuItem fx:id="manageUserButton" mnemonicParsing="false" onAction="#userInfo" text="ManageUser" />
                         <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" text="Logout" />
                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </MenuButton>
                </children>
             </AnchorPane>
@@ -572,7 +568,7 @@
                                                 <Glow />
                                              </input>
                                              <color>
-                                                <Color blue="1.0" green="1.0" red="1.0" />
+                                                <Color red="1.0" green="1.0" blue="1.0" />
                                              </color></DropShadow>
                                        </effect></Label>
                                     <AnchorPane prefWidth="380.0">

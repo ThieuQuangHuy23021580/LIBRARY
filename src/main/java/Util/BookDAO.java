@@ -1,35 +1,27 @@
-package controller.libraryapp;
+package Util;
 
 import model.Book;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseUtil {
+public class BookDAO {
 
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/library";
-    private static final String USER = "root";  // Your MySQL username
-    private static final String PASSWORD = "huy104967";  // Your MySQL password
-
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
-
-    // Insert book into the database
     public static void insertBook(Book book) {
-        if (isBookExists(book.getIsbn())) {  // Check if book exists by ISBN
+        if (isBookExists(book.getIsbn())) {
             System.out.println("Book already exists: " + book.getTitle() + " by " + book.getAuthor());
-            return; // Skip inserting duplicates
+            return;
         }
 
         String query = "INSERT INTO books (title, author, publisher, description, imageUrl, quantity, category, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try {
+            Connection conn = DatabaseConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
 
             stmt.setString(1, book.getTitle());
             stmt.setString(2, book.getAuthor());
@@ -50,21 +42,19 @@ public class DatabaseUtil {
 
     // Check if a book already exists in the database based on ISBN
     public static boolean isBookExists(String isbn) {
-        String query = "SELECT COUNT(*) FROM books WHERE isbn = ?";
+        String query = "SELECT 1 FROM books WHERE isbn = ?";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnect.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, isbn);
 
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0; // Return true if count > 0
-                }
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error checking existence of book with ISBN: " + isbn);
         }
 
         return false; // Default to false if error occurs
@@ -74,7 +64,7 @@ public class DatabaseUtil {
     public static int getBookCountByCategory(String category) {
         String query = "SELECT COUNT(*) FROM books WHERE category = ?";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnect.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, category);
@@ -91,6 +81,7 @@ public class DatabaseUtil {
 
         return 0; // Return 0 if error occurs
     }
+
     public static List<Book> getBooksByTitle(String searchTerm) {
         // Ensure the search term is not null or empty
         if (searchTerm == null || searchTerm.trim().isEmpty()) {
@@ -103,7 +94,7 @@ public class DatabaseUtil {
         String likeSearchTerm = "%" + searchTerm.trim() + "%";
         List<Book> books = new ArrayList<>();
 
-        try (Connection conn = getConnection();
+        try (Connection conn = DatabaseConnect.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             // Set the search term with wildcards
@@ -131,8 +122,59 @@ public class DatabaseUtil {
         return books;
     }
 
+    public static Book getBookByISBN(String isbn) {
+        String query = "SELECT * FROM books where isbn = ?";
+        try {
+            Connection conn = DatabaseConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1,isbn);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Book(
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getString("description"),
+                        rs.getString("imageUrl"),
+                        rs.getInt("quantity"),
+                        rs.getString("category"),
+                        rs.getString("isbn")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
+    public static List<Book> getRandomBook() {
+
+        String query = "SELECT * FROM books order by rand() limit 15";
+        List<Book> books = new ArrayList<>();
+
+        try {
+            Connection conn = DatabaseConnect.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                books.add(new Book(
+                        rs.getString("title"),
+                        rs.getString("author"),
+                        rs.getString("publisher"),
+                        rs.getString("description"),
+                        rs.getString("imageUrl"),
+                        rs.getInt("quantity"),
+                        rs.getString("category"),
+                        rs.getString("isbn")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return books;
+    }
 }
 
 

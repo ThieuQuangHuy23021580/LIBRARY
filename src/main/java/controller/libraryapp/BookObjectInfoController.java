@@ -1,4 +1,5 @@
 package controller.libraryapp;
+import Util.LoanDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,9 +10,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import model.Book;
+import model.Loan;
+import model.User;
 
 import java.awt.*;
 
@@ -29,12 +34,26 @@ public class BookObjectInfoController {
     private TextField descriptionConfigTextField;
     @FXML
     private ImageView bookImage;
-// TextField for book quantity in stock
+    @FXML
+    private TextField borrowQuantityTextField;
 
+// TextField for book quantity in stock
+    int borrowQuantity = 0;
+    public void initialize() {
+        borrowQuantityTextField.setText(String.valueOf(borrowQuantity));
+    }
+    private User user;
+    private Book book;
+    public void setBook(Book book) {
+        this.book = book;
+        displayBookDetails();
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
     // Method to load book information from a database or any other source
-    public void displayBookDetails(Book book) {
+    public void displayBookDetails() {
         if (book != null) {
-            // Set the details in the UI
             titleBook.setText(book.getTitle());
             authorConfigTextField.setText("Author: " + book.getAuthor());
             publishConfigTextField.setText("Published: " + book.getPublisher());
@@ -65,7 +84,6 @@ public class BookObjectInfoController {
 
     @FXML
     private void handleCloseButtonAction() {
-        // Remove this AnchorPane from its parent
         ((StackPane) bookObjectInfo.getParent()).getChildren().remove(bookObjectInfo);
     }
 
@@ -75,8 +93,25 @@ public class BookObjectInfoController {
     public void deleteButtonPress(ActionEvent actionEvent) {
     }
 
-    public void borrowButtonPress(ActionEvent actionEvent) {
+    public void borrowButtonPress() {
+        borrowQuantity = Integer.parseInt(borrowQuantityTextField.getText());
+        if(borrowQuantity <= book.getQuantity()) {
+           Loan loan = new Loan(user,book, LocalDate.now(),borrowQuantity);
+           book.setQuantity(book.getQuantity() - borrowQuantity);
+           LoanDAO.addLoan(loan);
+        }
     }
+    public void minusQuantity() {
+        if(borrowQuantity < 0)
+          return;
+        borrowQuantity-= 1;
+        borrowQuantityTextField.setText(String.valueOf(borrowQuantity));
+    }
+    public void plusQuantity() {
+        borrowQuantity += 1;
+        borrowQuantityTextField.setText(String.valueOf(borrowQuantity));
+    }
+
 
     public void returnButtonPress(ActionEvent actionEvent) {
     }

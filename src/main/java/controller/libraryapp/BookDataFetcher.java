@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import Util.BookDAO;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -124,7 +125,7 @@ public class BookDataFetcher {
         for (String category : categories) {
             try {
                 // Check the current number of books in the database for this category
-                int currentCount = DatabaseUtil.getBookCountByCategory(category);
+                int currentCount = BookDAO.getBookCountByCategory(category);
 
                 // Calculate how many more books are needed
                 if (currentCount < targetCount) {
@@ -138,7 +139,7 @@ public class BookDataFetcher {
 
                     // Insert fetched books into the database
                     for (Book book : books) {
-                        DatabaseUtil.insertBook(book);
+                        BookDAO.insertBook(book);
                     }
 
                     System.out.println("Category: " + category + " now has " + targetCount + " books.");

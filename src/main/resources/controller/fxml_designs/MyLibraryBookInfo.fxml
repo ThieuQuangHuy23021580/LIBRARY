@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane fx:id="myLibraryBookInfo" prefHeight="330.0" prefWidth="1200.0" style="-fx-background-color: black;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.LoanController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="330.0" layoutX="50.0" stroke="WHITE" strokeType="INSIDE" width="300.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="330.0" layoutX="350.0" stroke="WHITE" strokeType="INSIDE" width="400.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="330.0" layoutX="750.0" stroke="WHITE" strokeType="INSIDE" width="400.0" />
+        <Label fx:id="beginningTimeLable" layoutX="480.0" layoutY="140.0" style="-fx-font-size: 26;" text="2024-12-01" textFill="WHITE" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="587.0" AnchorPane.topAnchor="140.0" />
+        <Label fx:id="deadlineTimeLable" layoutX="880.0" layoutY="140.0" style="-fx-font-size: 26;" text="2025-01-01" textFill="WHITE" />
+        <AnchorPane fx:id="bookObjectContain" layoutX="100.0" prefHeight="330.0" prefWidth="200.0" />
+    </children>
+</AnchorPane>

@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<StackPane fx:id="bookObject" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.BookObjectController">
+<StackPane fx:id="bookObject" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.BookObjectController">
    <children>
       <BorderPane prefHeight="330.0" prefWidth="200.0">
          <left>
@@ -30,7 +30,7 @@
                   <Label fx:id="bookName" layoutX="30.0" layoutY="10.0" prefHeight="20.0" prefWidth="140.0" style="-fx-font-size: 14; -fx-font-style: italic; -fx-font-weight: bold; -fx-text-overrun: ellipsis; -fx-wrap-text: false;" text="Book name" />
                   <Label layoutX="30.0" layoutY="30.0" prefHeight="13.0" prefWidth="25.0" style="-fx-font-size: 7; -fx-font-style: italic;" text="Author: " />
                   <Label fx:id="author" layoutX="57.0" layoutY="30.0" prefHeight="13.0" prefWidth="75.0" style="-fx-font-size: 7; -fx-font-style: italic; -fx-text-overrun: ellipsis; -fx-wrap-text: false;" text="Author Name..." />
-                  <Button fx:id="moreInfobutton" layoutX="110.0" layoutY="43.0" mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-color: #E50914FF; -fx-font-weight: bold; -fx-border-radius: 15; -fx-background-radius: 15;" text="More Info" textFill="#fcfcfc">
+                  <Button fx:id="moreInfobutton" layoutX="110.0" layoutY="43.0" mnemonicParsing="false" onAction="#displayBookInfo" style="-fx-font-size: 10; -fx-background-color: #E50914FF; -fx-font-weight: bold; -fx-border-radius: 15; -fx-background-radius: 15;" text="More Info" textFill="#fcfcfc">
                      <effect>
                         <DropShadow height="10.0" radius="4.5" width="10.0" />
                      </effect>

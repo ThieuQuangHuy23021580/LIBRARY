@@ -1,4 +1,4 @@
-package controller.libraryapp;
+package Util;
 
 import model.Book;
 import com.google.gson.JsonArray;
@@ -14,7 +14,6 @@ public class GoogleBooksAPI {
 
     private static final String API_KEY = "AIzaSyCfOWbVT84KCF8MS0AL7gwN4S8XNvSFy1k";  // Replace with your actual Google API key
 
-    // Method to search for a book by its query (or ISBN)
     public static Book searchBookByISBN(String isbn) {
         try {
             String urlString = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + API_KEY;
