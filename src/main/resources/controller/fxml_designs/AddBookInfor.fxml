@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="adminBookObjectInfo" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.AdminBookObjectInfoController">
+<AnchorPane fx:id="AddBookInfor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.AddBookInforController">
     <children>
         <AnchorPane layoutX="200.0" layoutY="120.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: transparent;">
             <children>
@@ -56,20 +57,20 @@
                                             </effect></Label>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label fx:id="authorConfigLabel" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#d2d2d2" />
-                                                <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." visible="false" />
+                                                <Label fx:id="authorConfigTextField" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#d2d2d2" />
+                                                <TextField layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." visible="false" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label fx:id="publishConfigLabel" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#d2d2d2" />
-                                                <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." visible="false" />
+                                                <Label fx:id="publishConfigTextField" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#d2d2d2" />
+                                                <TextField layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." visible="false" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label fx:id="quantityConfigLabel" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#d2d2d2" />
-                                                <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." visible="false" />
+                                                <Label fx:id="quantityConfigTextField" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#d2d2d2" />
+                                                <TextField layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." visible="false" />
                                             </children>
                                         </AnchorPane>
                                         <Label style="-fx-font-size: 16; -fx-font-style: italic;" text="Description : " textFill="#d2d2d2" />
@@ -81,24 +82,32 @@
                                                     </effect></Rectangle>
                                                 <AnchorPane layoutX="10.0" layoutY="5.0">
                                                     <children>
-                                                        <Label fx:id="descriptionConfigLabel" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#373737" wrapText="true" />
-                                                        <TextField fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." visible="false" />
+                                                        <Label fx:id="descriptionConfigTextField" alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" style="-fx-font-size: 15; -fx-font-style: italic;" text="There is no description ..." textFill="#373737" wrapText="true" />
+                                                        <TextField alignment="TOP_LEFT" prefHeight="135.0" prefWidth="360.0" promptText="Enter the new Description..." visible="false" />
                                                     </children>
                                                 </AnchorPane>
                                             </children>
                                         </AnchorPane>
                                     </children>
                                 </VBox>
-                                <TextField fx:id="addQuantityTextField" layoutX="145.0" layoutY="375.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: transparent; -fx-font-size: 15; -fx-border-color: white;">
+                                <TextField fx:id="addQuantity" layoutX="145.0" layoutY="375.0" prefHeight="37.0" prefWidth="200.0" promptText="Enter the number of books..." style="-fx-background-color: transparent; -fx-font-size: 15; -fx-border-color: white;">
                                     <effect>
                                         <DropShadow />
                                     </effect></TextField>
-                                <Label layoutX="35.0" layoutY="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity : " textFill="#d2d2d2" />
+                                <Label layoutX="35.0" layoutY="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity : " textFill="#adabab" />
                                 <Button fx:id="minusQuantityButton" layoutX="111.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="-" textFill="WHITE" />
                                 <Button fx:id="plusQuantityButton" layoutX="345.0" layoutY="375.0" minHeight="38.0" minWidth="35.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="35.0" style="-fx-font-size: 13; -fx-background-color: #E50914A5; -fx-border-color: white;" text="+" textFill="WHITE" />
-                                <Button fx:id="configButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#configButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Config" textFill="WHITE" />
-                                <Button fx:id="deleteButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#deleteButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" />
-                                <Button fx:id="authorConfigButton" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onAction="#handleAuthorConfig" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                <Button fx:id="configButton" disable="true" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Config" textFill="WHITE" visible="false" />
+                                <Button fx:id="deleteButton" disable="true" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Delete" textFill="WHITE" visible="false" />
+                                <Button fx:id="cancelButton" layoutX="320.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-font-weight: bold; -fx-background-radius: 10;" text="Cancel" textFill="WHITE">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></Button>
+                                <Button fx:id="addButton" layoutX="190.0" layoutY="435.0" mnemonicParsing="false" onAction="#handleAddButtonAction" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Add" textFill="WHITE">
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor></Button>
+                                <Button fx:id="authorConfigButton" disable="true" layoutY="111.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -107,7 +116,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="publishConfigButton" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onAction="#handlePublishConfig" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                <Button fx:id="publishConfigButton" disable="true" layoutY="135.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -116,7 +125,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="quantityConfigButton" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onAction="#handleQuantityConfig" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                <Button fx:id="quantityConfigButton" disable="true" layoutY="160.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -125,7 +134,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                                <Button fx:id="descriptionConfigButton" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" onAction="#handleDescriptionConfig" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;">
+                                <Button fx:id="descriptionConfigButton" disable="true" layoutY="185.0" maxHeight="25.0" maxWidth="33.0" minHeight="25.0" minWidth="33.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="33.0" style="-fx-background-color: transparent; -fx-border-color: white;" visible="false">
                                     <graphic>
                                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
@@ -134,7 +143,6 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
-                        <Button fx:id="addBookButton" layoutX="70.0" layoutY="435.0" mnemonicParsing="false" onAction="#addBookButtonPress" prefHeight="45.0" prefWidth="90.0" style="-fx-font-size: 15; -fx-background-color: #E50914A5; -fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold;" text="Add" textFill="WHITE" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -144,7 +152,7 @@
                 <DropShadow height="30.0" radius="14.5" spread="0.05" width="30.0" />
             </effect>
         </AnchorPane>
-        <Button fx:id="closeButton" layoutX="935.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" opacity="0.8" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 10;">
+        <Button fx:id="closeButton" layoutX="935.0" layoutY="63.0" mnemonicParsing="false" onAction="#handleCancelButtonAction" opacity="0.8" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 10;">
             <graphic>
                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -154,6 +162,4 @@
             </graphic>
         </Button>
     </children>
-
-
 </AnchorPane>

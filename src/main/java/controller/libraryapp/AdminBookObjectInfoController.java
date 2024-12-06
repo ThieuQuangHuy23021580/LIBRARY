@@ -2,18 +2,22 @@ package controller.libraryapp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import model.Book;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class AdminBookObjectInfoController {
 
@@ -40,7 +44,15 @@ public class AdminBookObjectInfoController {
     @FXML
     private AnchorPane adminBookObjectInfo;
     @FXML
-    private Label successMessageLabel;
+    private StackPane mainStackPane;
+    @FXML
+    private TextField addQuantityTextField;
+
+
+
+    public void setMainStackpane(StackPane mainStackpane) {
+        this.mainStackPane = mainStackpane;
+    }
 
     private String isbn;
     private Book book;
@@ -180,12 +192,87 @@ public class AdminBookObjectInfoController {
     // Placeholder for delete button action
     @FXML
     public void deleteButtonPress(ActionEvent actionEvent) {
-        // Implement delete button logic here
+        if (book == null || book.getIsbn() == null || book.getIsbn().isEmpty()) {
+            System.out.println("No book selected to delete.");
+            return;
+        }
+
+        // Get the quantity to be reduced from the TextField or other source
+        String quantityText = addQuantityTextField.getText(); // Assuming you have a TextField for quantity input
+        int quantityToDelete;
+
+        try {
+            quantityToDelete = Integer.parseInt(quantityText);
+            if (quantityToDelete <= 0) {
+                System.out.println("Invalid quantity to delete. It must be greater than 0.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid quantity format.");
+            return;
+        }
+
+        String checkQuery = "SELECT quantity FROM books WHERE isbn = ?";
+        String updateQuery = "UPDATE books SET quantity = quantity - ? WHERE isbn = ?";
+        String deleteQuery = "DELETE FROM books WHERE isbn = ?";
+
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+             PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+             PreparedStatement deleteStmt = conn.prepareStatement(deleteQuery)) {
+
+            // Check if the book exists
+            checkStmt.setString(1, book.getIsbn());
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next()) {
+                int currentQuantity = rs.getInt("quantity");
+
+                if (currentQuantity > quantityToDelete) {
+                    // If the quantity is greater than the deletion amount, update the quantity
+                    updateStmt.setInt(1, quantityToDelete);
+                    updateStmt.setString(2, book.getIsbn());
+                    updateStmt.executeUpdate();
+                    System.out.println("Reduced quantity of book: " + book.getTitle() + " by " + quantityToDelete);
+                } else {
+                    // If the quantity is less than or equal to the deletion amount, delete the book
+                    deleteStmt.setString(1, book.getIsbn());
+                    deleteStmt.executeUpdate();
+                    System.out.println("Deleted book: " + book.getTitle());
+                }
+            } else {
+                System.out.println("No book found with ISBN: " + book.getIsbn());
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error in deleteButtonPress for ISBN: " + book.getIsbn());
+        }
     }
 
+
     // Placeholder for add button action
-    @FXML
     public void addBookButtonPress(ActionEvent actionEvent) {
-        // Implement add book button logic here
+        try {
+            // Load the AddBook FXML layout
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/AddBookView.fxml"));
+            AnchorPane addBookAnchorPane = loader.load();
+            AddBookController controller = loader.getController();
+            controller.setStackPane(mainStackPane);
+
+
+            mainStackPane = (StackPane) adminBookObjectInfo.getScene().getRoot();
+
+            // Add the AddBook AnchorPane to the main StackPane
+            mainStackPane.getChildren().add(addBookAnchorPane);
+            mainStackPane.getChildren().remove(adminBookObjectInfo);
+
+            // Optionally, make the new AnchorPane visible or set a transition effect
+            addBookAnchorPane.setVisible(true);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading AddBook FXML: " + e.getMessage());
+        }
     }
 }

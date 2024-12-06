@@ -20,54 +20,44 @@ public class DatabaseUtil {
     }
 
     // Insert book into the database
-    public static void insertBook(Book book) {
-        if (isBookExists(book.getIsbn())) {  // Check if book exists by ISBN
-            System.out.println("Book already exists: " + book.getTitle() + " by " + book.getAuthor());
-            return; // Skip inserting duplicates
-        }
-
-        String query = "INSERT INTO books (title, author, publisher, description, imageUrl, quantity, category, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public static void insertBook(Book book, int quantity) {
+        String checkQuery = "SELECT quantity FROM books WHERE isbn = ?";
+        String insertQuery = "INSERT INTO books (title, author, publisher, description, imageUrl, quantity, category, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String updateQuery = "UPDATE books SET quantity = quantity + ? WHERE isbn = ?";
 
         try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+             PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
+             PreparedStatement insertStmt = conn.prepareStatement(insertQuery);
+             PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
 
-            stmt.setString(1, book.getTitle());
-            stmt.setString(2, book.getAuthor());
-            stmt.setString(3, book.getPublisher());
-            stmt.setString(4, book.getDescription());
-            stmt.setString(5, book.getImageUrl());
-            stmt.setInt(6, book.getQuantity());
-            stmt.setString(7, book.getCategory()); // Insert the category
-            stmt.setString(8, book.getIsbn()); // Insert ISBN
+            // Check if the book exists
+            checkStmt.setString(1, book.getIsbn());
+            ResultSet rs = checkStmt.executeQuery();
 
-            stmt.executeUpdate();
-            System.out.println("Inserted book: " + book.getTitle() + " by " + book.getAuthor());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error inserting book: " + book.getTitle());
-        }
-    }
-
-    // Check if a book already exists in the database based on ISBN
-    public static boolean isBookExists(String isbn) {
-        String query = "SELECT COUNT(*) FROM books WHERE isbn = ?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-
-            stmt.setString(1, isbn);
-
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0; // Return true if count > 0
-                }
+            if (rs.next()) {
+                // Book exists, update the quantity
+                updateStmt.setInt(1, quantity); // Increment the quantity
+                updateStmt.setString(2, book.getIsbn());
+                updateStmt.executeUpdate();
+                System.out.println("Updated quantity for book: " + book.getTitle() + ". Quantity increased by: " + quantity);
+            } else {
+                // Book doesn't exist, insert it
+                insertStmt.setString(1, book.getTitle());
+                insertStmt.setString(2, book.getAuthor());
+                insertStmt.setString(3, book.getPublisher());
+                insertStmt.setString(4, book.getDescription());
+                insertStmt.setString(5, book.getImageUrl());
+                insertStmt.setInt(6, quantity); // Insert the initial quantity
+                insertStmt.setString(7, book.getCategory());
+                insertStmt.setString(8, book.getIsbn());
+                insertStmt.executeUpdate();
+                System.out.println("Inserted new book: " + book.getTitle());
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error checking existence of book with ISBN: " + isbn);
+            System.out.println("Error in insertOrUpdateBook for ISBN: " + book.getIsbn());
         }
-
-        return false; // Default to false if error occurs
     }
 
     // Get the current number of books in a specific category

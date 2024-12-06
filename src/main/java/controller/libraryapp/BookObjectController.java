@@ -72,6 +72,7 @@ public class BookObjectController {
             AnchorPane bookInfoPane = loader.load();
             if (user.getRole().equals("Manager")) {
                 AdminBookObjectInfoController adminController = loader.getController();
+                adminController.setMainStackpane(mainStackPane);
                 adminController.displayBookDetails(book);
             } else {
                 BookObjectInfoController infoController = loader.getController();

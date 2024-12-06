@@ -138,7 +138,7 @@ public class BookDataFetcher {
 
                     // Insert fetched books into the database
                     for (Book book : books) {
-                        DatabaseUtil.insertBook(book);
+                        DatabaseUtil.insertBook(book,1);
                     }
 
                     System.out.println("Category: " + category + " now has " + targetCount + " books.");
