@@ -27,10 +27,6 @@ public class AddBookInforController {
     @FXML
     private ImageView bookImage;
     @FXML
-    private Button addButton;
-    @FXML
-    private Button cancelButton;
-    @FXML
     private Book book;
     @FXML
     private TextField addQuantity;

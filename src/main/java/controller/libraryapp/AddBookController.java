@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import model.Book;
 
@@ -15,6 +16,8 @@ public class AddBookController {
     private TextField isbnAddBookTextField;
     @FXML
     private StackPane stackPane;
+    @FXML
+    private AnchorPane addBookPane;
 
     public void setStackPane(StackPane stackPane) {
         this.stackPane = stackPane;
@@ -56,6 +59,6 @@ public class AddBookController {
 
 
     public void cancelButtonPress(ActionEvent actionEvent) {
-        stackPane.getChildren().clear();
+        stackPane.getChildren().remove(addBookPane);
     }
 }

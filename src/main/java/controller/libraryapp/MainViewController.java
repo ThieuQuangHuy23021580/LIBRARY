@@ -294,4 +294,26 @@ public class MainViewController {
     public void userInfo() throws IOException {
         SwitchScene.showUserDashboard(user);
     }
+
+    public void addBookButtonPressed(ActionEvent actionEvent) {
+        try {
+            // Load the AddBook FXML layout
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/AddBookView.fxml"));
+            AnchorPane addBookAnchorPane = loader.load();
+            AddBookController controller = loader.getController();
+            controller.setStackPane(mainStackPane);
+
+
+
+            // Add the AddBook AnchorPane to the main StackPane
+            mainStackPane.getChildren().add(addBookAnchorPane);
+
+            // Optionally, make the new AnchorPane visible or set a transition effect
+            addBookAnchorPane.setVisible(true);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading AddBook FXML: " + e.getMessage());
+        }
+    }
 }

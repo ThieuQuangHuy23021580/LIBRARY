@@ -254,25 +254,23 @@ public class AdminBookObjectInfoController {
     // Placeholder for add button action
     public void addBookButtonPress(ActionEvent actionEvent) {
         try {
-            // Load the AddBook FXML layout
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/AddBookView.fxml"));
-            AnchorPane addBookAnchorPane = loader.load();
-            AddBookController controller = loader.getController();
-            controller.setStackPane(mainStackPane);
+            // Parse the quantity from the TextField
+            int quantity = Integer.parseInt(addQuantityTextField.getText());
 
+            if (quantity <= 0) {
+                // Display an error if the quantity is invalid
+                System.out.println("Quantity must be greater than 0.");
+                return;
+            }
 
-            mainStackPane = (StackPane) adminBookObjectInfo.getScene().getRoot();
+            // Use the database method to insert or update the book with the given quantity
+            DatabaseUtil.insertBook(book, quantity);
 
-            // Add the AddBook AnchorPane to the main StackPane
-            mainStackPane.getChildren().add(addBookAnchorPane);
-            mainStackPane.getChildren().remove(adminBookObjectInfo);
-
-            // Optionally, make the new AnchorPane visible or set a transition effect
-            addBookAnchorPane.setVisible(true);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Error loading AddBook FXML: " + e.getMessage());
+            // Feedback to the user
+            System.out.println("Added " + quantity + " copies of the book: " + book.getTitle());
+        } catch (NumberFormatException e) {
+            // Handle invalid number format
+            System.out.println("Invalid quantity entered. Please enter a valid number.");
         }
     }
 }
