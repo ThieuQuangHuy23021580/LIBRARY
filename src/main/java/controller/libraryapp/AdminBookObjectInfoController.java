@@ -273,4 +273,16 @@ public class AdminBookObjectInfoController {
             System.out.println("Invalid quantity entered. Please enter a valid number.");
         }
     }
+
+    public void minusQuantityButtonPressed(ActionEvent actionEvent) {
+        int addQuantity = Integer.parseInt(addQuantityTextField.getText());
+        if (addQuantity >= 1) {
+            addQuantityTextField.setText(String.valueOf(addQuantity - 1));
+        }
+    }
+
+    public void plusQuantityButtonPressed(ActionEvent actionEvent) {
+        int addQuantity = Integer.parseInt(addQuantityTextField.getText());
+        addQuantityTextField.setText(String.valueOf(addQuantity + 1));
+    }
 }
