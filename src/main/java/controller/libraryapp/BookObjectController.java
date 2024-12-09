@@ -1,5 +1,7 @@
 package controller.libraryapp;
 
+import Util.LoanDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import model.Book;
+import model.Loan;
 import model.User;
 
 import java.io.IOException;
@@ -29,12 +32,25 @@ public class BookObjectController {
 
     @FXML
     private StackPane mainStackPane;
-
+    private Book book;
+    private User user;
+    private LoanController controller;
     public void setMainStackPane(StackPane stackPane) {
         this.mainStackPane = stackPane;
     }
 
-    public void setBookDetails(Book book, User user) {
+    public void setBook(Book book) {
+        this.book = book;
+        setBookDetails();
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+    public void setLoanController(LoanController loanController) {
+        this.controller = loanController;
+    }
+
+    public void setBookDetails() {
         bookName.setText(book.getTitle());
         author.setText(book.getAuthor());
 
@@ -47,7 +63,7 @@ public class BookObjectController {
         }
 
         // Add event handler for "More Info" button if needed
-        moreInfobutton.setOnAction(event -> displayBookInfo(book, user));
+        moreInfobutton.setOnAction(event -> displayBookInfo(book));
     }
 
     private void displayBookInfo(Book book, User user) {
@@ -60,13 +76,13 @@ public class BookObjectController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             if (user.getRole().equals("Manager")) {
                 loader.setControllerFactory(param -> {
-            try {
-                    return new AdminBookObjectInfoController(book, book.getIsbn(), databaseUtil.getConnection());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            });
+                    try {
+                        return new AdminBookObjectInfoController(book, book.getIsbn(), databaseUtil.getConnection());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                });
             }
 
             AnchorPane bookInfoPane = loader.load();
@@ -76,7 +92,8 @@ public class BookObjectController {
                 adminController.displayBookDetails(book);
             } else {
                 BookObjectInfoController infoController = loader.getController();
-                infoController.displayBookDetails(book);
+                infoController.setUp(book,user);
+                infoController.setLoanController(controller);
             }
 
             // Add the detailed view to the main StackPane
@@ -90,7 +107,4 @@ public class BookObjectController {
             e.printStackTrace();
         }
     }
-
-
 }
-

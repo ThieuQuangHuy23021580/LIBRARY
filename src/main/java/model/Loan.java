@@ -1,5 +1,6 @@
 package model;
 
+
 import java.time.LocalDate;
 
 public class Loan {
@@ -8,13 +9,30 @@ public class Loan {
     private Book book;
     private LocalDate loanDate;
     private LocalDate returnDate;
+    private String status;
+    private int quantity;
 
-    public Loan(String loanId, User user, Book book, LocalDate loanDate) {
-        this.loanId = loanId;
+    public Loan(User user, Book book, LocalDate loanDate, int quantity) {
         this.user = user;
         this.book = book;
         this.loanDate = loanDate;
+        this.returnDate = loanDate.plusDays(2);
+        this.quantity = quantity;
+    }
+
+    public Loan(Book book, LocalDate loanDate, LocalDate returnDate, int quantity) {
+        this.book = book;
+        this.loanDate = loanDate;
+        this.returnDate = returnDate;
+        this.quantity = quantity;
+    }
+    public Loan(User user, Book book) {
+        this.user = user;
+        this.book = book;
+        this.loanDate = null;
+        status = "Returned";
         this.returnDate = null;
+        this.quantity = 0;
     }
 
     public String getLoanId() {
@@ -33,11 +51,18 @@ public class Loan {
         return loanDate;
     }
 
+    public void setLoanDate(LocalDate loanDate) {
+        this.loanDate = loanDate;
+    }
     public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDate returnDate) {
-        this.returnDate = returnDate;
+    public String getStatus() {
+        return status;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

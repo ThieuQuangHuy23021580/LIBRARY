@@ -21,6 +21,10 @@ public class Book {
         this.isbn = isbn;
     }
 
+    public Book(String isbn, String title) {
+        this.isbn = isbn;
+        this.title = title;
+    }
     // Getters and Setters
     public String getTitle() { return title; }
     public String getAuthor() { return author; }

@@ -1,14 +1,9 @@
 package controller.libraryapp;
 
-
-import Util.DatabaseConnect;
-import Util.SwitchScene;
+import Util.Alert;
+import Util.SceneManager;
 import Util.UserDAO;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import model.User;
 import javafx.animation.TranslateTransition;
 
@@ -18,7 +13,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -99,16 +93,19 @@ public class LoginViewController {
     @FXML
     void signUpButtonPressed(ActionEvent event) throws SQLException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty() || ConfirmPasswordField.getText().isEmpty()) {
-            UserDAO.showAlert("Please fill all", "no");
+            Alert.showAlert("Please fill all", "no");
             return;
         }
         if (!checkStrongPassword(passwordField.getText())) {
-            UserDAO.showAlert("Password must contain one digit, one special character, one uppercase and one lowercase letter", "no");
+            Alert.showAlert("Password not strong enough", "no");
             return;
         }
         if (passwordField.getText().equals(ConfirmPasswordField.getText())) {
             if (UserDAO.handleRegister(emailAddressField.getText(), passwordField.getText())) {
                 toSignInButtonPressed(event);
+            }
+            else{
+                Alert.showAlert("Tai khoan da ton tai", "dang ki khong thanh cong");
             }
         }
     }
@@ -116,39 +113,22 @@ public class LoginViewController {
     @FXML
     void signInButtonPressed() throws IOException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            UserDAO.showAlert("Please fill all fields", "Error");
+            Alert.showAlert("Please fill all fields", "Error");
             return;
         }
         try {
             User user = UserDAO.authenticator(emailAddressField.getText(), passwordField.getText());
             if (user == null) {
-                UserDAO.showAlert("Username or password is incorrect", "Error");
+                Alert.showAlert("Username or password is incorrect", "Error");
             } else {
-                UserDAO.showAlert("Login successfully", "Correct");
-                SwitchScene.showMainView(user);
+                Alert.showAlert("Login successfully", "Correct");
+                SceneManager.showMainView(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
-    public void loginViewToMenu(ActionEvent event) throws IOException, SQLException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NewMainView.fxml"));
-        Parent root = loader.load();
-
-        MainViewController controller = loader.getController();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    public void showAlert(String content, String title) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(content);
-        alert.setTitle(title);
-        alert.showAndWait();
-    }
 
     public void showCharacter() {
         if (show.isSelected()) {
@@ -162,7 +142,7 @@ public class LoginViewController {
         }
     }
 
-    public boolean checkStrongPassword(String password) {
+    public static boolean checkStrongPassword(String password) {
         String spCharacter = "!@#$%^&*()_+-={}[]|:;\"'<>,.?/";
         boolean haveUpperCase = false;
         boolean haveLowerCase = false;

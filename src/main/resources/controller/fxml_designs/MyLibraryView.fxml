@@ -9,59 +9,49 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 
-<StackPane fx:id="myLibraryStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" style="-fx-background-color: black;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-<children>
-<ScrollPane prefHeight="690.0" prefWidth="1200.0">
-<content>
-    <FlowPane fx:id="flowHome" prefHeight="690.0" prefWidth="1200.0">
-               <children>
-                  <AnchorPane prefHeight="100.0" prefWidth="1200.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="50.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: transparent;" width="200.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="250.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: transparent;" width="300.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="550.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: transparent;" width="300.0" />
-                        <Label layoutX="85.0" layoutY="30.0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: white;" text="Your Books">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="1.0" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </Label>
-                        <Label layoutX="280.0" layoutY="30.0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: white;" text="Loan Beginning Time">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="1.0" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </Label>
-                        <Label layoutX="570.0" layoutY="30.0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: white;" text="Deadline For Returning">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="1.0" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="850.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: transparent;" width="300.0" />
-                        <Label layoutX="930.0" layoutY="30.0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: white;" text="Loan (VNĐ)">
-                           <effect>
-                              <DropShadow>
-                                 <color>
-                                    <Color red="1.0" />
-                                 </color>
-                              </DropShadow>
-                           </effect>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </children>
-    </FlowPane>
-</content>
-</ScrollPane>
-</children>
+<StackPane fx:id="myLibraryStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1200.0" style="-fx-background-color: black;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.LoanController">
+    <children>
+        <ScrollPane prefHeight="690.0" prefWidth="1200.0">
+            <content>
+                <FlowPane fx:id="flowHome" prefHeight="690.0" prefWidth="1200.0">
+                    <children>
+                        <AnchorPane prefHeight="100.0" prefWidth="1200.0">
+                            <children>
+                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="50.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: transparent;" width="300.0" />
+                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="350.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: transparent;" width="400.0" />
+                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" layoutX="750.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: transparent;" width="400.0" />
+                                <Label layoutX="128.0" layoutY="30.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="Your Books">
+                                    <effect>
+                                        <DropShadow>
+                                            <color>
+                                                <Color red="1.0" />
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                </Label>
+                                <Label layoutX="424.0" layoutY="30.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="Loan Beginning Time">
+                                    <effect>
+                                        <DropShadow>
+                                            <color>
+                                                <Color red="1.0" />
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                </Label>
+                                <Label layoutX="810.0" layoutY="30.0" style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: white;" text="Deadline For Returning">
+                                    <effect>
+                                        <DropShadow>
+                                            <color>
+                                                <Color red="1.0" />
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </FlowPane>
+            </content>
+        </ScrollPane>
+    </children>
 </StackPane>
