@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@../../css/fullpackstyling.css">
+         <children>
+             <Button fx:id="closeButton" layoutX="935.0" layoutY="45.0" mnemonicParsing="false" onAction="#handleCloseButtonAction" opacity="0.8" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 10;">
+                 <graphic>
+                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                         <image>
+                             <Image url="@../../PICTURES/x.png" />
+                         </image>
+                     </ImageView>
+                 </graphic>
+             </Button>
+
+             <AnchorPane layoutX="200.0" layoutY="100.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 5;">
+               <children>
+                  <AnchorPane prefHeight="70.0" prefWidth="800.0">
+                     <children>
+                        <Label layoutX="325.0" layoutY="10.0" style="-fx-font-size: 30; -fx-font-weight: bold;" text="Notification" textFill="WHITE">
+                           <effect>
+                              <DropShadow>
+                                 <color>
+                                    <Color red="1.0" />
+                                 </color>
+                              </DropShadow>
+                           </effect>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <ScrollPane layoutY="70.0" prefHeight="530.0" prefWidth="800.0">
+                     <content>
+                        <VBox fx:id="notificationList" prefHeight="530.0" prefWidth="800.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
