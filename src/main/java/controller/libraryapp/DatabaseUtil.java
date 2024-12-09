@@ -13,7 +13,7 @@ public class DatabaseUtil {
 
     private static final String URL = "jdbc:mysql://127.0.0.1:3307/library";
     private static final String USER = "root";  // Your MySQL username
-    private static final String PASSWORD = "123";  // Your MySQL password
+    private static final String PASSWORD = "";  // Your MySQL password
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
@@ -116,6 +116,44 @@ public class DatabaseUtil {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error occurred while searching for books with term: " + searchTerm);
+        }
+
+        return books;
+    }
+    public static List<Book> getBooksByCategory(String category) {
+        // Ensure the category is not null or empty
+        if (category == null || category.trim().isEmpty()) {
+            System.out.println("Category cannot be null or empty.");
+            return new ArrayList<>();
+        }
+
+        // SQL query to fetch books by category with a limit of 15
+        String query = "SELECT * FROM books WHERE category = ? LIMIT 15";
+        List<Book> books = new ArrayList<>();
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            // Set the category parameter
+            stmt.setString(1, category);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    books.add(new Book(
+                            rs.getString("title"),
+                            rs.getString("author"),
+                            rs.getString("publisher"),
+                            rs.getString("description"),
+                            rs.getString("imageUrl"),
+                            rs.getInt("quantity"),
+                            rs.getString("category"),
+                            rs.getString("isbn")
+                    ));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error occurred while fetching books for category: " + category);
         }
 
         return books;

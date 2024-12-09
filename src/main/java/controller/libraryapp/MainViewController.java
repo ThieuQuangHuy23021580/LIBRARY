@@ -156,6 +156,8 @@ public class MainViewController {
     private Label userName;
     @FXML
     private StackPane parent;
+    @FXML
+    private Label recommendLabel;
 
     private User user;
 
@@ -249,6 +251,7 @@ public class MainViewController {
     private void handleSearchButtonAction() {
         String title = searchTextField.getText().trim();
         recommendFlowPane.getChildren().clear();
+        recommendLabel.setText("Result for " + title + ":");
 
         // Fetch books by title
         List<Book> books = DatabaseUtil.getBooksByTitle(title);
@@ -277,16 +280,6 @@ public class MainViewController {
         }
     }
 
-    public void configButtonPress(ActionEvent actionEvent) {
-    }
-
-    public void deleteButtonPress(ActionEvent actionEvent) {
-    }
-    public void borrowButtonPress(ActionEvent actionEvent) {
-    }
-
-    public void returnButtonPress(ActionEvent actionEvent) {
-    }
     public void logOut() throws IOException {
         SwitchScene.showLoginView();
     }
@@ -315,5 +308,52 @@ public class MainViewController {
             e.printStackTrace();
             System.err.println("Error loading AddBook FXML: " + e.getMessage());
         }
+    }
+    public void handleCategoryButtonAction(String category, String labelText) {
+        // Fetch books by category
+        List<Book> books = DatabaseUtil.getBooksByCategory(category);
+        recommendFlowPane.getChildren().clear();
+        recommendLabel.setText(labelText);
+
+        // Handle no books found case
+        if (books == null || books.isEmpty()) {
+            System.out.println("No books found with category: " + category);
+        } else {
+            try {
+                for (Book book : books) {
+                    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
+                    StackPane bookObject = loader.load();
+
+                    // Set details in the controller
+                    BookObjectController controller = loader.getController();
+                    controller.setMainStackPane(mainStackPane);
+                    controller.setBookDetails(book, user);
+
+                    // Add to the flow pane
+                    recommendFlowPane.getChildren().add(bookObject);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.err.println("Error loading book objects for category: " + category);
+            }
+        }
+    }
+    public void handleFictionButtonAction(ActionEvent actionEvent) {
+        handleCategoryButtonAction("Fiction", "Fiction");
+    }
+    public void handleHealthAndFitnessButtonAction(ActionEvent actionEvent) {
+        handleCategoryButtonAction("Health & Fitness", "Health and Fitness");
+    }
+    public void handleBusinessButtonAction(ActionEvent actionEvent) {
+        handleCategoryButtonAction("Business & Economics", "Business and Economics");
+    }
+    public void handleOtherButtonAction(ActionEvent actionEvent) {
+        handleCategoryButtonAction("Other", "Other");
+    }
+    public void handleEducationButtonAction(ActionEvent actionEvent) {
+        handleCategoryButtonAction("Education", "Education");
+    }
+    public void handleComicButtonAction(ActionEvent actionEvent) {
+        handleCategoryButtonAction("Comics & Graphic Novels", "Comics and Graphic Novels");
     }
 }
