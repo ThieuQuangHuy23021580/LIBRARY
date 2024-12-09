@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import Util.LoanDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import model.Book;
+import model.Loan;
 import model.User;
 
 import java.io.IOException;
@@ -29,7 +31,7 @@ public class BookObjectController {
     private StackPane mainStackPane;
     private Book book;
     private User user;
-
+    private LoanController controller;
     public void setMainStackPane(StackPane stackPane) {
         this.mainStackPane = stackPane;
     }
@@ -40,6 +42,9 @@ public class BookObjectController {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+    public void setLoanController(LoanController loanController) {
+        this.controller = loanController;
     }
 
     public void setBookDetails() {
@@ -61,13 +66,13 @@ public class BookObjectController {
             AnchorPane bookInfoPane = loader.load();
 
             BookObjectInfoController infoController = loader.getController();
-            infoController.setBook(book);
-            infoController.setUser(user);
+            infoController.setUp(book,user);
             mainStackPane.getChildren().add(bookInfoPane);
+            infoController.setLoanController(controller);
 
             // Configure the close button to remove the detailed view
-            Button closeButton = (Button) bookInfoPane.lookup("#closeButton");
-            closeButton.setOnAction(e -> mainStackPane.getChildren().remove(bookInfoPane));
+            //Button closeButton = (Button) bookInfoPane.lookup("#closeButton");
+            //closeButton.setOnAction(e -> mainStackPane.getChildren().remove(bookInfoPane));
 
         } catch (IOException e) {
             System.err.println("Error loading the detailed book info view: " + e.getMessage());

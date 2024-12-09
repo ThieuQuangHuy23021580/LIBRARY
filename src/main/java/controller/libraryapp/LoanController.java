@@ -4,12 +4,11 @@ import Util.LoanDAO;
 import Util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Pair;
 import model.Book;
 import model.Loan;
 import model.User;
@@ -24,13 +23,11 @@ public class LoanController {
 
     private User user;
     @FXML
-    private FlowPane flowHome;
+    FlowPane flowHome;
     @FXML
-    private AnchorPane bookObjectContain;
-    @FXML
-    private AnchorPane myLibraryBookInfo;
-    @FXML
-     StackPane myLibraryStackPane;
+    StackPane myLibraryStackPane;
+
+    List<Pair<AnchorPane, String>> anchorPaneBooks = new ArrayList<>();
 
 
     List<Loan> loans = new ArrayList<>();
@@ -47,19 +44,39 @@ public class LoanController {
         try {
             loans = LoanDAO.getLoanByUserId(user.getId());
             for (Loan loan : loans) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/MyLibraryBookInfo.fxml"));
-                AnchorPane root = loader.load();
-                FXMLLoader book = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
-                AnchorPane bookObjectContain = book.load();
-                BookObjectController controller = book.getController();
+                AnchorPane myLibraryBookInfo = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/MyLibraryBookInfo.fxml")));
+                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SceneManager.class.getResource("/controller/fxml_designs/BookObject.fxml")));
+                StackPane st = loader.load();
+
+                BookObjectController controller = loader.getController();
                 controller.setBook(loan.getBook());
                 controller.setUser(user);
+                controller.setLoanController(this);
                 controller.setMainStackPane(myLibraryStackPane);
-                root.getChildren().add(bookObjectContain);
-                flowHome.getChildren().add(root);
+
+                myLibraryBookInfo.getChildren().add(st);
+                flowHome.getChildren().add(myLibraryBookInfo);
+                anchorPaneBooks.add(new Pair<>(myLibraryBookInfo,loan.getBook().getIsbn()));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
+    public void deleteStackPane(String isbn) {
+        Pair<AnchorPane, String> targetPair = null;
+
+        for (Pair<AnchorPane, String> pair : anchorPaneBooks) {
+            if (pair.getValue().equals(isbn)) {
+                targetPair = pair;
+                break;
+            }
+        }
+
+        if (targetPair != null) {
+            flowHome.getChildren().remove(targetPair.getKey());
+            anchorPaneBooks.remove(targetPair);
+        }
+    }
+
 }

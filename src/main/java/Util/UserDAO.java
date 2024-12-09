@@ -1,9 +1,13 @@
 package Util;
 
-import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import model.User;
 
+import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
     private static Connection conn = null;
@@ -26,13 +30,6 @@ public class UserDAO {
         return null;
     }
 
-    public static void showAlert(String content, String title) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(content);
-        alert.setTitle(title);
-        alert.showAndWait();
-    }
-
     public static boolean handleRegister(String email, String password) throws SQLException {
         conn = DatabaseConnect.getConnection();
         String checkEmailSql = "SELECT 1 FROM user WHERE email = ?";
@@ -41,7 +38,6 @@ public class UserDAO {
 
         ResultSet rs = checkEmailPs.executeQuery();
         if (rs.next()) {
-            showAlert("Tai khoan da ton tai", "dang ki khong thanh cong");
             return false;
         }
         String sql = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
@@ -64,6 +60,60 @@ public class UserDAO {
         ps.setString(3, user.getPassword());
         ps.setInt(4, user.getId());
         ps.executeUpdate();
+    }
+
+    public static List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        try {
+            conn = DatabaseConnect.getConnection();
+            String sql = "SELECT id, username, email,phone FROM user where role = 'User'";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"), rs.getString("phone"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public static void saveImagePathToDatabase(File selectedFile, User user) {
+        String imagePath = selectedFile.getAbsolutePath();
+
+        String insertQuery = "update user set imagePath = ? where id = ?";
+
+        try (Connection conn = DatabaseConnect.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(insertQuery);
+            ps.setString(1, imagePath);
+            ps.setInt(2, user.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadImageFromDatabase(User user, ImageView imageView) {
+        String query = "SELECT imagePath FROM user WHERE id = ?";
+
+        try (Connection conn = DatabaseConnect.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, user.getId());  // userId
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String imagePath = rs.getString("imagePath");
+                File file = new File(imagePath);
+
+                if (file.exists()) {
+                    Image image = new Image(file.toURI().toString());
+                    imageView.setImage(image);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

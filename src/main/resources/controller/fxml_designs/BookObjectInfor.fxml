@@ -57,19 +57,19 @@
                                             </effect></Label>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#d2d2d2" />
+                                                <Label fx:id="authorNameLabel" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Author : Author Name" textFill="#d2d2d2" />
                                                 <TextField fx:id="authorConfigTextField" layoutX="58.0" prefHeight="25.0" prefWidth="327.0" promptText="Enter the new Author's name..." visible="false" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#d2d2d2" />
+                                                <Label fx:id="publishDateLabel" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Publish : Publish date" textFill="#d2d2d2" />
                                                 <TextField fx:id="publishConfigTextField" layoutX="60.0" prefHeight="25.0" prefWidth="325.0" promptText="Enter the new Publish date..." visible="false" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane prefWidth="380.0">
                                             <children>
-                                                <Label prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#d2d2d2" />
+                                                <Label fx:id="quantityInStocksLabel" prefWidth="380.0" style="-fx-font-size: 16; -fx-font-style: italic;" text="Quantity in Stocks: " textFill="#d2d2d2" />
                                                 <TextField fx:id="quantityConfigTextField" layoutX="135.0" prefHeight="25.0" prefWidth="250.0" promptText="Enter the current Quantity..." visible="false" />
                                             </children>
                                         </AnchorPane>
@@ -143,6 +143,7 @@
                                         </ImageView>
                                     </graphic>
                                 </Button>
+                        <Label fx:id="userBorrowQuantity" layoutX="58.0" layoutY="449.0" text="Label" textFill="#f2e0e0" />
                             </children>
                         </AnchorPane>
                     </children>

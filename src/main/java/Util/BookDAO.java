@@ -20,6 +20,7 @@ public class BookDAO {
         String query = "INSERT INTO books (title, author, publisher, description, imageUrl, quantity, category, isbn) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
+
             Connection conn = DatabaseConnect.getConnection();
             PreparedStatement stmt = conn.prepareStatement(query);
 
@@ -174,6 +175,25 @@ public class BookDAO {
         }
 
         return books;
+    }
+
+    public static void updateBookQuantity(int borrowQuantity, String isbn, int type) {
+        String sql = "update books set quantity = quantity + ? where isbn = ?";
+        try {
+            Connection conn = DatabaseConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            if(type == 1) {
+                ps.setInt(1, -borrowQuantity);}
+            else {
+                ps.setInt(1,borrowQuantity);
+            }
+            ps.setString(2, isbn);
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 

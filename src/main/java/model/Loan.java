@@ -16,12 +16,15 @@ public class Loan {
         this.user = user;
         this.book = book;
         this.loanDate = loanDate;
-        this.returnDate = loanDate.plusDays(15);
+        this.returnDate = loanDate.plusDays(2);
         this.quantity = quantity;
     }
 
-    public Loan(Book book) {
+    public Loan(Book book, LocalDate loanDate, LocalDate returnDate, int quantity) {
         this.book = book;
+        this.loanDate = loanDate;
+        this.returnDate = returnDate;
+        this.quantity = quantity;
     }
     public Loan(User user, Book book) {
         this.user = user;

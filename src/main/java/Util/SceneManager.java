@@ -1,16 +1,15 @@
 package Util;
 
-import controller.libraryapp.BookObjectController;
-import controller.libraryapp.LoanController;
-import controller.libraryapp.MainViewController;
-import controller.libraryapp.UserController;
+import controller.libraryapp.*;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.Book;
+import model.Notification;
 import model.User;
 
 import java.io.IOException;
@@ -28,7 +27,6 @@ public class SceneManager {
         primaryStage = stage;
     }
 
-    // Lazy loading for scenes
     private static void loadSceneIfNotCached(String sceneName, String fxmlPath) throws IOException {
         if (!sceneCache.containsKey(sceneName)) {
             FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource(fxmlPath));
@@ -39,6 +37,7 @@ public class SceneManager {
             loaderCache.put(sceneName, loader);
         }
     }
+
 
     public static void showScene(String sceneName, String fxmlPath) {
         try {
@@ -127,6 +126,17 @@ public class SceneManager {
     public static void showUserLoan(User user) {
         showScene("Loan", "/controller/fxml_designs/MyLibraryView.fxml");
         LoanController controller = getController("Loan");
+        controller.setUser(user);
+    }
+
+    public static void showManageUser() {
+        showScene("ManageUser","/controller/fxml_designs/ManageUser.fxml");
+        ManageUserController controller = getController("ManageUser");
+    }
+
+    public static void showNotification(User user) {
+        showScene("Notification","/controller/fxml_designs/Notification.fxml");
+        NotificationController controller = getController("Notification");
         controller.setUser(user);
     }
 }

@@ -64,8 +64,9 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#userInfo" text="Your Information" />
                       <MenuItem fx:id="listLoanButton" mnemonicParsing="false" onAction="#showListLoan" text="My Library" />
-                        <MenuItem fx:id="manageUserButton" mnemonicParsing="false" onAction="#userInfo" text="ManageUser" />
+                        <MenuItem fx:id="manageUserButton" mnemonicParsing="false" onAction="#manageUser" text="ManageUser" />
                         <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" text="Logout" />
+                        <MenuItem mnemonicParsing="false" onAction="#showNotifications" text="Notification" />
                     </items>
                      <cursor>
                         <Cursor fx:constant="HAND" />

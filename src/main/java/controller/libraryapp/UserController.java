@@ -1,14 +1,20 @@
 package controller.libraryapp;
 
+import Util.Alert;
 import Util.SceneManager;
 import Util.UserDAO;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import model.User;
 import javafx.fxml.FXML;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -39,6 +45,10 @@ public class UserController {
     private Label userEmail;
     @FXML
     private Label userId;
+    @FXML
+    private ImageView userImageView;
+    @FXML
+    private Button uploadButton;
 
     private User user;
 
@@ -61,6 +71,7 @@ public class UserController {
         userPhone.setText(user.getPhone());
         userPassword.setText(convert(user.getPassword()));
         userEmail.setText(user.getEmail());
+        UserDAO.loadImageFromDatabase(user,userImageView);
     }
 
     public void changeInfo() {
@@ -74,23 +85,25 @@ public class UserController {
     }
 
     public void updateInfo() throws SQLException {
-        String userName = userNameTextField.getText();
+        String name = userNameTextField.getText();
 
         String phone = userPhoneTextField.getText();
         String password = userPasswordTextField.getText();
-        if (userName == null || phone == null || password == null) {
-            UserDAO.showAlert("no", "fill all");
+        if (name.isEmpty() && phone.isEmpty() && password.isEmpty()) {
+            Alert.showAlert("no", "fill");
         }
-        if (checkPhone(phone)) {
+        if (!phone.isEmpty() && checkPhone(phone)) {
             user.setPhone(phone);
-        } else UserDAO.showAlert("no", "must contain number only");
-        user.setUserName(userName);
-        user.setPassword(userPasswordTextField.getText());
+            userPhone.setText(phone);
+        } else Alert.showAlert("no", "must contain number only");
+        if(!password.isEmpty() && LoginViewController.checkStrongPassword(password)) {
+            user.setPassword(password);
+            userPassword.setText(password);
+        }
+        if(!name.isEmpty()) {
+            user.setUserName(name);
+        }
         UserDAO.handleUpdateInfo(user);
-
-        userNameTextField.setText(userName);
-        userPhone.setText(phone);
-        userPassword.setText(password);
 
         cancelUpdate();
     }
@@ -113,6 +126,23 @@ public class UserController {
         timeline.play();
     }
 
+    public void chooseImageFromDesktop() {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+            File selectedFile = fileChooser.showOpenDialog(uploadButton.getScene().getWindow());
+
+            if (selectedFile != null) {
+                UserDAO.saveImagePathToDatabase(selectedFile,user);
+
+                try (FileInputStream fileInputStream = new FileInputStream(selectedFile)) {
+                    Image image = new Image(fileInputStream);
+                    userImageView.setImage(image);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+    }
+
     private String convert(String password) {
         String rs = "";
         for (int i = 0; i < password.length(); i++) {
@@ -130,7 +160,6 @@ public class UserController {
 
         return true;
     }
-
 
     public void backtoMain() throws IOException {
         SceneManager.showMainView(user);

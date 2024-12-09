@@ -1,15 +1,16 @@
 package controller.libraryapp;
 
+import Util.NotificationDAO;
 import Util.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
         try {
+            NotificationDAO.generateNotifications();
             SceneManager.setPrimaryStage(primaryStage);
             SceneManager.showLoginView();
         } catch (Exception e) {

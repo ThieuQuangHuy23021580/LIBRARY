@@ -1,4 +1,6 @@
 package controller.libraryapp;
+
+import Util.BookDAO;
 import Util.LoanDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,21 +38,35 @@ public class BookObjectInfoController {
     private ImageView bookImage;
     @FXML
     private TextField borrowQuantityTextField;
+    @FXML
+    private Button returnButton;
+    @FXML
+    Label userBorrowQuantity;
 
-// TextField for book quantity in stock
     int borrowQuantity = 0;
+    int returnQuantity = 0;
+
     public void initialize() {
         borrowQuantityTextField.setText(String.valueOf(borrowQuantity));
     }
+
     private User user;
     private Book book;
-    public void setBook(Book book) {
+    private LoanController controller = null;
+
+    public void setUp(Book book, User user) {
         this.book = book;
-        displayBookDetails();
-    }
-    public void setUser(User user) {
         this.user = user;
+        displayBookDetails();
+        if (LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn()) == 0) {
+            returnButton.setDisable(true);
+        } else userBorrowQuantity.setText(String.valueOf(LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn())));
     }
+
+    public void setLoanController(LoanController controller) {
+        this.controller = controller;
+    }
+
     // Method to load book information from a database or any other source
     public void displayBookDetails() {
         if (book != null) {
@@ -85,6 +101,11 @@ public class BookObjectInfoController {
     @FXML
     private void handleCloseButtonAction() {
         ((StackPane) bookObjectInfo.getParent()).getChildren().remove(bookObjectInfo);
+        if (controller == null) {
+            return;
+        } else if (LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn()) == 0) {
+            controller.deleteStackPane(book.getIsbn());
+        }
     }
 
     public void configButtonPress(ActionEvent actionEvent) {
@@ -94,25 +115,45 @@ public class BookObjectInfoController {
     }
 
     public void borrowButtonPress() {
+        if(LoanDAO.getBorrowQuantity(user.getId(),book.getIsbn()) !=0) {
+            return;
+        }
         borrowQuantity = Integer.parseInt(borrowQuantityTextField.getText());
-        if(borrowQuantity <= book.getQuantity()) {
-           Loan loan = new Loan(user,book, LocalDate.now(),borrowQuantity);
-           book.setQuantity(book.getQuantity() - borrowQuantity);
-           LoanDAO.addLoan(loan);
+        if (borrowQuantity <= book.getQuantity() && borrowQuantity > 0) {
+            Loan loan = new Loan(user, book, LocalDate.now(), borrowQuantity);
+            LoanDAO.addLoan(loan);
+
+            book.setQuantity(book.getQuantity() - borrowQuantity);
+
+            userBorrowQuantity.setText(String.valueOf(borrowQuantity));
+            BookDAO.updateBookQuantity(borrowQuantity, book.getIsbn(), 1);
+            returnButton.setDisable(false);
         }
     }
+
+    public void returnButtonPress() {
+        returnQuantity = Integer.parseInt(borrowQuantityTextField.getText());
+        int borrowQuantity1 = LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn());
+        if (returnQuantity < borrowQuantity1 && returnQuantity > 0) {
+            userBorrowQuantity.setText(String.valueOf(borrowQuantity1 - returnQuantity));
+            LoanDAO.updateLoan(user.getId(), book.getIsbn(), returnQuantity);
+        } else if (returnQuantity == borrowQuantity1) {
+            userBorrowQuantity.setText("0");
+            LoanDAO.deleteLoan(user.getId(), book.getIsbn());
+        }
+    }
+
     public void minusQuantity() {
-        if(borrowQuantity < 0)
-          return;
-        borrowQuantity-= 1;
+        if (borrowQuantity > 0) {
+            borrowQuantity -= 1;
+        }
         borrowQuantityTextField.setText(String.valueOf(borrowQuantity));
     }
+
     public void plusQuantity() {
         borrowQuantity += 1;
         borrowQuantityTextField.setText(String.valueOf(borrowQuantity));
     }
 
 
-    public void returnButtonPress(ActionEvent actionEvent) {
-    }
 }

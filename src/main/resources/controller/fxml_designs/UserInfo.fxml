@@ -61,7 +61,7 @@
                 </Glow>
             </effect>
         </Circle>
-        <ImageView fitHeight="250.0" fitWidth="250.0" layoutX="170.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="userImageView" fitHeight="250.0" fitWidth="250.0" layoutX="170.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
         <Label layoutX="520.0" layoutY="160.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="ID:" textFill="WHITE" />
         <Label layoutX="520.0" layoutY="230.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="User Name:" textFill="WHITE" />
         <Label layoutX="520.0" layoutY="300.0" style="-fx-font-size: 20; -fx-font-weight: bold;" text="Email:" textFill="WHITE" />
@@ -112,5 +112,6 @@
          </cursor>
         </Button>
       <Button layoutX="217.0" layoutY="613.0" mnemonicParsing="false" onAction="#backtoMain" text="Button" />
+      <Button fx:id="uploadButton" layoutX="219.0" layoutY="521.0" mnemonicParsing="false" onAction="#chooseImageFromDesktop" text="ChooseFile" />
     </children>
 </AnchorPane>

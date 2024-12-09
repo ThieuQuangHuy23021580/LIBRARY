@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import Util.Alert;
 import Util.BookDAO;
 import Util.SceneManager;
 import javafx.application.Platform;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -174,7 +176,7 @@ public class MainViewController {
         }
         userName.setText(user.getUserName());
 
-        showBook();
+        //showBook();
     }
 
     public void setView(Parent root) {
@@ -302,23 +304,28 @@ public class MainViewController {
     }
 
 
-    public void showListLoan() {
+    public void showListLoan() throws IOException{
         SceneManager.showUserLoan(user);
-
     }
 
     public void logOut() throws IOException {
         SceneManager.showLoginView();
+        Alert.showAlert("r u sure u want to logout","no");
     }
-
 
     public void userInfo() throws IOException {
         SceneManager.showUserDashboard(user);
     }
 
+    public void manageUser() {
+        SceneManager.showManageUser();
+    }
+
+    public void showNotifications() { SceneManager.showNotification(user);}
+
     public void cleanUp()
     {
-        recommendFlowPane.getChildren().clear(); // Dọn sạch danh sách sách cũ
+        recommendFlowPane.getChildren().clear();
     }
 
 }
