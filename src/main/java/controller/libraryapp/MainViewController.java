@@ -401,4 +401,9 @@ public class MainViewController {
     }
 
 
+    public void handleNoNotifiButonPressed(ActionEvent actionEvent) {
+    }
+
+    public void handleHavingNotifiButonPressed(ActionEvent actionEvent) {
+    }
 }

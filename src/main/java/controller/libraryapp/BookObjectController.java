@@ -66,7 +66,8 @@ public class BookObjectController {
         moreInfobutton.setOnAction(event -> displayBookInfo(book, user));
     }
 
-    private void displayBookInfo(Book book, User user) {
+
+    public void displayBookInfo(Book book, User user) {
         String fxmlPath = user.getRole().equals("Manager")
                 ? "/controller/fxml_designs/AdminBookObjectInfo.fxml"
                 : "/controller/fxml_designs/BookObjectInfor.fxml";
@@ -107,4 +108,5 @@ public class BookObjectController {
             e.printStackTrace();
         }
     }
+
 }

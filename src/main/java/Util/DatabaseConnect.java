@@ -5,13 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnect {
+    private static Connection connection;
     public static final String url = "jdbc:mysql://127.0.0.1:3306/library";
     public static final String user = "root";
     public static final String password = "huy104967";
 
     public static synchronized Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            connection = DriverManager.getConnection(url, user, password);
         }
         return connection;
     }
