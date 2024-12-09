@@ -41,7 +41,7 @@ public class BookObjectController {
 
     public void setBook(Book book) {
         this.book = book;
-        setBookDetails();
+        setBookDetails(book,user);
     }
     public void setUser(User user) {
         this.user = user;
@@ -50,7 +50,7 @@ public class BookObjectController {
         this.controller = loanController;
     }
 
-    public void setBookDetails() {
+    public void setBookDetails(Book book, User user) {
         bookName.setText(book.getTitle());
         author.setText(book.getAuthor());
 
@@ -63,7 +63,7 @@ public class BookObjectController {
         }
 
         // Add event handler for "More Info" button if needed
-        moreInfobutton.setOnAction(event -> displayBookInfo(book));
+        moreInfobutton.setOnAction(event -> displayBookInfo(book, user));
     }
 
     private void displayBookInfo(Book book, User user) {
