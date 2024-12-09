@@ -104,7 +104,7 @@
                                     <Image url="@../../PICTURES/0d21cfa28c0b1fe8fa76569985c7ca94.jpg" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="educationButton" layoutX="195.0" layoutY="320.0" mnemonicParsing="false" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="educationButton" layoutX="195.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleEducationButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -113,7 +113,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="fictionButton" layoutY="320.0" mnemonicParsing="false" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="fictionButton" layoutY="320.0" mnemonicParsing="false" onAction="#handleFictionButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -122,7 +122,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="comicButton" layoutX="390.0" layoutY="320.0" mnemonicParsing="false" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="comicButton" layoutX="390.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleComicButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -131,7 +131,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="businessAndEconomicButton" layoutX="585.0" layoutY="320.0" mnemonicParsing="false" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="businessAndEconomicButton" layoutX="585.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBusinessButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -140,7 +140,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="healthAndFitnessButton" layoutX="780.0" layoutY="320.0" mnemonicParsing="false" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="healthAndFitnessButton" layoutX="780.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleHealthAndFitnessButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -149,7 +149,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="otherCategoriesButton" layoutX="980.0" layoutY="320.0" mnemonicParsing="false" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="otherCategoriesButton" layoutX="980.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleOtherButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -519,7 +519,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="recommendAnchorPane" prefHeight="300.0" prefWidth="1200.0">
                            <children>
-                              <Label layoutX="100.0" layoutY="50.0" style="-fx-font-size: 25; -fx-font-weight: bold;" text="Recommend " textFill="#f8f8f8" />
+                              <Label fx:id="recommendLabel" layoutX="100.0" layoutY="50.0" style="-fx-font-size: 25; -fx-font-weight: bold;" text="Recommend " textFill="#f8f8f8" />
                               <FlowPane fx:id="recommendFlowPane" layoutX="100.0" layoutY="100.0" prefHeight="200.0" prefWidth="1000.0" />
                            </children></AnchorPane>
                      </children>
