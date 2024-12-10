@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.NotificationController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.NotificationController">
    <children>
       <AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@../../css/fullpackstyling.css">
          <children>
@@ -38,6 +38,7 @@
                               </DropShadow>
                            </effect>
                         </Label>
+                        <Button layoutX="66.0" layoutY="22.0" mnemonicParsing="false" onAction="#handleDeleteNofi" text="Button" />
                      </children>
                   </AnchorPane>
                   <ScrollPane layoutY="70.0" prefHeight="530.0" prefWidth="800.0">

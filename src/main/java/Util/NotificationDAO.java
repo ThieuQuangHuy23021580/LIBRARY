@@ -41,14 +41,15 @@ public class NotificationDAO {
             Book book = BookDAO.getBookByISBN(bookISBN);
             String message = "";
             if (dayRemaining >= 0) {
-                message = "Sách: '" + book.getTitle() + "'(Sắp hết hạn - còn " + dayRemaining + " ngày";
+                message = "Sách: '" + book.getTitle() + "'(Sắp hết hạn - còn " + dayRemaining + " ngày)";
             } else
                 message = "Sách: '" + book.getTitle() + "'(Đã quá hạn trả " + -dayRemaining + " ngày\n" + "Số tiền phải trả:" + -dayRemaining * 300000 + " VNĐ";
             if (checkDuplicateNotification(userId, message)) {
-                String insertQuery = "INSERT INTO notification(userId, message) VALUES (?,?)";
+                String insertQuery = "INSERT INTO notification(userId, message, isRead) VALUES (?,?,?)";
                 PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
                 insertStatement.setInt(1, userId);
                 insertStatement.setString(2, message);
+                insertStatement.setBoolean(3, false);
                 insertStatement.executeUpdate();
             }
         }
@@ -58,14 +59,14 @@ public class NotificationDAO {
         try {
             Connection connection = DatabaseConnect.getConnection();
 
-            String query = "SELECT message FROM notification WHERE userId= ? and isRead = 'false'";
+            String query = "SELECT message FROM notification WHERE userId= ? and isRead = false";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, user.getId());
 
             ResultSet resultSet = statement.executeQuery();
             List<Notification> notifications = new ArrayList<>();
             while (resultSet.next()) {
-                Notification notification = new Notification(user, resultSet.getString("message"), false);
+                Notification notification = new Notification(user, resultSet.getString("message"),false);
                 notifications.add(notification);
             }
             return notifications;
@@ -75,8 +76,9 @@ public class NotificationDAO {
         return null;
     }
 
+
     public static void markNotificationAsRead(Notification notification) {
-        String sql = "update notification set isRead = 1 where userId = ? and message = ?";
+        String sql = "update notification set isRead = true where userId = ? and message = ?";
         try {
             Connection conn = DatabaseConnect.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);

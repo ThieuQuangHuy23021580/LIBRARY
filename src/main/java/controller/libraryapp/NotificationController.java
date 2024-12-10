@@ -1,5 +1,7 @@
 package controller.libraryapp;
+
 import Util.NotificationDAO;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -14,17 +16,17 @@ import java.util.List;
 
 public class NotificationController {
 
-
-    private User user;
     private List<Notification> notifications;
     private StackPane mainStackPane;
     private StackPane stackPane;
     @FXML
     VBox notificationList;
 
+    private AnchorPane selectedNotificationPane;
+    private Notification selectedNotification;
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setList(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 
     public void setView(StackPane stackPane, StackPane st) {
@@ -36,26 +38,41 @@ public class NotificationController {
     public void getNotificationList() {
         try {
 
-            notifications = NotificationDAO.getNotificationsForUser(user);
-            for(Notification notification : notifications) {
-                Label label = new Label(notification.getMessage());
+            for (Notification notification : notifications) {
                 FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NotificationObject.fxml"));
-                AnchorPane child = loader1.load();
-
-                label.setLayoutX(250.0);
-                label.setLayoutY(50.0);
+                AnchorPane notificationPane = loader1.load();
+                Label label = new Label(notification.getMessage());
+                label.setLayoutX(12.0);
+                label.setLayoutY(5.0);
+                label.setPrefHeight(46.0);
+                label.setPrefWidth(747.0);
                 label.setStyle("-fx-font-size: 25;");
-
-                child.getChildren().add(label);
-                notificationList.getChildren().add(child);
+                label.setTextFill(javafx.scene.paint.Color.WHITE);
+                label.setWrapText(true);
+                notificationPane.getChildren().add(label);
+                notificationPane.setOnMouseClicked(event -> {
+                    selectedNotificationPane = notificationPane;
+                    selectedNotification = notification;
+                });
+                notificationList.getChildren().add(notificationPane);
             }
             mainStackPane.getChildren().add(stackPane);
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public void handleCloseButtonAction() {
         mainStackPane.getChildren().remove(stackPane);
     }
+
+
+    public void handleDeleteNofi() {
+        if(selectedNotification != null) {
+            notificationList.getChildren().remove(selectedNotificationPane);
+            NotificationDAO.markNotificationAsRead(selectedNotification);
+            notifications.remove(selectedNotification);
+        }
+    }
+
 }

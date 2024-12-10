@@ -172,6 +172,8 @@ public class LoginViewController {
      * @param actionEvent sự kiện nhấn nút Sign Up.
      */
     public void toSignUpButtonPressed(ActionEvent actionEvent) {
+        emailAddressField.setText("");
+        passwordField.setText("");
         show.setVisible(false);
         //Dịch chuyển khung hình hiên thị background trái sang phải.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);

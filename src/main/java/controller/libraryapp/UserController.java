@@ -86,9 +86,9 @@ public class UserController {
 
     public void updateInfo() throws SQLException {
         String name = userNameTextField.getText();
-
         String phone = userPhoneTextField.getText();
         String password = userPasswordTextField.getText();
+
         if (name.isEmpty() && phone.isEmpty() && password.isEmpty()) {
             Alert.showAlert("no", "fill");
         }

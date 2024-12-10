@@ -16,7 +16,7 @@ public class Loan {
         this.user = user;
         this.book = book;
         this.loanDate = loanDate;
-        this.returnDate = loanDate.plusDays(2);
+        this.returnDate = loanDate.plusDays(-2);
         this.quantity = quantity;
     }
 

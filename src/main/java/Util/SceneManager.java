@@ -42,7 +42,7 @@ public class SceneManager {
     public static void showScene(String sceneName, String fxmlPath) {
         try {
             loadSceneIfNotCached(sceneName, fxmlPath);
-            cleanController(sceneName); // Dọn dẹp dữ liệu trước khi chuyển
+            cleanController(sceneName);
             primaryStage.setScene(sceneCache.get(sceneName));
             primaryStage.show();
         } catch (IOException e) {
@@ -70,7 +70,6 @@ public class SceneManager {
     }
 
 
-    // Clean up data of controllers
     private static void cleanController(String sceneName) {
         Object controller = loaderCache.get(sceneName).getController();
         if (controller instanceof MainViewController) {
@@ -123,9 +122,4 @@ public class SceneManager {
         ManageUserController controller = getController("ManageUser");
     }
 
-    public static void showNotification(User user) {
-        showScene("Notification","/controller/fxml_designs/Notification.fxml");
-        NotificationController controller = getController("Notification");
-        controller.setUser(user);
-    }
 }

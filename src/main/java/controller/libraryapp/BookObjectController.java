@@ -1,18 +1,14 @@
 package controller.libraryapp;
 
 import Util.DatabaseConnect;
-import Util.LoanDAO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import model.Book;
-import model.Loan;
 import model.User;
 
 import java.io.IOException;
@@ -29,13 +25,11 @@ public class BookObjectController {
     private ImageView imageView;
 
     @FXML
-    private Button moreInfobutton;
-
-    @FXML
     private StackPane mainStackPane;
     private Book book;
     private User user;
     private LoanController controller;
+
     public void setMainStackPane(StackPane stackPane) {
         this.mainStackPane = stackPane;
     }
@@ -44,9 +38,11 @@ public class BookObjectController {
         this.book = book;
         setBookDetails(book);
     }
+
     public void setUser(User user) {
         this.user = user;
     }
+
     public void setLoanController(LoanController loanController) {
         this.controller = loanController;
     }
@@ -55,7 +51,6 @@ public class BookObjectController {
         bookName.setText(book.getTitle());
         author.setText(book.getAuthor());
 
-        // Set the image if available, otherwise use a placeholder
         String imageUrl = book.getImageUrl();
         if (imageUrl != null && !imageUrl.isEmpty()) {
             imageView.setImage(new Image(imageUrl));
@@ -91,7 +86,7 @@ public class BookObjectController {
                 adminController.displayBookDetails(book);
             } else {
                 BookObjectInfoController infoController = loader.getController();
-                infoController.setUp(book,user);
+                infoController.setUp(book, user);
                 infoController.setLoanController(controller);
             }
 

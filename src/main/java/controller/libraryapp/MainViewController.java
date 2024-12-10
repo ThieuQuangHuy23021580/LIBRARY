@@ -5,12 +5,9 @@ import Util.BookDAO;
 import Util.NotificationDAO;
 import Util.SceneManager;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -22,10 +19,8 @@ import model.User;
 
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Objects;
 
 public class MainViewController {
 
@@ -166,6 +161,12 @@ public class MainViewController {
     private StackPane parent;
     @FXML
     private Label recommendLabel;
+    @FXML
+    private Button noNotifiButton;
+    @FXML
+    private Button havingNotifiButton;
+
+    private List<Notification> notifications;
 
     private User user;
 
@@ -177,6 +178,14 @@ public class MainViewController {
         } else {
             listLoanButton.setVisible(true);
             manageUserButton.setVisible(false);
+        }
+        notifications = NotificationDAO.getNotificationsForUser(user);
+        if (!notifications.isEmpty()) {
+            noNotifiButton.setVisible(false);
+            havingNotifiButton.setVisible(true);
+        } else {
+            noNotifiButton.setVisible(true);
+            havingNotifiButton.setVisible(false);
         }
         userName.setText(user.getUserName());
 
@@ -278,25 +287,15 @@ public class MainViewController {
         setListBook(books);
     }
 
-    public void configButtonPress(ActionEvent actionEvent) {
-    }
-
-    public void deleteButtonPress(ActionEvent actionEvent) {
-    }
-
-    public void borrowButtonPress(ActionEvent actionEvent) {
-    }
-
-    public void returnButtonPress(ActionEvent actionEvent) {
-    }
 
     public void showListLoan() throws IOException {
         SceneManager.showUserLoan(user);
     }
 
     public void logOut() throws IOException {
-        SceneManager.showLoginView();
         Alert.showAlert("r u sure u want to logout", "no");
+        SceneManager.showLoginView();
+
     }
 
     public void userInfo() throws IOException {
@@ -307,9 +306,6 @@ public class MainViewController {
         SceneManager.showManageUser();
     }
 
-    public void showNotifications() {
-        SceneManager.showNotification(user);
-    }
 
     public void cleanUp() {
         recommendFlowPane.getChildren().clear();
@@ -369,8 +365,8 @@ public class MainViewController {
     }
 
 
-    public void handleNoNotifiButonPressed(ActionEvent actionEvent) {
-        Alert.showAlert("You have no notifi","omg");
+    public void handleNoNotifiButonPressed() {
+        Alert.showAlert("You have no notifi", "omg");
     }
 
     public void handleHavingNotifiButonPressed() {
@@ -378,14 +374,11 @@ public class MainViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NotificationView.fxml"));
             StackPane notiView = loader.load();
             NotificationController controller = loader.getController();
-            controller.setUser(user);
-            controller.setView(notiView,mainStackPane);
+            controller.setList(notifications);
+            controller.setView(notiView, mainStackPane);
 
-        }catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public void handleCloseButtonAction() {
-
     }
 }

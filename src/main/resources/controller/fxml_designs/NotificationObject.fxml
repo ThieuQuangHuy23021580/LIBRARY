@@ -3,13 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.NotificationController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.NotificationController">
    <children>
-      <Label layoutX="578.0" layoutY="48.0" style="-fx-font-size: 25;" text="Sách : " textFill="WHITE" />
-      <Label layoutX="50.0" layoutY="50.0" style="-fx-font-size: 25;" text="Số tiền phải trả:" textFill="WHITE" />
-      <Label fx:id="loanNumberTextField" layoutX="250.0" layoutY="50.0" style="-fx-font-size: 25;" text="900000 (VNĐ)" textFill="WHITE" />
-      <Label fx:id="bookTittleTextField" layoutX="120.0" layoutY="15.0" prefHeight="36.0" prefWidth="319.0" style="-fx-font-size: 25;" text="&quot;Như một vì tinh tú Chây 97&quot;" textFill="WHITE" />
-      <Label fx:id="dateUpdateTextField" layoutX="440.0" layoutY="15.0" prefHeight="36.0" prefWidth="330.0" style="-fx-font-size: 25;" text="(Sắp hết hạn - còn 3 ngày)" textFill="WHITE" />
-      <Label fx:id="messageLabel" layoutX="60.0" layoutY="25.0" style="-fx-font-size: 25;" textFill="WHITE" />
+      <Label fx:id="messageLabel" layoutX="12.0" layoutY="5.0" prefHeight="46.0" prefWidth="747.0" style="-fx-font-size: 25;" textFill="WHITE" wrapText="true" />
    </children>
 </AnchorPane>
