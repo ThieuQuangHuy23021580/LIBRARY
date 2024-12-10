@@ -169,6 +169,8 @@ public class MainViewController {
     private Button noNotifiButton;
     @FXML
     private Button havingNotifiButton;
+    @FXML
+    private MenuItem addBookButton;
 
     private List<Notification> notifications;
 
@@ -184,9 +186,12 @@ public class MainViewController {
         if (user.getRole().equals(User.MANAGER)) {
             listLoanButton.setVisible(false);
             manageUserButton.setVisible(true);
+            addBookButton.setVisible(true);
+
         } else {
             listLoanButton.setVisible(true);
             manageUserButton.setVisible(false);
+            addBookButton.setVisible(false);
         }
         notifications = NotificationDAO.getNotificationsForUser(user);
         if (!notifications.isEmpty()) {

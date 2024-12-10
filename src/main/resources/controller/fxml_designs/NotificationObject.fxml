@@ -3,8 +3,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.NotificationController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="800.0" style="-fx-background-color: black; -fx-border-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.NotificationController">
    <children>
-      <Label fx:id="messageLabel" layoutX="12.0" layoutY="5.0" prefHeight="46.0" prefWidth="747.0" style="-fx-font-size: 25;" textFill="WHITE" wrapText="true" />
+      <Label fx:id="messageLabel" layoutX="15.0" layoutY="5.0" prefHeight="91.0" prefWidth="732.0" style="-fx-font-size: 25;" textFill="WHITE" wrapText="true" />
    </children>
 </AnchorPane>
