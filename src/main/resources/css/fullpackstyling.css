@@ -18,19 +18,19 @@
 #signInButton {
     -fx-font-family: "Poppins-ExtraBold";
     -fx-background-color: transparent;
-    -fx-border-color: rgb(107, 41, 151); /* Màu viền */
+    -fx-border-color: #E50914FF; /* Màu viền */
     -fx-border-width: 3px; /* Độ dày viền */
-    -fx-text-fill: #6b2997; /* Màu chữ */
+    -fx-text-fill: #E50914FF; /* Màu chữ */
     -fx-background-radius: 50px; /* Bo góc button */
     -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
 }
 
 #signInButton:hover {
     -fx-font-family: "Poppins-ExtraBold";
-    -fx-border-color: rgb(178, 81, 184);
-    -fx-effect: dropshadow(gaussian, rgb(178, 81, 184), 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
-    -fx-background-color: rgba(178, 81, 184, 0.82); /* Màu nền nhẹ khi hover */
-    -fx-text-fill: rgb(178, 81, 184); /* Màu chữ khi hover */
+    -fx-border-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #E50914FF, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.7); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #E50914FF; /* Màu chữ khi hover */
 }
 #toSignInButton {
     -fx-font-family: "Poppins-ExtraBold";
@@ -51,19 +51,19 @@
 #signUpButton {
     -fx-font-family: "Poppins-ExtraBold";
     -fx-background-color: transparent;
-    -fx-border-color: rgb(107, 41, 151); /* Màu viền */
+    -fx-border-color: #E50914FF; /* Màu viền */
     -fx-border-width: 3px; /* Độ dày viền */
-    -fx-text-fill: #6b2997; /* Màu chữ */
+    -fx-text-fill: #E50914FF; /* Màu chữ */
     -fx-background-radius: 50px; /* Bo góc button */
     -fx-effect: dropshadow(gaussian, transparent, 0, 0, 0, 0); /* Không có hiệu ứng khi không hover */
 }
 
 #signUpButton:hover {
     -fx-font-family: "Poppins-ExtraBold";
-    -fx-border-color: rgb(178, 81, 184);
-    -fx-effect: dropshadow(gaussian, rgb(178, 81, 184), 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
-    -fx-background-color: rgba(178, 81, 184, 0.82); /* Màu nền nhẹ khi hover */
-    -fx-text-fill: rgb(178, 81, 184); /* Màu chữ khi hover */
+    -fx-border-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, #E50914FF, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.7); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #E50914FF; /* Màu chữ khi hover */
 }
 
 
@@ -390,4 +390,22 @@
 
 #moreInfoButton:hover{
     -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+
+#undoButton:hover{
+    -fx-effect: dropshadow(gaussian, white, 10, 0, 0, 0);
+}
+#uploadButton:hover{
+    -fx-effect: dropshadow(gaussian, white, 10, 0, 0, 0);
+}
+#returnButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+#borrowButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+#showPassword{
+    -fx-border-color: #E50914FF;
 }

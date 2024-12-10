@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import model.User;
@@ -53,6 +54,10 @@ public class UserController {
     private User user;
 
     public void initialize() {
+        Circle circle = new Circle(125);
+        circle.setCenterX(125);
+        circle.setCenterY(125);
+        userImageView.setClip(circle);
         updateInfoButton.setVisible(false);
         cancelInfoButton.setVisible(false);
     }

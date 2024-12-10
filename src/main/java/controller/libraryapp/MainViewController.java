@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import Util.*;
 import Util.Alert;
 import Util.BookDAO;
 import Util.NotificationDAO;
@@ -9,9 +10,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import model.Book;
 import model.Notification;
@@ -19,7 +22,6 @@ import model.User;
 
 
 import java.io.IOException;
-
 import java.util.List;
 
 public class MainViewController {
@@ -162,6 +164,8 @@ public class MainViewController {
     @FXML
     private Label recommendLabel;
     @FXML
+    private ImageView userAvatar;
+    @FXML
     private Button noNotifiButton;
     @FXML
     private Button havingNotifiButton;
@@ -172,6 +176,11 @@ public class MainViewController {
 
     public void setUser(User user) {
         this.user = user;
+        try {
+            UserDAO.loadImageFromDatabase(user, userAvatar);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         if (user.getRole().equals(User.MANAGER)) {
             listLoanButton.setVisible(false);
             manageUserButton.setVisible(true);
@@ -194,20 +203,13 @@ public class MainViewController {
 
     @FXML
     public void initialize() {
-        fictionButton.setOnMouseEntered(event -> getFictionCateList());
-        fictionButton.setOnMouseExited(event -> getDiscoveryCategories());
-        educationButton.setOnMouseEntered(event -> getEducationCateList());
-        educationButton.setOnMouseExited(event -> getDiscoveryCategories());
-        comicButton.setOnMouseEntered(event -> getComicCateList());
-        comicButton.setOnMouseExited(event -> getDiscoveryCategories());
-        healthAndFitnessButton.setOnMouseEntered(event -> getHealthAndFitnessCateList());
-        healthAndFitnessButton.setOnMouseExited(event -> getDiscoveryCategories());
-        businessAndEconomicButton.setOnMouseEntered(event -> getBusinessAndEconomicCateList());
-        businessAndEconomicButton.setOnMouseExited(event -> getDiscoveryCategories());
-        otherCategoriesButton.setOnMouseEntered(event -> getOtherCateList());
-        otherCategoriesButton.setOnMouseExited(event -> getDiscoveryCategories());
+        Circle circle = new Circle(17.5);
+        circle.setCenterX(17.5);
+        circle.setCenterY(17.5);
+        userAvatar.setClip(circle);
     }
 
+    @FXML
     void getDiscoveryCategories() {
         discoverCatetegories.setVisible(true);
         fictionCateList.setVisible(false);
@@ -218,31 +220,37 @@ public class MainViewController {
         businessAndEconomicCateList.setVisible(false);
     }
 
+    @FXML
     void getFictionCateList() {
         fictionCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
 
+    @FXML
     void getEducationCateList() {
         educationCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
 
+    @FXML
     void getComicCateList() {
         comicCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
 
+    @FXML
     void getHealthAndFitnessCateList() {
         healthAndFitnessCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
 
+    @FXML
     void getBusinessAndEconomicCateList() {
         businessAndEconomicCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
 
+    @FXML
     void getOtherCateList() {
         otherCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
@@ -275,7 +283,7 @@ public class MainViewController {
 
 
     @FXML
-    private StackPane mainStackPane; // Reference to the main StackPane in your FXML
+    private StackPane mainStackPane;
 
     @FXML
     private void handleSearchButtonAction() throws IOException {
@@ -286,7 +294,6 @@ public class MainViewController {
         List<Book> books = BookDAO.getBooksByTitle(title);
         setListBook(books);
     }
-
 
     public void showListLoan() throws IOException {
         SceneManager.showUserLoan(user);

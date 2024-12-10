@@ -82,8 +82,7 @@ public class LoginViewController {
         toSignInButton.setVisible(false);
         signUpButton.setVisible(false);
         ConfirmPasswordField.setVisible(false);
-        clip = new Rectangle(bg.getFitWidth(), 400);
-        clip.setY(800);
+        clip = new Rectangle(407, 800);
         bg.setClip(clip);
         signInButton.setCursor(Cursor.HAND);
         signUpButton.setCursor(Cursor.HAND);
@@ -177,9 +176,9 @@ public class LoginViewController {
         show.setVisible(false);
         //Dịch chuyển khung hình hiên thị background trái sang phải.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);
-        moveClip.setToY(-800);
+        moveClip.setToX(793);
         moveClip.play();
-        System.out.println("moveclip " + moveClip.getNode().getTranslateY());
+        System.out.println("moveclip " + moveClip.getNode().getTranslateX());
 
         //Dịch chuyển layer1 sang phải.
         TranslateTransition slide1 = new TranslateTransition();
@@ -231,9 +230,9 @@ public class LoginViewController {
         show.setVisible(true);
         //Dịch chuyển khung hình hiên thị background phải sang trái.
         TranslateTransition moveClip = new TranslateTransition(Duration.seconds(0.8), clip);
-        moveClip.setToY(0);
+        moveClip.setToX(0);
         moveClip.play();
-        System.out.println("moveclip " + moveClip.getNode().getTranslateY());
+        System.out.println("moveclip " + moveClip.getNode().getTranslateX());
 
         // Dịch chuyển layer1 sang trái.
         TranslateTransition slide1 = new TranslateTransition();

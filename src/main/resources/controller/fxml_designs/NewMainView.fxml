@@ -22,7 +22,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="mainStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
+<StackPane fx:id="mainStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #000000;" stylesheets="@../../css/fullpackstyling.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.libraryapp.MainViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="1200.0">
          <children>
@@ -54,7 +54,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="980.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="userAvatar" fitHeight="35.0" fitWidth="35.0" layoutX="980.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../PICTURES/userAvartar.png" />
                      </image>
@@ -126,7 +126,7 @@
                                     <Image url="@../../PICTURES/0d21cfa28c0b1fe8fa76569985c7ca94.jpg" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="educationButton" layoutX="195.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleEducationButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="educationButton" layoutX="195.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleEducationButtonAction" onMouseEntered="#getEducationCateList" onMouseExited="#getDiscoveryCategories" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -135,7 +135,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="fictionButton" layoutY="320.0" mnemonicParsing="false" onAction="#handleFictionButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="fictionButton" layoutY="320.0" mnemonicParsing="false" onAction="#handleFictionButtonAction" onMouseEntered="#getFictionCateList" onMouseExited="#getDiscoveryCategories" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -144,7 +144,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="comicButton" layoutX="390.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleComicButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="comicButton" layoutX="390.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleComicButtonAction" onMouseEntered="#getComicCateList" onMouseExited="#getDiscoveryCategories" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -153,7 +153,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="businessAndEconomicButton" layoutX="585.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBusinessButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="businessAndEconomicButton" layoutX="585.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBusinessButtonAction" onMouseEntered="#getBusinessAndEconomicCateList" onMouseExited="#getDiscoveryCategories" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -162,7 +162,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="healthAndFitnessButton" layoutX="780.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleHealthAndFitnessButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="healthAndFitnessButton" layoutX="780.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleHealthAndFitnessButtonAction" onMouseEntered="#getHealthAndFitnessCateList" onMouseExited="#getDiscoveryCategories" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -171,7 +171,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="otherCategoriesButton" layoutX="980.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleOtherButtonAction" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
+                              <Button fx:id="otherCategoriesButton" layoutX="980.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleOtherButtonAction" onMouseEntered="#getOtherCateList" onMouseExited="#getDiscoveryCategories" prefHeight="300.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                                  <graphic>
                                     <ImageView fitHeight="300.0" fitWidth="195.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
