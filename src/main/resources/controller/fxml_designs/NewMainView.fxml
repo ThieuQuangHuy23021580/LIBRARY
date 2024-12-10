@@ -33,13 +33,13 @@
                         <Reflection fraction="0.86" topOffset="-10.0" topOpacity="0.61" />
                      </effect>
                   </Label>
-                  <Button fx:id="homeButton_active" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Home" textFill="#bcb5b5" />
+                  <Button fx:id="homeButton_active" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#whiteHomeButtonPressed" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Home" textFill="#bcb5b5" />
                   <Button fx:id="homeButton_inactive" layoutX="280.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-BoldItalic&quot;; -fx-font-size: 20; -fx-font-weight: bold; -fx-background-color: transparent;" text="Home" textFill="#e50914">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font></Button>
                   <Button fx:id="categoriesButton_inactive" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Categories" textFill="#e50914" />
-                  <Button fx:id="categoriesButton_active" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Categories" textFill="#bcb5b5" />
+                  <Button fx:id="categoriesButton_active" layoutX="390.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#whiteCategoriesButtonPressed" style="-fx-font-family: &quot;Poppins-ExtraBold&quot;; -fx-font-weight: bold; -fx-font-size: 20; -fx-background-color: transparent;" text="Categories" textFill="#bcb5b5" />
                   <TextField fx:id="searchTextField" layoutX="563.0" layoutY="12.0" prefHeight="40.0" prefWidth="315.0" promptText="  Searching for . . " style="-fx-border-color: white; -fx-border-width: 1; -fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: &quot;Poppins-BoldItalic&quot;;" />
                   <ImageView disable="true" fitHeight="30.0" fitWidth="30.0" layoutX="888.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                      <image>

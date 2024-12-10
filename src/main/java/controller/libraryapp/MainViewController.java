@@ -208,10 +208,14 @@ public class MainViewController {
 
     @FXML
     public void initialize() {
+        showBook();
+        categoriesAnchorPane.setManaged(false);
+        categoriesAnchorPane.setVisible(false);
         Circle circle = new Circle(17.5);
         circle.setCenterX(17.5);
         circle.setCenterY(17.5);
         userAvatar.setClip(circle);
+
     }
 
     @FXML
@@ -331,8 +335,6 @@ public class MainViewController {
             controller.setStackPane(mainStackPane);
 
             mainStackPane.getChildren().add(addBookAnchorPane);
-
-            // Optionally, make the new AnchorPane visible or set a transition effect
             addBookAnchorPane.setVisible(true);
 
         } catch (IOException e) {
@@ -393,4 +395,42 @@ public class MainViewController {
             e.printStackTrace();
         }
     }
+
+
+    @FXML
+    public void whiteHomeButtonPressed() {
+        homeButton_active.setVisible(false);
+        homeButton_active.setManaged(false);
+        homeButton_inactive.setVisible(true);
+        homeButton_inactive.setManaged(true);
+        categoriesButton_active.setVisible(true);
+        categoriesButton_active.setManaged(true);
+        categoriesButton_inactive.setVisible(false);
+        categoriesButton_inactive.setManaged(false);
+        homeAnchorPane.setManaged(true);
+        homeAnchorPane.setVisible(true);
+        categoriesAnchorPane.setManaged(false);
+        categoriesAnchorPane.setVisible(false);
+        recommendLabel.setText("Recommend");
+        cleanUp();
+        showBook();
+    }
+    @FXML
+    public void whiteCategoriesButtonPressed() {
+        homeButton_active.setVisible(true);
+        homeButton_active.setManaged(false);
+        homeButton_inactive.setVisible(false);
+        homeButton_inactive.setManaged(false);
+        categoriesButton_active.setVisible(false);
+        categoriesButton_active.setManaged(false);
+        categoriesButton_inactive.setVisible(true);
+        categoriesButton_inactive.setManaged(true);
+        categoriesAnchorPane.setManaged(true);
+        categoriesAnchorPane.setVisible(true);
+        homeAnchorPane.setManaged(false);
+        homeAnchorPane.setVisible(false);
+        recommendLabel.setText("Discovery all categories now.");
+        cleanUp();
+    }
+
 }

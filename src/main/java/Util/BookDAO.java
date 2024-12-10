@@ -183,7 +183,7 @@ public class BookDAO {
 
     public static List<Book> getRandomBook() {
 
-        String query = "SELECT * FROM books order by rand() limit 15";
+        String query = "SELECT * FROM books order by rand() limit 10";
         List<Book> books = new ArrayList<>();
 
         try {

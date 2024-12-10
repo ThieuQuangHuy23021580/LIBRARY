@@ -273,9 +273,9 @@
 }
 #categoriesButton_inactive:hover {
     -fx-font-family: "Poppins-ExtraBold";
-    -fx-effect: dropshadow(gaussian,  #ffffff, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
-    -fx-background-color: rgba(255, 253, 253, 0.35); /* Màu nền nhẹ khi hover */
-    -fx-text-fill:  #ffffff; /* Màu chữ khi hover */
+    -fx-effect: dropshadow(gaussian, #e50914, 10, 0, 0, 0); /* Hiệu ứng glow khi hover */
+    -fx-background-color: rgba(229, 9, 20, 0.37); /* Màu nền nhẹ khi hover */
+    -fx-text-fill: #e50914; /* Màu chữ khi hover */
 }
 
 #searchButton {
