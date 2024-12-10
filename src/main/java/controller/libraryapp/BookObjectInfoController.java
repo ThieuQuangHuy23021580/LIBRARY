@@ -60,7 +60,7 @@ public class BookObjectInfoController {
         displayBookDetails();
         if (LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn()) == 0) {
             returnButton.setDisable(true);
-        } else userBorrowQuantity.setText(String.valueOf(LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn())));
+        } else userBorrowQuantity.setText("Borrowed: " + String.valueOf(LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn())));
     }
 
     public void setLoanController(LoanController controller) {
@@ -125,7 +125,7 @@ public class BookObjectInfoController {
 
             book.setQuantity(book.getQuantity() - borrowQuantity);
 
-            userBorrowQuantity.setText(String.valueOf(borrowQuantity));
+            userBorrowQuantity.setText("Borrowed: "+String.valueOf(borrowQuantity));
             BookDAO.updateBookQuantity(borrowQuantity, book.getIsbn(), 1);
             returnButton.setDisable(false);
         }
@@ -135,10 +135,10 @@ public class BookObjectInfoController {
         returnQuantity = Integer.parseInt(borrowQuantityTextField.getText());
         int borrowQuantity1 = LoanDAO.getBorrowQuantity(user.getId(), book.getIsbn());
         if (returnQuantity < borrowQuantity1 && returnQuantity > 0) {
-            userBorrowQuantity.setText(String.valueOf(borrowQuantity1 - returnQuantity));
+            userBorrowQuantity.setText("Borrowed: "+ String.valueOf(borrowQuantity1 - returnQuantity));
             LoanDAO.updateLoan(user.getId(), book.getIsbn(), returnQuantity);
         } else if (returnQuantity == borrowQuantity1) {
-            userBorrowQuantity.setText("0");
+            userBorrowQuantity.setText("Borrowed: 0");
             LoanDAO.deleteLoan(user.getId(), book.getIsbn());
         }
     }

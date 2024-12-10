@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DatabaseConnect {
     private static Connection connection;
-    public static final String url = "jdbc:mysql://127.0.0.1:3306/library";
+    public static final String url = "jdbc:mariadb://localhost:3306/library";
     public static final String user = "root";
-    public static final String password = "huy104967";
+    public static final String password = "071205";
 
     public static synchronized Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {

@@ -30,7 +30,7 @@ public class NotificationDAO {
     public static void generateNotifications() throws SQLException {
         Connection connection = DatabaseConnect.getConnection();
 
-        String query = "SELECT userId, bookISBN, datediff(returnDate, now()) as daysRemaining from loan HAVING daysRemaining between 0 and 3";
+        String query = "SELECT userId, bookISBN, datediff(returnDate, now()) as daysRemaining from loan HAVING daysRemaining <= 3";
         PreparedStatement statement = connection.prepareStatement(query);
 
         ResultSet resultSet = statement.executeQuery();
@@ -39,7 +39,11 @@ public class NotificationDAO {
             String bookISBN = resultSet.getString("bookISBN");
             int dayRemaining = resultSet.getInt("daysRemaining");
             Book book = BookDAO.getBookByISBN(bookISBN);
-            String message = "Sách với tên " + book.getTitle() + " sắp đến hạn trả trong " + dayRemaining + " ngày nữa!";
+            String message = "";
+            if (dayRemaining >= 0) {
+                message = "Sách: '" + book.getTitle() + "'(Sắp hết hạn - còn " + dayRemaining + " ngày";
+            } else
+                message = "Sách: '" + book.getTitle() + "'(Đã quá hạn trả " + -dayRemaining + " ngày\n" + "Số tiền phải trả:" + -dayRemaining * 300000 + " VNĐ";
             if (checkDuplicateNotification(userId, message)) {
                 String insertQuery = "INSERT INTO notification(userId, message) VALUES (?,?)";
                 PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
@@ -76,11 +80,10 @@ public class NotificationDAO {
         try {
             Connection conn = DatabaseConnect.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1,notification.getUser().getId());
-            ps.setString(2,notification.getMessage());
+            ps.setInt(1, notification.getUser().getId());
+            ps.setString(2, notification.getMessage());
             ps.executeUpdate();
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

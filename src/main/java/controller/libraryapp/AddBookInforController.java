@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import Util.BookDAO;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -69,7 +70,7 @@ public class AddBookInforController {
             }
 
             // Use the database method to insert or update the book with the given quantity
-            DatabaseUtil.insertBook(book, quantity);
+            BookDAO.insertBook(book, quantity);
 
             // Feedback to the user
             System.out.println("Added " + quantity + " copies of the book: " + book.getTitle());

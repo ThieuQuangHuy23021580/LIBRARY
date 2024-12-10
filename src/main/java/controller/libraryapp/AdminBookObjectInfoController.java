@@ -1,5 +1,7 @@
 package controller.libraryapp;
 
+import Util.BookDAO;
+import Util.DatabaseConnect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -216,7 +218,7 @@ public class AdminBookObjectInfoController {
         String updateQuery = "UPDATE books SET quantity = quantity - ? WHERE isbn = ?";
         String deleteQuery = "DELETE FROM books WHERE isbn = ?";
 
-        try (Connection conn = DatabaseUtil.getConnection();
+        try (Connection conn = DatabaseConnect.getConnection();
              PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
              PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
              PreparedStatement deleteStmt = conn.prepareStatement(deleteQuery)) {
@@ -264,7 +266,7 @@ public class AdminBookObjectInfoController {
             }
 
             // Use the database method to insert or update the book with the given quantity
-            DatabaseUtil.insertBook(book, quantity);
+            BookDAO.insertBook(book, quantity);
 
             // Feedback to the user
             System.out.println("Added " + quantity + " copies of the book: " + book.getTitle());

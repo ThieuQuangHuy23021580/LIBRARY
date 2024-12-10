@@ -1,5 +1,6 @@
 package controller.libraryapp;
 
+import Util.DatabaseConnect;
 import Util.LoanDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,7 +42,7 @@ public class BookObjectController {
 
     public void setBook(Book book) {
         this.book = book;
-        setBookDetails(book,user);
+        setBookDetails(book);
     }
     public void setUser(User user) {
         this.user = user;
@@ -50,7 +51,7 @@ public class BookObjectController {
         this.controller = loanController;
     }
 
-    public void setBookDetails(Book book, User user) {
+    public void setBookDetails(Book book) {
         bookName.setText(book.getTitle());
         author.setText(book.getAuthor());
 
@@ -62,23 +63,20 @@ public class BookObjectController {
             imageView.setImage(new Image(book.getImageUrl()));
         }
 
-        // Add event handler for "More Info" button if needed
-        moreInfobutton.setOnAction(event -> displayBookInfo(book, user));
     }
 
+    public void displayBookInfo() {
 
-    public void displayBookInfo(Book book, User user) {
         String fxmlPath = user.getRole().equals("Manager")
                 ? "/controller/fxml_designs/AdminBookObjectInfo.fxml"
                 : "/controller/fxml_designs/BookObjectInfor.fxml";
-        DatabaseUtil databaseUtil = new DatabaseUtil();
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             if (user.getRole().equals("Manager")) {
                 loader.setControllerFactory(param -> {
                     try {
-                        return new AdminBookObjectInfoController(book, book.getIsbn(), databaseUtil.getConnection());
+                        return new AdminBookObjectInfoController(book, book.getIsbn(), DatabaseConnect.getConnection());
                     } catch (SQLException e) {
                         e.printStackTrace();
                         return null;
@@ -97,12 +95,8 @@ public class BookObjectController {
                 infoController.setLoanController(controller);
             }
 
-            // Add the detailed view to the main StackPane
             mainStackPane.getChildren().add(bookInfoPane);
 
-            // Configure the close button to remove the detailed view
-            Button closeButton = (Button) bookInfoPane.lookup("#closeButton");
-            closeButton.setOnAction(e -> mainStackPane.getChildren().remove(bookInfoPane));
         } catch (IOException e) {
             System.err.println("Error loading detailed book info view: " + e.getMessage());
             e.printStackTrace();

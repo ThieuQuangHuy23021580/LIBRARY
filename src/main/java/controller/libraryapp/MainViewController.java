@@ -2,6 +2,7 @@ package controller.libraryapp;
 
 import Util.Alert;
 import Util.BookDAO;
+import Util.NotificationDAO;
 import Util.SceneManager;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -16,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import model.Book;
+import model.Notification;
 import model.User;
 
 
@@ -180,10 +182,6 @@ public class MainViewController {
 
     }
 
-    public void setView(Parent root) {
-        mainStackPane.getChildren().add(root);
-    }
-
 
     @FXML
     public void initialize() {
@@ -201,7 +199,7 @@ public class MainViewController {
         otherCategoriesButton.setOnMouseExited(event -> getDiscoveryCategories());
     }
 
-    void getDiscoveryCategories(){
+    void getDiscoveryCategories() {
         discoverCatetegories.setVisible(true);
         fictionCateList.setVisible(false);
         educationCateList.setVisible(false);
@@ -210,55 +208,61 @@ public class MainViewController {
         healthAndFitnessCateList.setVisible(false);
         businessAndEconomicCateList.setVisible(false);
     }
-    void getFictionCateList(){
+
+    void getFictionCateList() {
         fictionCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getEducationCateList(){
+
+    void getEducationCateList() {
         educationCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getComicCateList(){
+
+    void getComicCateList() {
         comicCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getHealthAndFitnessCateList(){
+
+    void getHealthAndFitnessCateList() {
         healthAndFitnessCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getBusinessAndEconomicCateList(){
+
+    void getBusinessAndEconomicCateList() {
         businessAndEconomicCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
-    void getOtherCateList(){
+
+    void getOtherCateList() {
         otherCateList.setVisible(true);
         discoverCatetegories.setVisible(false);
     }
 
     public void setListBook(List<Book> books) throws IOException {
         for (Book book : books) {
-            StackPane bookObject = (StackPane) SceneManager.loadBookObject(book, user, mainStackPane);
+            StackPane bookObject = SceneManager.loadBookObject(book, user, mainStackPane);
             recommendFlowPane.getChildren().add(bookObject);
         }
     }
 
     void showBook() {
-            new Thread(() -> {
-                try {
-                    List<Book> books = BookDAO.getRandomBook();
-                    // Gọi phương thức UI trong luồng chính để cập nhật giao diện
-                    Platform.runLater(() -> {
-                        try {
-                            setListBook(books);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
-        }
+        new Thread(() -> {
+            try {
+                List<Book> books = BookDAO.getRandomBook();
+                // Gọi phương thức UI trong luồng chính để cập nhật giao diện
+                Platform.runLater(() -> {
+                    try {
+                        setListBook(books);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
 
 
     @FXML
@@ -270,31 +274,8 @@ public class MainViewController {
         recommendFlowPane.getChildren().clear();
         recommendLabel.setText("Result for " + title + ":");
 
-        // Fetch books by title
-        List<Book> books = DatabaseUtil.getBooksByTitle(title);
-
-        if (books == null || books.isEmpty()) {
-            System.out.println("No books found with title: " + title);
-        } else {
-            try {
-                for (Book book : books) {
-                    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
-                    StackPane bookObject = loader.load();
-
-                    // Pass book details to the controller
-                    BookObjectController controller = loader.getController();
-                    controller.setMainStackPane(mainStackPane);
-
-                    controller.setBookDetails(book,user);
-
-
-                    recommendFlowPane.getChildren().add(bookObject);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.err.println("Error loading book objects for search results.");
-            }
-        }
+        List<Book> books = BookDAO.getBooksByTitle(title);
+        setListBook(books);
     }
 
     public void configButtonPress(ActionEvent actionEvent) {
@@ -302,19 +283,20 @@ public class MainViewController {
 
     public void deleteButtonPress(ActionEvent actionEvent) {
     }
+
     public void borrowButtonPress(ActionEvent actionEvent) {
     }
 
     public void returnButtonPress(ActionEvent actionEvent) {
     }
 
-    public void showListLoan() throws IOException{
+    public void showListLoan() throws IOException {
         SceneManager.showUserLoan(user);
     }
 
     public void logOut() throws IOException {
         SceneManager.showLoginView();
-        Alert.showAlert("r u sure u want to logout","no");
+        Alert.showAlert("r u sure u want to logout", "no");
     }
 
     public void userInfo() throws IOException {
@@ -325,23 +307,21 @@ public class MainViewController {
         SceneManager.showManageUser();
     }
 
-    public void showNotifications() { SceneManager.showNotification(user);}
+    public void showNotifications() {
+        SceneManager.showNotification(user);
+    }
 
-    public void cleanUp()
-    {
+    public void cleanUp() {
         recommendFlowPane.getChildren().clear();
     }
+
     public void addBookButtonPressed(ActionEvent actionEvent) {
         try {
-            // Load the AddBook FXML layout
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/AddBookView.fxml"));
             AnchorPane addBookAnchorPane = loader.load();
             AddBookController controller = loader.getController();
             controller.setStackPane(mainStackPane);
 
-
-
-            // Add the AddBook AnchorPane to the main StackPane
             mainStackPane.getChildren().add(addBookAnchorPane);
 
             // Optionally, make the new AnchorPane visible or set a transition effect
@@ -352,58 +332,60 @@ public class MainViewController {
             System.err.println("Error loading AddBook FXML: " + e.getMessage());
         }
     }
+
     public void handleCategoryButtonAction(String category, String labelText) {
-        // Fetch books by category
-        List<Book> books = DatabaseUtil.getBooksByCategory(category);
+        List<Book> books = BookDAO.getBooksByCategory(category);
         recommendFlowPane.getChildren().clear();
         recommendLabel.setText(labelText);
-
-        // Handle no books found case
-        if (books == null || books.isEmpty()) {
-            System.out.println("No books found with category: " + category);
-        } else {
-            try {
-                for (Book book : books) {
-                    FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/controller/fxml_designs/BookObject.fxml")));
-                    StackPane bookObject = loader.load();
-
-                    // Set details in the controller
-                    BookObjectController controller = loader.getController();
-                    controller.setMainStackPane(mainStackPane);
-                    controller.setBookDetails(book, user);
-
-                    // Add to the flow pane
-                    recommendFlowPane.getChildren().add(bookObject);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.err.println("Error loading book objects for category: " + category);
-            }
+        try {
+            setListBook(books);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
     public void handleFictionButtonAction(ActionEvent actionEvent) {
         handleCategoryButtonAction("Fiction", "Fiction");
     }
+
     public void handleHealthAndFitnessButtonAction(ActionEvent actionEvent) {
         handleCategoryButtonAction("Health & Fitness", "Health and Fitness");
     }
+
     public void handleBusinessButtonAction(ActionEvent actionEvent) {
         handleCategoryButtonAction("Business & Economics", "Business and Economics");
     }
+
     public void handleOtherButtonAction(ActionEvent actionEvent) {
         handleCategoryButtonAction("Other", "Other");
     }
+
     public void handleEducationButtonAction(ActionEvent actionEvent) {
         handleCategoryButtonAction("Education", "Education");
     }
+
     public void handleComicButtonAction(ActionEvent actionEvent) {
         handleCategoryButtonAction("Comics & Graphic Novels", "Comics and Graphic Novels");
     }
 
 
     public void handleNoNotifiButonPressed(ActionEvent actionEvent) {
+        Alert.showAlert("You have no notifi","omg");
     }
 
-    public void handleHavingNotifiButonPressed(ActionEvent actionEvent) {
+    public void handleHavingNotifiButonPressed() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/fxml_designs/NotificationView.fxml"));
+            StackPane notiView = loader.load();
+            NotificationController controller = loader.getController();
+            controller.setUser(user);
+            controller.setView(notiView,mainStackPane);
+
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void handleCloseButtonAction() {
+
     }
 }

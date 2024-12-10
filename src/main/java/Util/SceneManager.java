@@ -69,17 +69,6 @@ public class SceneManager {
         return bookObject;
     }
 
-    // Preload specific scenes (optional)
-    public static void preloadAllScenes() {
-        try {
-            loadSceneIfNotCached("LoginView", "/controller/fxml_designs/LoginView.fxml");
-            loadSceneIfNotCached("MainView", "/controller/fxml_designs/NewMainView.fxml");
-            loadSceneIfNotCached("UserInfo", "/controller/fxml_designs/UserInfo.fxml");
-            loadSceneIfNotCached("Loan", "/controller/fxml_designs/Loan.fxml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     // Clean up data of controllers
     private static void cleanController(String sceneName) {
