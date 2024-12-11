@@ -1,6 +1,6 @@
 package controller.libraryapp;
 
-import Util.Alert;
+import Util.AlertManager;
 import Util.SceneManager;
 import Util.UserDAO;
 import javafx.animation.KeyFrame;
@@ -95,12 +95,12 @@ public class UserController {
         String password = userPasswordTextField.getText();
 
         if (name.isEmpty() && phone.isEmpty() && password.isEmpty()) {
-            Alert.showAlert("no", "fill");
+            AlertManager.showAlert("no", "fill");
         }
         if (!phone.isEmpty() && checkPhone(phone)) {
             user.setPhone(phone);
             userPhone.setText(phone);
-        } else Alert.showAlert("no", "must contain number only");
+        } else AlertManager.showAlert("no", "must contain number only");
         if(!password.isEmpty() && LoginViewController.checkStrongPassword(password)) {
             user.setPassword(password);
             userPassword.setText(password);

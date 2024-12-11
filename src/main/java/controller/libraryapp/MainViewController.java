@@ -1,11 +1,10 @@
 package controller.libraryapp;
 
+import Util.AlertManager;
 import Util.*;
-import Util.Alert;
 import Util.BookDAO;
 import Util.NotificationDAO;
 import Util.SceneManager;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,7 @@ import model.User;
 
 
 import java.io.IOException;
+
 import java.util.List;
 
 public class MainViewController {
@@ -203,6 +203,7 @@ public class MainViewController {
         }
         userName.setText(user.getUserName());
 
+        showBook();
     }
 
 
@@ -267,27 +268,25 @@ public class MainViewController {
 
     public void setListBook(List<Book> books) throws IOException {
         for (Book book : books) {
-            StackPane bookObject = SceneManager.loadBookObject(book, user, mainStackPane);
-            recommendFlowPane.getChildren().add(bookObject);
+            SceneManager.loadBookObject(book, user, mainStackPane,
+                    bookObject -> {
+                        recommendFlowPane.getChildren().add(bookObject);
+                    },
+                    error -> {
+                        System.out.println("Lỗi khi tải BookObject: " + error.getMessage());
+                    }
+            );
+
         }
     }
 
     void showBook() {
-        new Thread(() -> {
-            try {
-                List<Book> books = BookDAO.getRandomBook();
-                // Gọi phương thức UI trong luồng chính để cập nhật giao diện
-                Platform.runLater(() -> {
-                    try {
-                        setListBook(books);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+        try {
+            List<Book> books = BookDAO.getRandomBook();
+            setListBook(books);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -309,7 +308,7 @@ public class MainViewController {
     }
 
     public void logOut() throws IOException {
-        Alert.showAlert("r u sure u want to logout", "no");
+        AlertManager.showAlert("r u sure u want to logout", "no");
         SceneManager.showLoginView();
 
     }
@@ -380,7 +379,7 @@ public class MainViewController {
 
 
     public void handleNoNotifiButonPressed() {
-        Alert.showAlert("You have no notifi", "omg");
+        AlertManager.showAlert("You have no notifi", "omg");
     }
 
     public void handleHavingNotifiButonPressed() {

@@ -2,6 +2,7 @@ package controller.libraryapp;
 
 import Util.BookDAO;
 import Util.LoanDAO;
+import Util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -73,11 +74,7 @@ public class BookObjectInfoController {
             descriptionConfigTextField.setText("Description: " + book.getDescription());
 
             String imageUrl = book.getImageUrl();
-            if (imageUrl != null && !imageUrl.isEmpty()) {
-                bookImage.setImage(new Image(imageUrl));
-            } else {
-                bookImage.setImage(null);
-            }
+            bookImage.setImage(SceneManager.getImage(imageUrl));
         } else {
 
             titleBook.setText("No book selected");
