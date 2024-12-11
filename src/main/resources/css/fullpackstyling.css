@@ -383,6 +383,7 @@
     -fx-border-color: white;
 }
 .menu-item:hover {
+    -fx-text-fill: white;
     -fx-border-color: red;
     -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
     -fx-background-color: #830a0a;
