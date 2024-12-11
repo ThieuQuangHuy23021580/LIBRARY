@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import model.Notification;
 import model.User;
 
@@ -53,6 +54,7 @@ public class NotificationController {
                 notificationPane.setOnMouseClicked(event -> {
                     selectedNotificationPane = notificationPane;
                     selectedNotification = notification;
+                    label.setTextFill(Color.RED);
                 });
                 notificationList.getChildren().add(notificationPane);
             }

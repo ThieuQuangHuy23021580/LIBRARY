@@ -64,7 +64,7 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#userInfo" text="Your Information" />
                       <MenuItem fx:id="listLoanButton" mnemonicParsing="false" onAction="#showListLoan" text="My Library" />
-                        <MenuItem fx:id="manageUserButton" mnemonicParsing="false" text="ManageUser" />
+                        <MenuItem fx:id="manageUserButton" mnemonicParsing="false" onAction="#manageUser" text="ManageUser" />
                         <MenuItem fx:id="addBookButton" mnemonicParsing="false" onAction="#addBookButtonPressed" text="Add Book" />
                         <MenuItem fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" text="Logout" />
                     </items>

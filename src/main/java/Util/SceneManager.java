@@ -1,10 +1,13 @@
 package Util;
 
 import controller.libraryapp.*;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -16,12 +19,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class SceneManager {
 
     private static Stage primaryStage;
     private static final Map<String, Scene> sceneCache = new HashMap<>();
     private static final Map<String, FXMLLoader> loaderCache = new HashMap<>();
+    private static final Map<String, Image> imageCache = new HashMap<>();
 
     public static void setPrimaryStage(Stage stage) {
         primaryStage = stage;
@@ -58,15 +63,38 @@ public class SceneManager {
         return loader.getController();
     }
 
-    public static StackPane loadBookObject(Book book, User user, StackPane sp) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SceneManager.class.getResource("/controller/fxml_designs/BookObject.fxml")));
-        StackPane bookObject = loader.load();
+    public static void loadBookObject(Book book, User user, StackPane sp, Consumer<StackPane> onSuccess, Consumer<Throwable> onFailure) {
+        Task<StackPane> loadTask = new Task<>() {
+            @Override
+            protected StackPane call() throws Exception {
+                FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SceneManager.class.getResource("/controller/fxml_designs/BookObject.fxml")));
+                StackPane bookObject = loader.load();
 
-        BookObjectController controller = loader.getController();
-        controller.setBook(book);
-        controller.setUser(user);
-        controller.setMainStackPane(sp);
-        return bookObject;
+                BookObjectController controller = loader.getController();
+                controller.setBook(book);
+                controller.setUser(user);
+                controller.setMainStackPane(sp);
+
+                return bookObject;
+            }
+        };
+
+        // Xử lý khi tải thành công
+        loadTask.setOnSucceeded(event -> {
+            // Cập nhật UI trong JavaFX Application Thread
+            Platform.runLater(() -> onSuccess.accept(loadTask.getValue()));
+        });
+
+        // Xử lý khi xảy ra lỗi
+        loadTask.setOnFailed(event -> {
+            Throwable ex = loadTask.getException();
+            ex.printStackTrace();
+            // Gửi lỗi đến callback
+            Platform.runLater(() -> onFailure.accept(ex));
+        });
+
+        // Chạy task trong luồng nền
+        new Thread(loadTask).start();
     }
 
 
@@ -82,28 +110,11 @@ public class SceneManager {
     }
 
     public static void showMainView(User user) {
-        Task<Void> loadTask = new Task<>() {
-            @Override
-            protected Void call() throws Exception {
-                loadSceneIfNotCached("MainView", "/controller/fxml_designs/NewMainView.fxml");
-                MainViewController controller = getController("MainView");
-                controller.setUser(user);
-                return null;
-            }
-        };
-
-        loadTask.setOnSucceeded(event -> {
-            showScene("MainView", "/controller/fxml_designs/NewMainView.fxml");
-        });
-
-        loadTask.setOnFailed(event -> {
-            Throwable ex = loadTask.getException();
-            ex.printStackTrace();
-            // Hiển thị thông báo lỗi cho người dùng (nếu cần)
-        });
-
-        new Thread(loadTask).start();
+        showScene("MainView", "/controller/fxml_designs/NewMainView.fxml");
+        MainViewController controller = getController("MainView");
+        controller.setUser(user);
     }
+
 
     public static void showUserDashboard(User user) {
         showScene("UserInfo", "/controller/fxml_designs/UserInfo.fxml");
@@ -118,8 +129,18 @@ public class SceneManager {
     }
 
     public static void showManageUser() {
-        showScene("ManageUser","/controller/fxml_designs/ManageUser.fxml");
+        showScene("ManageUser", "/controller/fxml_designs/ManageUser.fxml");
         ManageUserController controller = getController("ManageUser");
+    }
+
+    public static Image getImage(String url) {
+        if (imageCache.containsKey(url)) {
+            return imageCache.get(url);
+        } else {
+            Image image = new Image(url, true);
+            imageCache.put(url, image);
+            return image;
+        }
     }
 
 }

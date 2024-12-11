@@ -113,7 +113,6 @@ public class BookDAO {
     }
 
     public static List<Book> getBooksByCategory(String category) {
-        // Ensure the category is not null or empty
         if (category == null || category.trim().isEmpty()) {
             System.out.println("Category cannot be null or empty.");
             return new ArrayList<>();

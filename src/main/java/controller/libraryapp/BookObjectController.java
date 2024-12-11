@@ -1,8 +1,10 @@
 package controller.libraryapp;
 
 import Util.DatabaseConnect;
+import Util.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -52,12 +54,7 @@ public class BookObjectController {
         author.setText(book.getAuthor());
 
         String imageUrl = book.getImageUrl();
-        if (imageUrl != null && !imageUrl.isEmpty()) {
-            imageView.setImage(new Image(imageUrl));
-        } else {
-            imageView.setImage(new Image(book.getImageUrl()));
-        }
-
+        imageView.setImage(SceneManager.getImage(imageUrl));
     }
 
     public void displayBookInfo() {

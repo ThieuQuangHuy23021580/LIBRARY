@@ -1,10 +1,9 @@
 package controller.libraryapp;
 
-import Util.Alert;
+import Util.AlertManager;
 import Util.BookDAO;
 import Util.NotificationDAO;
 import Util.SceneManager;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -189,6 +188,7 @@ public class MainViewController {
         }
         userName.setText(user.getUserName());
 
+        showBook();
     }
 
 
@@ -206,6 +206,8 @@ public class MainViewController {
         businessAndEconomicButton.setOnMouseExited(event -> getDiscoveryCategories());
         otherCategoriesButton.setOnMouseEntered(event -> getOtherCateList());
         otherCategoriesButton.setOnMouseExited(event -> getDiscoveryCategories());
+
+
     }
 
     void getDiscoveryCategories() {
@@ -250,32 +252,29 @@ public class MainViewController {
 
     public void setListBook(List<Book> books) throws IOException {
         for (Book book : books) {
-            StackPane bookObject = SceneManager.loadBookObject(book, user, mainStackPane);
-            recommendFlowPane.getChildren().add(bookObject);
+            SceneManager.loadBookObject(book, user, mainStackPane,
+                    bookObject -> {
+                        recommendFlowPane.getChildren().add(bookObject);
+                    },
+                    error -> {
+                        System.out.println("Lỗi khi tải BookObject: " + error.getMessage());
+                    }
+            );
+
         }
     }
 
     void showBook() {
-        new Thread(() -> {
-            try {
-                List<Book> books = BookDAO.getRandomBook();
-                // Gọi phương thức UI trong luồng chính để cập nhật giao diện
-                Platform.runLater(() -> {
-                    try {
-                        setListBook(books);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+        try {
+            List<Book> books = BookDAO.getRandomBook();
+            setListBook(books);
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
-
     @FXML
-    private StackPane mainStackPane; // Reference to the main StackPane in your FXML
+    private StackPane mainStackPane;
 
     @FXML
     private void handleSearchButtonAction() throws IOException {
@@ -293,7 +292,7 @@ public class MainViewController {
     }
 
     public void logOut() throws IOException {
-        Alert.showAlert("r u sure u want to logout", "no");
+        AlertManager.showAlert("r u sure u want to logout", "no");
         SceneManager.showLoginView();
 
     }
@@ -366,7 +365,7 @@ public class MainViewController {
 
 
     public void handleNoNotifiButonPressed() {
-        Alert.showAlert("You have no notifi", "omg");
+        AlertManager.showAlert("You have no notifi", "omg");
     }
 
     public void handleHavingNotifiButonPressed() {

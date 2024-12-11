@@ -1,6 +1,6 @@
 package controller.libraryapp;
 
-import Util.Alert;
+import Util.AlertManager;
 import Util.SceneManager;
 import Util.UserDAO;
 import javafx.scene.Cursor;
@@ -93,11 +93,11 @@ public class LoginViewController {
     @FXML
     void signUpButtonPressed(ActionEvent event) throws SQLException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty() || ConfirmPasswordField.getText().isEmpty()) {
-            Alert.showAlert("Please fill all", "no");
+            AlertManager.showAlert("Please fill all", "no");
             return;
         }
         if (!checkStrongPassword(passwordField.getText())) {
-            Alert.showAlert("Password not strong enough", "no");
+            AlertManager.showAlert("Password not strong enough", "no");
             return;
         }
         if (passwordField.getText().equals(ConfirmPasswordField.getText())) {
@@ -105,7 +105,7 @@ public class LoginViewController {
                 toSignInButtonPressed(event);
             }
             else{
-                Alert.showAlert("Tai khoan da ton tai", "dang ki khong thanh cong");
+                AlertManager.showAlert("Tai khoan da ton tai", "dang ki khong thanh cong");
             }
         }
     }
@@ -113,15 +113,15 @@ public class LoginViewController {
     @FXML
     void signInButtonPressed() throws IOException {
         if (emailAddressField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            Alert.showAlert("Please fill all fields", "Error");
+            AlertManager.showAlert("Please fill all fields", "Error");
             return;
         }
         try {
             User user = UserDAO.authenticator(emailAddressField.getText(), passwordField.getText());
             if (user == null) {
-                Alert.showAlert("Username or password is incorrect", "Error");
+                AlertManager.showAlert("Username or password is incorrect", "Error");
             } else {
-                Alert.showAlert("Login successfully", "Correct");
+                AlertManager.showAlert("Login successfully", "Correct");
                 SceneManager.showMainView(user);
             }
         } catch (SQLException e) {
