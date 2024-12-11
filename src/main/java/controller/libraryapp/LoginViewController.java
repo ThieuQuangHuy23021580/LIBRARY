@@ -1,9 +1,14 @@
 package controller.libraryapp;
 
 import Util.AlertManager;
+import Util.NotificationDAO;
 import Util.SceneManager;
 import Util.UserDAO;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import model.User;
 import javafx.animation.TranslateTransition;
 
@@ -72,6 +77,11 @@ public class LoginViewController {
     private TextField showPassword;
     Rectangle clip;
 
+    private Stage stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
 
     @FXML
     void initialize() {
@@ -121,7 +131,15 @@ public class LoginViewController {
                 AlertManager.showAlert("Username or password is incorrect", "Error");
             } else {
                 AlertManager.showAlert("Login successfully", "Correct");
-                SceneManager.showMainView(user);
+                NotificationDAO.generateNotifications();
+                FXMLLoader loader = new FXMLLoader(SceneManager.class.getResource("/controller/fxml_designs/NewMainView.fxml"));
+                Parent root = loader.load();
+                MainViewController controller = loader.getController();
+                controller.setUser(user);
+
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
             }
         } catch (SQLException e) {
             e.printStackTrace();

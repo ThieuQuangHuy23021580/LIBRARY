@@ -124,6 +124,7 @@ public class BookObjectInfoController {
             userBorrowQuantity.setText("Borrowed: 0");
             LoanDAO.deleteLoan(user.getId(), book.getIsbn());
         }
+        BookDAO.updateBookQuantity(returnQuantity, book.getIsbn(), 0);
     }
 
     public void minusQuantity() {

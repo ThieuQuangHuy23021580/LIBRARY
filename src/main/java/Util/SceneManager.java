@@ -107,6 +107,8 @@ public class SceneManager {
 
     public static void showLoginView() {
         showScene("LoginView", "/controller/fxml_designs/LoginView.fxml");
+        LoginViewController controller = getController("LoginView");
+        controller.setStage(primaryStage);
     }
 
     public static void showMainView(User user) {
@@ -128,9 +130,10 @@ public class SceneManager {
         controller.setUser(user);
     }
 
-    public static void showManageUser() {
+    public static void showManageUser(User user) {
         showScene("ManageUser", "/controller/fxml_designs/ManageUser.fxml");
         ManageUserController controller = getController("ManageUser");
+        controller.setUser(user);
     }
 
     public static Image getImage(String url) {

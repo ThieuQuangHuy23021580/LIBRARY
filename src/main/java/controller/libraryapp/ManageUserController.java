@@ -1,13 +1,17 @@
 package controller.libraryapp;
 
 import Util.LoanDAO;
+import Util.SceneManager;
 import Util.UserDAO;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import model.Loan;
 import model.User;
 
@@ -33,6 +37,13 @@ public class ManageUserController {
     private TableColumn<Loan, LocalDate> returnDateColumn;
     @FXML
     private TableColumn<Loan, Integer> quantityColumn;
+    @FXML
+    private Button undoButton;
+
+    private User user;
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void initialize() {
         userIdColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
@@ -45,6 +56,7 @@ public class ManageUserController {
         quantityColumn.setCellValueFactory(cellData ->new SimpleObjectProperty<>(cellData.getValue().getQuantity()));
 
         loanTableView.setVisible(false);
+        undoButton.setVisible(false);
         userTableView.setItems(getUserList());
     }
 
@@ -64,7 +76,26 @@ public class ManageUserController {
             ObservableList<Loan> loanList = getLoanList(selectedUser);
             loanTableView.setItems(loanList);
             loanTableView.setVisible(true);
-            userTableView.setVisible(false);
+            undoButton.setVisible(true);
         }
+    }
+
+    @FXML
+    public void handleCloseButtonAction() {
+        SceneManager.showMainView(user);
+    }
+
+    public void handleDeleteUser() {
+        User selectedUser = userTableView.getSelectionModel().getSelectedItem();
+        if(selectedUser != null) {
+            UserDAO.deleteUser(selectedUser);
+            userTableView.getItems().remove(selectedUser);
+        }
+    }
+
+    @FXML
+    public void backToManageUser() {
+        loanTableView.setVisible(false);
+        undoButton.setVisible(false);
     }
 }

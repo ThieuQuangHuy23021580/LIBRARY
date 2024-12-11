@@ -1,10 +1,12 @@
 package Util;
 
+import javafx.scene.chart.PieChart;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.User;
 
 import java.io.File;
+import java.io.PipedReader;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,19 @@ public class UserDAO {
         ps.setString(3, user.getPassword());
         ps.setInt(4, user.getId());
         ps.executeUpdate();
+    }
+
+    public static void deleteUser(User user) {
+        String sql = "DELETE FROM user WHERE id = ?";
+        try {
+            Connection conn = DatabaseConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, user.getId());
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static List<User> getAllUsers() {

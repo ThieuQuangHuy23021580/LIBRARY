@@ -409,3 +409,37 @@
 #showPassword{
     -fx-border-color: #E50914FF;
 }
+.table-view{
+    -fx-alignment: center;
+    -fx-background-color: linear-gradient(to bottom, #ca0000, #5e0404);
+}
+/*#userTableView .column-header{*/
+/*    -fx-text-fill: white;*/
+/*}*/
+.table-view .column-header {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+    -fx-font-size: 23px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+}
+.table-row-cell {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-font-size: 20;
+}
+.table-cell {
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+}
+
+#deleteUserButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}
+#showLoanButton:hover{
+    -fx-background-color: #E50914FF;
+    -fx-effect: dropshadow(gaussian, red, 10, 0, 0, 0);
+}

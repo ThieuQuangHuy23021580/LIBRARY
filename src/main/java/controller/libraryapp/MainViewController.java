@@ -5,6 +5,7 @@ import Util.*;
 import Util.BookDAO;
 import Util.NotificationDAO;
 import Util.SceneManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,6 @@ import model.User;
 
 
 import java.io.IOException;
-
 import java.util.List;
 
 public class MainViewController {
@@ -166,9 +166,9 @@ public class MainViewController {
     @FXML
     private ImageView userAvatar;
     @FXML
-    private Button noNotifiButton;
+    protected Button noNotifiButton;
     @FXML
-    private Button havingNotifiButton;
+    protected Button havingNotifiButton;
     @FXML
     private MenuItem addBookButton;
 
@@ -195,21 +195,27 @@ public class MainViewController {
         }
         notifications = NotificationDAO.getNotificationsForUser(user);
         if (!notifications.isEmpty()) {
-            noNotifiButton.setVisible(false);
-            havingNotifiButton.setVisible(true);
+            haveNotification();
         } else {
-            noNotifiButton.setVisible(true);
-            havingNotifiButton.setVisible(false);
+            noNotification();
         }
         userName.setText(user.getUserName());
-
         showBook();
+    }
+
+    public void haveNotification() {
+        noNotifiButton.setVisible(false);
+        havingNotifiButton.setVisible(true);
+    }
+    public void noNotification() {
+        noNotifiButton.setVisible(true);
+        havingNotifiButton.setVisible(false);
     }
 
 
     @FXML
     public void initialize() {
-        showBook();
+
         categoriesAnchorPane.setManaged(false);
         categoriesAnchorPane.setVisible(false);
         Circle circle = new Circle(17.5);
@@ -308,8 +314,11 @@ public class MainViewController {
     }
 
     public void logOut() throws IOException {
-        AlertManager.showAlert("r u sure u want to logout", "no");
-        SceneManager.showLoginView();
+
+        Boolean isCofirm = AlertManager.showConfirmAlert("r u sure u want to logout", "no");
+        if(isCofirm){
+            SceneManager.showLoginView();
+        }
 
     }
 
@@ -318,7 +327,7 @@ public class MainViewController {
     }
 
     public void manageUser() {
-        SceneManager.showManageUser();
+        SceneManager.showManageUser(user);
     }
 
 
@@ -388,6 +397,7 @@ public class MainViewController {
             StackPane notiView = loader.load();
             NotificationController controller = loader.getController();
             controller.setList(notifications);
+            controller.setMainViewController(this);
             controller.setView(notiView, mainStackPane);
 
         } catch (IOException e) {

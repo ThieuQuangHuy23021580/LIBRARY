@@ -10,7 +10,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            NotificationDAO.generateNotifications();
             SceneManager.setPrimaryStage(primaryStage);
             SceneManager.showLoginView();
         } catch (Exception e) {

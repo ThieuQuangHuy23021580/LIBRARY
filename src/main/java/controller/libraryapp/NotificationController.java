@@ -25,6 +25,7 @@ public class NotificationController {
 
     private AnchorPane selectedNotificationPane;
     private Notification selectedNotification;
+    private MainViewController mainViewController;
 
     public void setList(List<Notification> notifications) {
         this.notifications = notifications;
@@ -34,6 +35,9 @@ public class NotificationController {
         this.stackPane = stackPane;
         this.mainStackPane = st;
         getNotificationList();
+    }
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
     }
 
     public void getNotificationList() {
@@ -66,6 +70,10 @@ public class NotificationController {
 
     public void handleCloseButtonAction() {
         mainStackPane.getChildren().remove(stackPane);
+        if(notifications.isEmpty()) {
+            mainViewController.noNotification();
+        }
+        else mainViewController.haveNotification();
     }
 
 
