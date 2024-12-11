@@ -16,11 +16,12 @@ Tên nhóm: ThreeSticks
  - GoogleBooks API
 * Chi tiết về ứng dụng:
   - LOGIN (Sign in, Sign up):
-     ![image](https://github.com/user-attachments/assets/9d7e5325-24d8-494a-8c14-433528424dda)
-     ![image](https://github.com/user-attachments/assets/98dd5c89-0995-4c23-939f-df90462cdd06)
+  - ![image](https://github.com/user-attachments/assets/166e37a0-f175-4410-82c6-51161db5e4e4)
+    ![image](https://github.com/user-attachments/assets/00ee4c3b-43b6-47dc-ae6c-01a5f6c57769)
   - SHOW BOOKS RECOMMEND:
-   ![image](https://github.com/user-attachments/assets/ac747270-422b-4016-8c76-2c5706e5d312)
+    ![image](https://github.com/user-attachments/assets/26ebae8c-6e20-4a20-a79b-88b0fb46d3c8)
 
+  
   - SEARCH BOOKS: (chức năng được tích hợp đa luồng để xử lí được tối ưu và hiệu quả hơn):
   ![image](https://github.com/user-attachments/assets/00596b5e-3c29-4141-beda-1b35a29591f5)
   ![image](https://github.com/user-attachments/assets/bd356e39-bb91-4480-adbd-2b79df496904)
